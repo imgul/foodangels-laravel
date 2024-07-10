@@ -989,7 +989,7 @@ class CategoryTableSeeder extends Seeder
 
     public function run(){
         if (env('DEMO_MODE')) {
-            foreach ($this->categories as $category) {
+            foreach ($this->categories as $key => $category) {
                 $categoryObject = Category::create([
                     'name'         => $category['name'],
                     'slug'         => $category['slug'],
@@ -1004,6 +1004,7 @@ class CategoryTableSeeder extends Seeder
                     'creator_id'   => $category['creator_id'],
                     'editor_type'  => $category['editor_type'],
                     'editor_id'    => $category['editor_id'],
+                    'orders' => ++$key
                 ]);
 
                 if (file_exists(

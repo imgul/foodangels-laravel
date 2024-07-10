@@ -391,4 +391,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'installed', 'licens
     //user module
     Route::resource('user',                     UserController::class);
     Route::get('get-users',                     [UserController::class, 'getUsers'])->name('users.get-users');
+    Route::post('category/position', [CategoryController::class, 'categoryPosition'])->name('category.position');
 });
