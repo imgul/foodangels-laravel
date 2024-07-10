@@ -1,0 +1,341 @@
+p {
+    color: black;
+}
+.tab-content {
+    padding: 28px 33px;
+    position: relative;
+    z-index: 10;
+    display: inline-block;
+    width: 100%;
+}
+.promo-header {
+    padding-bottom: 30px;
+}
+.promo-header .tab-content.food-price-tab .product-image-section {
+    position: relative;
+}
+.promo-header .style-2 {
+    margin-bottom: 20px;
+}
+.promo-header .row {
+    overflow-x: auto;
+    flex-wrap: unset;
+}
+.promo-header .product-name-style {
+    min-height: 40px;
+    font-weight: bold;
+}
+.promo-header .tabs-container.border-radius {
+    background: #f9ebd6;
+    border-radius: 10px;
+}
+.promo-header .col-md-3 {
+    padding: 0 7px;
+}
+.promo-header h2 {
+    margin: 10px 25px 20px 25px;
+    font-size: 24px;
+    color: #ff6222;
+    font-weight: bold;
+    font-style: italic;
+    border-bottom: 2px solid;
+    padding-bottom: 3px;
+}
+.promo-header img.menu-img {
+    width: 100%;
+}
+.tabs-container img.menu-img {
+    /*width: 6em;*/
+    width: 100%;
+    height: auto;
+    float: right
+}
+
+.tabs-container i.menu-cart {
+    position: absolute;
+    background: #f36805;
+    padding: 3px;
+    border: 1px solid #fdfdfd;
+    right: 0;
+    color: #fff;
+    float: right;
+    font-size: 12px
+}
+
+.tabs-container.border-radius {
+    border-radius: 0
+}
+.tab-content.food-price-tab .product-description-section {
+    width: 70%;
+    float: left;
+    display: inline-block
+}
+
+.tab-content.food-price-tab .product-image-section {
+    width: 30%;
+    float: left
+}
+.food-price-tab a,
+div.layout-style {
+    padding: 0 !important
+}
+body p {
+    font-size: 14px;
+    line-height: 20px;
+}
+p {
+    margin: 0 0 17px;
+}
+.special-offer {
+    background: #f36805;
+    padding: 5px 7px;
+    color: #fff;
+    border-radius: 20px;
+    font-size: 10px;
+    font-family: system-ui;
+    font-weight: 700;
+    font-style: normal
+}
+.food-price-tab .food-price-p.custom-design {
+    font-weight: 600;
+    margin-top: 5px;
+}
+.style-2 .tabs-container {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1);
+    border: 1px solid #ccc;
+    border-radius: 10px !important;
+}
+.food-price-tab a,
+div.layout-style {
+    padding: 0 !important
+}
+.tabs-container {
+    overflow: hidden;
+    width: 100%;
+}
+.food-price-tab {
+    padding: 20px !important;
+}
+.food-price-tab a{
+    padding: 0 !important;
+}
+.discount-price {
+    text-decoration: line-through;
+    margin-right: 10px;
+    color: red;
+}
+
+.section_1 {
+    background: #587586;
+    padding: 50px 0;
+}
+.section_1 img {
+    width: 100%;
+}
+.section_1 .row {
+    align-items: center;
+}
+.section_1 .main-text-area h4 {
+    color: #f36805;
+}
+.section_1 .main-text-area h2 {
+    color: #fff;
+}
+.section_1 .main-text-area p {
+    color: #fff;
+}
+.section_2 {
+    background: #303030;
+}
+.opening_details {
+    border: 1px dashed rgba(255,255,255,0.2);
+    padding: 30px;
+    background: #0e1c2a3b;
+    margin: 42px;
+}
+.bg-image {
+    height: 500px;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.bg-image p {
+    color: #fff;
+    padding: 0 50px;
+}
+.opening_details h4 {
+    color: #f36805;
+    text-align: center;
+}
+.opening_details h2 {
+    text-align: center;
+    color: #fff;
+}
+.dotts {
+    color: #f36805;
+    text-align: center;
+    font-size: 36px;
+}
+.call {
+    border: 2px solid #f36805;
+    padding: 17px 20px;
+    display: block;
+    color: #fff !important;
+    background: #f36805;
+    border-radius: 30px;
+    font-size: 18px;
+    margin: 10px auto;
+    width: 200px;
+    text-align: center;
+}
+.call:hover {
+    background: transparent;
+    color: #fff;
+}
+.work-time h3 {
+    color: #f36805;
+    font-size: 18px;
+}
+.new_items {
+    margin-top: 30px;
+    text-align: center;
+}
+.work-time .hours {
+    color: #fff;
+    font-size: 24px;
+    line-height: 36px;
+    font-weight: bold;
+}
+.bold-separator {
+    position: relative;
+    margin-bottom: 40px;
+}
+.bold-separator::after {
+    content: '';
+    position: absolute;
+    width: 30%;
+    height: 1px;
+    background: #f36805;
+    left: 10%;
+    opacity: 0.7;
+    bottom: -4px;
+}
+.bold-separator::before{
+    content: '';
+    position: absolute;
+    width: 30%;
+    height: 1px;
+    background: #f36805;
+    right: 10%;
+    opacity: 0.7;
+    bottom: -4px;
+}
+.section_advanceorder {
+    background: #23364A;
+    padding: 50px 0;
+}
+.section_advanceorder .items_list {
+    width: 160px;
+    box-shadow: 0px 1px 9px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 10px;
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 20px;
+    background: #fff;
+    margin-left: 5px;
+}
+.new_items {
+    margin-top: 30px;
+}
+.section_advanceorder .items_list .new_tag {
+    width: 60px;
+    position: absolute;
+    z-index: 1;
+    right: -1px;
+    top: -20px;
+}
+.section_advanceorder .items_list .new_product {
+    width: 100%;
+    border-radius: 50%;
+    height: 140px;
+    object-fit: cover;
+}
+.section_advanceorder .work-time {
+    max-width: 580px;
+    margin: 0 auto;
+    text-align: center;
+}
+.contact_details a {
+    font-size: 16px;
+    display: block;
+    margin-bottom: 10px;
+}
+.contact_details {
+    margin-bottom: 20px;
+}
+.contact_details i {
+    margin-right: 7px;
+    font-size: 18px;
+    font-family: FontAwesome;
+    color: #f36805;
+}
+.section_advanceorder .col-sm-12.col-md-4.col-lg-4 {
+    background: #fff;
+    padding: 50px;
+    border-radius: 10px 0 0 10px;
+}
+.section_advanceorder .col-sm-12.col-md-8.col-lg-8 {
+    background: #676767;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border-radius: 0px 10px 10px 0px;
+}
+.section_advanceorder .work-time h3 {
+    margin-top: 0px;
+}
+.section_advanceorder .bold-separator::before {
+    width: 40%;
+    right: 0%;
+}
+.section_advanceorder .bold-separator::after {
+    width: 40%;
+    left: 0%;
+}
+
+.main-search-container {
+    display: block;
+    width: 100%;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    height: 620px;
+    z-index: 9;
+}
+
+.transparent-header .main-search-container h2 {
+    font-family: Poppins, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 3.8em;
+    line-height: 1.3em;
+    text-transform: capitalize
+}
+
+.banner-title {
+    color: #fff !important;
+}
+
+.banner-subtitle {
+    font-size: 1.2em;
+    line-height: 1.2em;
+    color: #fff;
+    margin: 0;
+}
