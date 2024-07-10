@@ -25,6 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->unsignedTinyInteger('status');
             $table->unsignedTinyInteger('requested')->default(CategoryRequested::NON_REQUESTED);
+            $table->integer('orders')->nullable();
             $table->auditColumn();
             $table->timestamps();
         });

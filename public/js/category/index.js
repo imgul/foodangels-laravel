@@ -9,45 +9,49 @@
 
 load_data();
 
-$('#date-search').on('click', function () {
-    let status    = $('#status').val();
-    let requested = $('#requested').val();
-    $('#maintable').DataTable().destroy();
+$("#date-search").on("click", function () {
+    let status = $("#status").val();
+    let requested = $("#requested").val();
+    $("#maintable").DataTable().destroy();
     load_data(status, requested);
 });
 
-$('#refresh').on('click', function () {
-    $('#status').val('');
-    $('#requested').val('');
-    $('#maintable').DataTable().destroy();
+$("#refresh").on("click", function () {
+    $("#status").val("");
+    $("#requested").val("");
+    $("#maintable").DataTable().destroy();
     load_data();
 });
 
-function load_data(status = '', requested = '') {
-    var table = $('#maintable').DataTable({
-        processing : true,
-        serverSide : true,
-        ajax : {
-            url : $('#maintable').attr('data-url'),
-            data : {'status' : status, 'requested' : requested}
+function load_data(status = "", requested = "") {
+    var table = $("#maintable").DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: $("#maintable").attr("data-url"),
+            data: { status: status, requested: requested },
         },
         columns: [
-            { data: 'id', name: 'id' },
-            { data: 'image', name: 'image' },
-            { data: 'name', name: 'name' },
-            { data: 'created_by', name: 'created_by' },
-            { data: 'status', name: 'status' },
-            { data: 'action', name: 'action' },
+            { data: "id", name: "id" },
+            { data: "image", name: "image" },
+            { data: "name", name: "name" },
+            { data: "created_by", name: "created_by" },
+            { data: "status", name: "status" },
+            { data: "action", name: "action" },
         ],
-        "ordering" : false
+        ordering: false,
+        rowCallback: function (row, data) {
+            $(row).attr("data-id", data.id);
+            // console.log(data);
+        },
     });
 
-    let hidecolumn = $('#maintable').data('hidecolumn');
-    if(!hidecolumn) {
-        table.column( 5 ).visible( false );
+    let hidecolumn = $("#maintable").data("hidecolumn");
+    if (!hidecolumn) {
+        table.column(5).visible(false);
     }
 }
 
-$('#maintable').on('draw.dt', function () {
+$("#maintable").on("draw.dt", function () {
     $('[data-toggle="tooltip"]').tooltip();
-})
+});

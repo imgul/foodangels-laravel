@@ -25,7 +25,6 @@ class CategoryController extends BackendController
         $this->middleware(['permission:category_create'])->only('create', 'store');
         $this->middleware(['permission:category_edit'])->only('edit', 'update');
         $this->middleware(['permission:category_delete'])->only('destroy');
-
     }
 
     public function index(Request $request)
@@ -98,8 +97,8 @@ class CategoryController extends BackendController
     {
         if (request()->ajax()) {
             $queryArray = [];
-            
-            if(!auth()->user()->myrole == UserRole::ADMIN ){
+
+            if (!auth()->user()->myrole == UserRole::ADMIN) {
                 $queryArray['status'] = Status::ACTIVE;
             }
 
@@ -110,7 +109,7 @@ class CategoryController extends BackendController
                 $queryArray['requested'] = $request->requested;
             }
 
-            $categories = Category::where($queryArray)->descending()->get();
+            $categories = Category::where($queryArray)->orderBy('orders')->get();
 
             $i = 0;
             return Datatables::of($categories)
@@ -126,9 +125,9 @@ class CategoryController extends BackendController
                         }
 
                         if (auth()->user()->can('category_delete')) {
-                            $retAction .= '<form id="detete-'.$category->id.'" class="float-left pl-2" action="' . route('admin.category.destroy', $category) . '"
+                            $retAction .= '<form id="detete-' . $category->id . '" class="float-left pl-2" action="' . route('admin.category.destroy', $category) . '"
                             method="POST">' . method_field('DELETE') . csrf_field() .
-                            '<button type="button" data-id="'.$category->id.'"
+                                '<button type="button" data-id="' . $category->id . '"
                              class="btn btn-sm btn-icon btn-danger delete confirm-delete"  data-toggle="modal" data-target="#exampleModal" title="Delete">
                              <i class="fa fa-trash"></i>
                              </button></form>';
@@ -136,8 +135,9 @@ class CategoryController extends BackendController
                     }
                     return $retAction;
                 })
-                ->editColumn('id', function ($category) use (&$i) {
-                    return ++$i;
+                ->editColumn('id', function ($category) {
+                    // return ++$i;
+                    return $category->getKey();
                 })
                 ->editColumn('status', function ($category) {
                     return trans('statuses.' . $category->status) ?? trans('statuses.' . CategoryStatus::INACTIVE);
@@ -149,8 +149,22 @@ class CategoryController extends BackendController
 
                 ->escapeColumns([])
                 ->make(true);
-
         }
         return view('admin.category.index');
+    }
+
+    public function categoryPosition(Request $request)
+    {
+
+        $newOrders = $request->order;
+        foreach ($newOrders as $index => $value) {
+            Category::where('id', $value['dataId'])
+                ->where('status', 5)->update([
+                    'orders' => $value['position'],
+                ]);
+        }
+
+
+        return response()->json(['success' => 'success']);
     }
 }
