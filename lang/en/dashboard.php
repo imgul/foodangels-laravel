@@ -14,4 +14,6 @@ return array (
   'total_notification_order' => 'Total Notification Order',
   'file' => 'File',
   'delete_customer' => 'Yes, Delete Customer',
+  'daily_paypal_income'               => 'Daily Paypal Income',
+  'daily_cash_income'               => 'Daily Cash Income',
 );

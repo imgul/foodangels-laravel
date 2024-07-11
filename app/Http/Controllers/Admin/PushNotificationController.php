@@ -50,6 +50,7 @@ class PushNotificationController extends BackendController
     {
         $topicName = '';
 
+        
         $notification = new PushNotification;
         $notification->title = $request->title;
         $notification->description = strip_tags($request->description);
