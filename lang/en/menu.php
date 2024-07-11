@@ -55,4 +55,6 @@ return array (
   'menu_items_type'               => 'Menu Item Types',
   'menu-items-type'               => 'Menu Item Types',
   'tax'               => 'Tax',
+  'daily_report'               => 'daily_report',
+
 );

@@ -81,6 +81,17 @@ class DashboardController extends BackendController
             }
         }
 
+        $totalCashIncome      = 0;
+        
+        //total incone
+        if (!blank($totalOrders)) {
+            foreach ($totalOrders as $totalOrder) {
+                if (OrderStatus::COMPLETED == $totalOrder->status) {
+                    $totalCashIncome = $totalCashIncome + $totalOrder->paid_amount;
+                }
+            }
+        }
+
 
 
 

@@ -356,6 +356,17 @@ class BackendMenuTableSeeder extends Seeder
                 'priority'  => 68,
                 'status'    => 1,
             ],
+            
+            
+            [
+                'name'      => 'daily_report',
+                'link'      => 'daily_report',
+                'icon'      => 'fas fa-file-invoice-dollar',
+                'parent_id' => $parent['report'],
+                'priority'  => 68,
+                'status'    => 1,
+            ],
+
             [
                 'name'      => 'reservation_report',
                 'link'      => 'reservation-report',

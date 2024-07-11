@@ -55,4 +55,5 @@ return array (
     'menu_items_type'               => 'Arten von Menüpunkten',
     'menu-items-type'               => 'Arten von Menüpunkten',
     'tax'               => 'Steuer',
+    'daily_report'               => 'Tagesbericht',
   );

@@ -1,21 +1,21 @@
 <?php
 
-use App\Http\Controllers\Admin\MenuItemTypeController;
-use App\Http\Controllers\Admin\PromoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FinalController;
+use App\Http\Controllers\Admin\TaxController;
 use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AddonController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\PromoController;
 use App\Http\Controllers\Admin\TableController;
+use App\Http\Controllers\DailyReportController;
 use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CouponController;
-use App\Http\Controllers\Admin\TaxController;
 use App\Http\Controllers\Admin\QrCodeController;
 use App\Http\Controllers\Admin\RatingController;
 use App\Http\Controllers\PurchaseCodeController;
@@ -46,6 +46,7 @@ use App\Http\Controllers\Frontend\PrivacyController;
 use App\Http\Controllers\Admin\DeliveryBoyController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Frontend\CheckoutController;
+use App\Http\Controllers\Admin\MenuItemTypeController;
 use App\Http\Controllers\Admin\AdministratorController;
 use App\Http\Controllers\Frontend\RestaurantController;
 use App\Http\Controllers\Admin\CustomerReportController;
@@ -365,12 +366,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'installed', 'licens
 
     
     //tax Route
-    Route::resource('tax', TaxController::class);
-    // Route::get('tax', [TaxController::class, 'index'])->name('tax.index');
-    // Route::get('tax-create', [TaxController::class, 'create'])->name('tax.create');
-    // Route::get('tax-edit/{id}', [TaxController::class, 'edit'])->name('tax.edit');
-    // Route::post('tax-store', [TaxController::class, 'store'])->name('tax.store');
+    Route::resource('tax', TaxController::class); 
     Route::get('get-tax',  [TaxController::class, 'getTax'])->name('get-tax');
+
+
 
 
 
