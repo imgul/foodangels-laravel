@@ -238,3 +238,13 @@ if (!function_exists('promoPrice')) {
 
 
 
+if (!function_exists('setting')) {
+    function setting($key, $default = 'de') {
+        // Replace this with the actual logic to retrieve settings from your configuration
+        $settings = [
+            'locale' => 'de' // Default to German
+        ];
+
+        return $settings[$key] ?? $default;
+    }
+}

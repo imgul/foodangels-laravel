@@ -79,14 +79,14 @@
 					<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 						<div class="card card-statistic-1">
 							<div class="card-icon bg-success">
-								<i class="fas fa-money-bill"></i>
+								<i class="fas fa-hand-holding"></i>
 							</div>
 							<div class="card-wrap">
 								<div class="card-header">
-									<h4>{{ __('dashboard.Daily Cash Income') }}</h4>
+									<h4>{{ __('dashboard.daily_cash_income') }}</h4>
 								</div>
 								<div class="card-body">
-									{{ number_format($totalIncome, 2) }}
+									{{ number_format($totalCashIncome, 2) }}
 								</div>
 							</div>
 						</div>
@@ -100,10 +100,10 @@
 							</div>
 							<div class="card-wrap">
 								<div class="card-header">
-									<h4>{{ __('dashboard.Daily Paypal Income') }}</h4>
+									<h4>{{ __('dashboard.daily_paypal_income') }}</h4>
 								</div>
 								<div class="card-body">
-									{{ number_format($totalIncome, 2) }}
+									{{ number_format($totalPaypalIncome, 2) }}
 								</div>
 							</div>
 						</div>

@@ -9,11 +9,12 @@ use App\Enums\OrderStatus;
 use App\Models\Restaurant;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Enums\RestaurantStatus;
+use Spatie\Permission\Models\Role;
 use App\Enums\DeliveryHistoryStatus;
 use App\Models\DeliveryStatusHistories;
 use App\Http\Controllers\BackendController;
-use Spatie\Permission\Models\Role;
 
 class DashboardController extends BackendController
 {
@@ -81,18 +82,33 @@ class DashboardController extends BackendController
             }
         }
 
+        $today = Carbon::today();
         $totalCashIncome      = 0;
-        
-        //total incone
+         
+        // Total income
         if (!blank($totalOrders)) {
             foreach ($totalOrders as $totalOrder) {
-                if (OrderStatus::COMPLETED == $totalOrder->status) {
-                    $totalCashIncome = $totalCashIncome + $totalOrder->paid_amount;
+                if ((OrderStatus::COMPLETED == $totalOrder->status && $totalOrder->payment_method == "5") &&
+                    $today->isSameDay(Carbon::parse($totalOrder->date))) {
+                    $totalCashIncome += $totalOrder->paid_amount;
                 }
             }
         }
 
+        
+        $totalPaypalIncome      = 0;
+         
+        // Total income
+        if (!blank($totalOrders)) {
+            foreach ($totalOrders as $totalOrder) {
+                if ((OrderStatus::COMPLETED == $totalOrder->status && $totalOrder->payment_method == "10") &&
+                    $today->isSameDay(Carbon::parse($totalOrder->date))) {
+                    $totalPaypalIncome += $totalOrder->paid_amount;
+                }
+            }
+        }
 
+// dd($totalPaypalIncome);
 
 
 
@@ -146,6 +162,8 @@ class DashboardController extends BackendController
         $this->data['totalDaliveryOrders']  = count($totalDaliveryOrders);
 
         $this->data['totalIncome']             = $totalIncome;
+        $this->data['totalPaypalIncome']             = $totalPaypalIncome;
+        $this->data['totalCashIncome']             = $totalCashIncome;
         $this->data['recentOrders']            = $recentOrders;
         $this->data['userCredit']            = currencyFormat(auth()->user()->balance->balance > 0 ? auth()->user()->balance->balance : 0 );
 

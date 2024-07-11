@@ -13,4 +13,6 @@ return array (
     'total_notification_order' => 'Gesamte Benachrichtigungsbestellung',
     'file'                     => 'Datei',
     'delete_customer'          => 'Ja, Kunde löschen',
+    'daily_paypal_income'               => 'tägliches Paypal Einkommen',
+    'daily_cash_income'               => 'tägliches Bargeldeinkommen',
   );
