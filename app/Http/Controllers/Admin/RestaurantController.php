@@ -267,6 +267,8 @@ class RestaurantController extends BackendController
 
     public function show($id)
     {
+
+       
         $restaurant = Restaurant::restaurantowner()->findOrFail($id);
         if (blank($restaurant->user)) {
             return redirect(route('admin.restaurant.index'))->withError('The user not found.');

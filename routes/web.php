@@ -67,6 +67,7 @@ use App\Http\Controllers\Admin\RestaurantOwnerSalesReportController;
 use App\Http\Controllers\Admin\CashOnDeliveryOrderBalanceReportController;
 use App\Http\Controllers\Admin\RestaurantController as RestaurantsController;
 use App\Http\Controllers\Admin\ReservationController as ReservationsController;
+use App\Http\Controllers\Frontend\CookiesController;
 
 Route::group(['middleware' => ['installed', 'license-activate']], function () {
     Auth::routes(['verify' => false]);
@@ -151,6 +152,9 @@ Route::group(['middleware' => ['installed', 'license-activate']], function () {
     //paypal
     Route::get('success-transaction',                       [CheckoutController::class, 'paypalSuccessTransaction'])->name('successTransaction');
     Route::get('cancel-transaction',                        [CheckoutController::class, 'paypalCancelTransaction'])->name('cancelTransaction');
+
+    Route::get('/cookies-set', [CookiesController::class, 'cookies'])->name('cookies-set');
+    Route::get('/cookies-cancel', [CookiesController::class, 'cookiesCancel'])->name('cookies-cancel');
 });
 
 
@@ -295,6 +299,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'installed', 'licens
     Route::put('restaurant-update/{restaurant}',            [RestaurantsController::class, 'restaurantUpdate'])->name('restaurant.restaurant-update');
 
     Route::resource('orders',                                OrderController::class);
+    Route::get('orders/invoice/{order}', 'OrderController@invoice')->name('orders.invoice');
     Route::get('orders/{order}/delivery',                   [OrderController::class, 'delivery'])->name('orders.delivery');
     Route::get('get-orders',                                [OrderController::class, 'getOrder'])->name('orders.get-orders');
     Route::get('orders/order-file/{id}',                    [OrderController::class, 'getDownloadFile'])->name('orders.order-file');

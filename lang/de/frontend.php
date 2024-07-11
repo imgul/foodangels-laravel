@@ -62,6 +62,7 @@ return array (
     1                                 => '1',
     'person'                          => 'Person',
     'time_slots'                      => 'Wählen Sie einen Zeitraum aus',
+    'as_soon_as_possible' => 'So schnell wie möglich',
     'request_to_book'                 => 'Anfrage zur Buchung',
     'delivery_details'                => 'Lieferdetails',
     'delivery_address'                => 'Lieferadresse',

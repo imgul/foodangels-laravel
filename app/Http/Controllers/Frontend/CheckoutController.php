@@ -98,7 +98,7 @@ class CheckoutController extends FrontendController
             $carts = session()->get('cart');
             $totalAmount = $carts['totalAmount'];
             $totalPayAmount = $carts['totalPayAmount'];
-            if ($totalAmount > $min_order && $totalAmount < $max_order) {
+            if ($totalAmount >= $min_order && $totalAmount <= $max_order) {
                 $carts['delivery_charge'] = $delivery_charge;
                 $newtotalPayAmount = $carts['totalAmount'] + $delivery_charge;
                 $carts['totalPayAmount'] = $newtotalPayAmount;
@@ -120,7 +120,7 @@ class CheckoutController extends FrontendController
 
     public function store(Request $request)
     {
-//        dd($request->all());
+    //    dd($request->all());
         $this->user = null;
         if (auth()->check()) {
             $this->user = auth()->user();

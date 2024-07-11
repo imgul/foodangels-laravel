@@ -63,6 +63,7 @@ return array (
   1 => '1',
   'person' => 'Person',
   'time_slots' => 'Pick a Time Slot',
+  'as_soon_as_possible' => 'As soon as possible',
   'request_to_book' => 'Request To Book',
   'delivery_details' => 'Delivery Details',
   'delivery_address' => 'Delivery Address',
@@ -194,4 +195,12 @@ return array (
   'sslcommerz' => 'SslCommerz',
   'min' => 'Min.',
   'free' => 'Free',
+  'your_privacy' => 'Privacy Settings',
+  'cookies_title' => 'Datenschutzeinstellungen
+  Wir verwenden Cookies und andere Technologien auf unserer Website. Einige von ihnen sind essenziell, während andere uns helfen, diese Website und Ihre Erfahrung zu verbessern. Personenbezogene Daten können verarbeitet werden (z. B. IP-Adressen), z. B. für personalisierte Anzeigen und Inhalte oder Anzeigen- und Inhaltsmessung. Weitere Informationen über die Verwendung Ihrer Daten finden Sie in unserer Datenschutzerklärung. Hier finden Sie eine Übersicht über alle verwendeten Cookies. Sie können Ihre Einwilligung zu ganzen Kategorien geben oder sich weitere Informationen anzeigen lassen und so nur bestimmte Cookies auswählen.',
+  'cookies_title_phone' => 'Datenschutzeinstellungen
+  Wir verwenden Cookies und andere Technologien auf unserer Website. Einige von ihnen sind essenziell, während andere uns helfen, diese Website und Ihre Erfahrung zu verbessern.',
+  'accept_all_cookies' => 'Accept All Cookies',
+  'cookies_cancel' => 'Cancel'
+  
 );
