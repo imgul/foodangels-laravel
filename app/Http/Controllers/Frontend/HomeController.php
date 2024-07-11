@@ -9,6 +9,7 @@ use App\Models\Restaurant;
 use App\Enums\RestaurantStatus;
 use App\Enums\Status;
 use App\Http\Controllers\FrontendController;
+use App\Models\Page;
 
 class HomeController extends FrontendController
 {
@@ -31,6 +32,7 @@ class HomeController extends FrontendController
         $this->data['bestSellingCuisines']    = $this->getBestSellingCuisines();
         $this->data['current_data']           =  now()->format('H:i:s');
         $this->data['restaurant']           = Restaurant::where('status', RestaurantStatus::ACTIVE)->first();
+        $this->data['pages'] = Page::where('status',Status::ACTIVE)->get();
         return view('frontend.home', $this->data);
     }
 

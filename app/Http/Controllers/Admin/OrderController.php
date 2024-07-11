@@ -66,8 +66,12 @@ class OrderController extends BackendController
      */
     public function show($id)
     {
+        
         $this->data['order'] = Order::orderowner()->findOrFail($id);
+
+    
         $this->data['items'] = OrderLineItem::with('menuItem', 'variation')->with('restaurant')->where(['order_id' => $this->data['order']->id])->get();
+        
         return view('admin.orders.view', $this->data);
     }
 

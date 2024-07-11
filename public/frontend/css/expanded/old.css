@@ -1,3 +1,7 @@
+:root {
+    --orange: #d98131
+}
+
 p {
     color: black;
 }
@@ -35,7 +39,7 @@ p {
 .promo-header h2 {
     margin: 10px 25px 20px 25px;
     font-size: 24px;
-    color: #ff6222;
+    color: var(--orange);
     font-weight: bold;
     font-style: italic;
     border-bottom: 2px solid;
@@ -53,7 +57,7 @@ p {
 
 .tabs-container i.menu-cart {
     position: absolute;
-    background: #f36805;
+    background: var(--orange);
     padding: 3px;
     border: 1px solid #fdfdfd;
     right: 0;
@@ -87,7 +91,7 @@ p {
     margin: 0 0 17px;
 }
 .special-offer {
-    background: #f36805;
+    background: var(--orange);
     padding: 5px 7px;
     color: #fff;
     border-radius: 20px;
@@ -122,7 +126,7 @@ div.layout-style {
 .discount-price {
     text-decoration: line-through;
     margin-right: 10px;
-    color: red;
+    color: var(--orange);
 }
 
 .section_1 {
@@ -136,7 +140,7 @@ div.layout-style {
     align-items: center;
 }
 .section_1 .main-text-area h4 {
-    color: #f36805;
+    color: var(--orange);
 }
 .section_1 .main-text-area h2 {
     color: #fff;
@@ -168,7 +172,7 @@ div.layout-style {
     padding: 0 50px;
 }
 .opening_details h4 {
-    color: #f36805;
+    color: var(--orange);
     text-align: center;
 }
 .opening_details h2 {
@@ -176,16 +180,16 @@ div.layout-style {
     color: #fff;
 }
 .dotts {
-    color: #f36805;
+    color: var(--orange);
     text-align: center;
     font-size: 36px;
 }
 .call {
-    border: 2px solid #f36805;
+    border: 2px solid var(--orange);
     padding: 17px 20px;
     display: block;
     color: #fff !important;
-    background: #f36805;
+    background: var(--orange);
     border-radius: 30px;
     font-size: 18px;
     margin: 10px auto;
@@ -197,7 +201,7 @@ div.layout-style {
     color: #fff;
 }
 .work-time h3 {
-    color: #f36805;
+    color: var(--orange);
     font-size: 18px;
 }
 .new_items {
@@ -219,7 +223,7 @@ div.layout-style {
     position: absolute;
     width: 30%;
     height: 1px;
-    background: #f36805;
+    background: var(--orange);
     left: 10%;
     opacity: 0.7;
     bottom: -4px;
@@ -229,7 +233,7 @@ div.layout-style {
     position: absolute;
     width: 30%;
     height: 1px;
-    background: #f36805;
+    background: var(--orange);
     right: 10%;
     opacity: 0.7;
     bottom: -4px;
@@ -284,7 +288,7 @@ div.layout-style {
     margin-right: 7px;
     font-size: 18px;
     font-family: FontAwesome;
-    color: #f36805;
+    color: var(--orange);
 }
 .section_advanceorder .col-sm-12.col-md-4.col-lg-4 {
     background: #fff;

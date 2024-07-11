@@ -48,6 +48,8 @@ class ShowCart extends Component
 
     public function submit($restaurant_id, $menu_id)
     {
+        
+
         session()->put('session_cart_restaurant_id', $restaurant_id);
         session()->put('session_cart_restaurant', $this->restaurant->slug);
 
@@ -99,63 +101,7 @@ class ShowCart extends Component
                 $j++;
             }
         }
-        // else{
-
-        //     $ijs_menuItemTypes        = MenuItemType::where('status', Status::ACTIVE)->orderBy('id','desc')->get();
-
-        //     $ijs_menuItemVariations   = $this->menuItem->variations->groupBy('menu_item_type_id')->toBase();
-
-        //     //---------------
-
-        //     $tmp_variation = array();
-        //         if(!blank($ijs_menuItemTypes)){
-        //             foreach(MenuItemType::where('status', Status::ACTIVE)->orderBy('id','desc')->get() as $type){
-        //                 if(isset($ijs_menuItemVariations[$type->id]))
-        //                 {
-        //                     $io=1;
-        //                     foreach($ijs_menuItemVariations[$type->id] as $variation)
-        //                     {
-        //                         if($io==1){
-        //                             if($variation['type'] == 0){
-        //                                 array_push($tmp_variation, $variation['id']);
-
-        //                             }
-        //                         }
-
-        //                         $io++;
-        //                     }
-
-
-        //                  }
-
-        //             }
-        //         }
-        //         if (!blank($tmp_variation)) {
-        //             $variations = MenuItemVariation::whereIn('id', $tmp_variation)->get();
-        //             $j = 0;
-        //             foreach ($variations as $variation) {
-
-        //                 if ($variation->type == 0) {
-        //                     $variationArray[$j]['id'] = $variation->id;
-        //                     $variationArray[$j]['name'] = $variation->name;
-        //                     $variationArray[$j]['price'] = $variation->unit_price;
-        //                 } else {
-        //                     $variationArray[$j]['id'] = $variation->id;
-        //                     $variationArray[$j]['name'] = $variation->relatedmenuitem->name;
-        //                     $variationArray[$j]['price'] = $variation->relatedmenuitem->unit_price;
-        //                 }
-
-        //                 if ($variation->unit_price) {
-        //                     $totalPrice += $variation->unit_price;
-        //                 } elseif (!blank($variation->relatedmenuitem)) {
-        //                     $totalPrice += $variation->relatedmenuitem->unit_price;
-        //                 }
-        //                 $j++;
-        //             }
-        //         }
-        //     //---------------
-        //     //print_r($smenuItemVariations); die;
-        // }
+        
         $optionArray = [];
         if (!blank($this->options)) {
             $options = MenuItemOption::whereIn('id', $this->options)->get();
@@ -180,6 +126,8 @@ class ShowCart extends Component
             }
         }
         $instructions = !blank($this->instructions) ? $this->instructions : "";
+
+       
         $test = session()->get('session_'.$menu_id, []);
         $test[0] = $instructions;
         session()->put('session_'.$menu_id, $test);
@@ -204,16 +152,16 @@ class ShowCart extends Component
             'name'            => $this->menuItem->name,
             'qty'             => $this->quantity,
             'price'           => $totalPrice,
-            'delivery_charge' => $delivery_charge,
-            'min_order'       => $min_order,
-            'max_order'       => $max_order,
+            'delivery_charge' => $delivery_charge ?? 0,
+            'min_order'       => $min_order ?? 0,
+            'max_order'       => $max_order ?? 0,
             'options'         => $optionArray,
             'variations'       => $variationArray,
             'discount'        => $discount,
             'restaurant_id'       => $this->menuItem->restaurant_id,
             'images'          => $this->menuItem->images,
             'menuItem_id'     => $this->menuItem->id,
-            'instructions'    => $getInstruction,
+            'instructions'    => $instructions,
             'promoId'=>$this->promoId,
         ];
         //   echo "<pre>"; print_r($cartItem); die;
