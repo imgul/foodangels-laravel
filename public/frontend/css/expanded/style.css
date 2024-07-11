@@ -6,7 +6,7 @@
     --dark: #160040;
     --black: #000000;
     --white: #ffffff;
-    --green: #1AB759;
+    --green: #80b42a;
     --gray: #D9DBE9;
     --slate: #F7F7FC;
     --purple: #b12fad;
@@ -16,8 +16,8 @@
     --text: #6E7191;
     --focus: #008BBA;
     --alert: #FB4E4E;
-    --primary: #EE1D48;
-    --secondary: #1F1F39;
+    --primary: #23364a;
+    --secondary: #587586;
     --placeholder: #A0A3BD;
     --border-gray: #D9DBE9;
     --border-slate: #EFF0F6;
@@ -6193,3 +6193,84 @@ input[type=number] {
     font-weight: 600;
     margin-bottom: 16px;
 }
+
+
+/* for cookies */
+
+.cookies-w {
+	width: 100%;
+	background: #100635 !important;
+	color: #fff;
+	border-radius: 7px;
+	padding: 10px;
+	position: fixed !important;
+	bottom: 0;
+	z-index: 9
+}
+
+.cookies_title {
+    font-size: 12px;
+    line-height: 16px;
+}
+
+#cookieNotice button {
+	padding: 5px 13px;
+	border: none;
+	border-radius: 30px !important;
+	font-size: 14px;
+}
+
+#cookieNotice .btn-primary {
+	animation: glowing 2s infinite;
+}
+
+@keyframes glowing {
+	0% {
+		box-shadow: 0px;
+	}
+
+	50% {
+		box-shadow: 0px 0px 20px 3px #3167eb;
+	}
+
+	100% {
+		box-shadow: 0px;
+	}
+}
+
+#cookieNotice .btn-danger {
+	animation: glowing_danger 2s infinite;
+}
+
+@keyframes glowing_danger {
+	0% {
+		box-shadow: 0px;
+	}
+
+	50% {
+		box-shadow: 0px 0px 20px 3px red;
+	}
+
+	100% {
+		box-shadow: 0px;
+	}
+}
+
+/* end cookies */
+
+#alert-box {
+    position: fixed;
+    top: 72px;
+    right: 1px;
+}
+
+#overlay {
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  }

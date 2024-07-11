@@ -44,10 +44,10 @@
                                     {{ \Carbon\Carbon::parse($order->created_at)->format('d M Y, h:i A') }}<br><br>
                                 </address>
                                 @if($order->time_slot)
-                                    <address>
-                                        <strong>{{ __('frontend.time_slot') }}:</strong><br>
-                                        {{ $order->time_slot }}<br><br>
-                                    </address>
+                                <address>
+                                    <strong>{{ __('frontend.time_slot') }}:</strong><br>
+                                    {{ $order->time_slot }}<br><br>
+                                </address>
                                 @endif
                             </div>
                         </div>
@@ -65,7 +65,9 @@
                                     <th>{{ __('order.item') }}</th>
                                     <th class="text-center">{{ __('levels.price') }}</th>
                                     <th class="text-center">{{ __('levels.quantity') }}</th>
+
                                     <th class="text-right">{{ __('levels.totals') }}</th>
+                                    <th class="text-right">{{ __('levels.instructions') }}</th>
                                 </tr>
                                 @foreach($items as $itemKey => $item)
                                 <tr>
@@ -85,12 +87,17 @@
                                     <td class="text-center">{{ currencyFormat($item->unit_price) }}</td>
                                     <td class="text-center">{{ $item->quantity }} </td>
                                     <td class="text-right">{{ currencyFormat($item->item_total) }}</td>
+                                    @if(!blank($item->instructions))
+
+                                    <td class="text-right" colspan="5"> {{ $item->instructions}} </td>
+
+                                    @else
+
+                                    <td class="text-right" colspan="5"><strong> N/A </td>
+
+                                    @endif
                                 </tr>
-                                @if(!blank($item->instructions))
-                                    <tr>
-                                        <td class="pt-0 pb-4" colspan="5"><strong> {{ __('levels.instructions') }}</strong>  {{ $item->instructions}}  </td>
-                                    </tr>
-                                @endif
+
 
                                 @endforeach
                             </table>

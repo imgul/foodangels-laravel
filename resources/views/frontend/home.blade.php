@@ -7,74 +7,92 @@
     <meta property="og:image" content="{{ asset('images/' . setting('site_logo')) }}">
 @endpush
 
+@push('css')
+    <style>
+        @media only screen and (max-width: 600px) {
+            .pac-container.pac-logo.hdpi {
+                width: calc(100vw - 80px) !important;
+            }
+        }
+    </style>
+@endpush
+
 @section('main-content')
 
     <!--======== BANNER PART START ==========-->
     <div class="color-overlay"></div>
-    <section class="banner" data-background-image="{{ asset('frontend/images/default/Veganer-Halal-Ttiple1-Burger-Foodangels-Vegan.jpg') }}" style="background-repeat: no-repeat; background-size: cover; background-position: center; background-image: url({{ asset('frontend/images/default/Veganer-Halal-Ttiple1-Burger-Foodangels-Vegan.jpg') }});">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12 col-md-7 col-lg-6">
+    
+        <section class="banner py-0" data-background-image="{{ asset('frontend/images/default/Veganer-Halal-Ttiple1-Burger-Foodangels-Vegan.jpg') }}" style="background-repeat: no-repeat; background-size: cover; background-position: center; background-image: url({{ asset('frontend/images/default/Veganer-Halal-Ttiple1-Burger-Foodangels-Vegan.jpg') }}); height: calc(100vh - 70px); display: flex; align-items: center;">
+            <div id="overlay">  
+                <div class="container h-100">
+                    <div class="row align-items-center h-100">
+                        <div class="col-12 col-md-7 col-lg-6">
 
-                    <h1 class="banner-title"> {{ Str::limit(setting('banner_title'), 75) }} </h1>
+                            <h1 class="banner-title"> {{ Str::limit(setting('banner_title'), 75) }} </h1>
 
-                    <p class="banner-subtitle"> {{ __('frontend.subtitle') }} </p>
-                    <form id="search-form"  method="GET" action="{{ route('search') }}">
-                        <div class="main-search-input">
-                            <input type="hidden" id="lat" name="lat" required="" value="">
-                            <input type="hidden" id="long" name="long" required="" value="">
-                            <input type="hidden" id="expedition" name="expedition" value="{{ __('all') }}">
+                            <p class="banner-subtitle mb-5"> {{ __('frontend.subtitle') }} </p>
+                            <form id="search-form"  method="GET" action="{{ route('search') }}">
+                                <div class="main-search-input">
+                                    <input type="hidden" id="lat" name="lat" required="" value="">
+                                    <input type="hidden" id="long" name="long" required="" value="">
+                                    <input type="hidden" id="expedition" name="expedition" value="{{ __('all') }}">
 
-                            <div class="banner-search main-search-input-item location">
-                                <div id="autocomplete-container" class="me-auto ms-2 w-100">
-                                    <input id="autocomplete-input" type="text" placeholder="{{ __('frontend.search') }}">
+                                    <div class="banner-search main-search-input-item location">
+                                        <div id="autocomplete-container" class="me-auto ms-2 w-100">
+                                            <input id="autocomplete-input" type="text" placeholder="{{ __('frontend.search') }}" name="s">
+                                        
+                                        </div>
+                                        <a href="javascript:void(0)">
+                                            <span id="locationIcon" onclick="getLocation()">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M12 19.5C16.1421 19.5 19.5 16.1421 19.5 12C19.5 7.85786 16.1421 4.5 12 4.5C7.85786 4.5 4.5 7.85786 4.5 12C4.5 16.1421 7.85786 19.5 12 19.5Z"
+                                                        stroke="#EE1D48" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                    <path
+                                                        d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
+                                                        stroke="#EE1D48" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                    <path d="M12 4V2" stroke="#EE1D48" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                    <path d="M4 12H2" stroke="#EE1D48" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                    <path d="M12 20V22" stroke="#EE1D48" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                    <path d="M20 12H22" stroke="#EE1D48" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                </svg>
+                                            </span>
+                                        </a>
+                                        <div class="d-flex gap-1">
+                                            <button id="searchBtn" type="submit">{{ __('frontend.search') }}</button>
+                                            <button id="pickupBtn" class="button">{{ __('frontend.pickup') }}</button>
+                                        </div>
+                                    </div>
+                                    @error('s')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
-                                <a href="javascript:void(0)">
-                                    <span id="locationIcon" onclick="getLocation()">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M12 19.5C16.1421 19.5 19.5 16.1421 19.5 12C19.5 7.85786 16.1421 4.5 12 4.5C7.85786 4.5 4.5 7.85786 4.5 12C4.5 16.1421 7.85786 19.5 12 19.5Z"
-                                                stroke="#EE1D48" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path
-                                                d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
-                                                stroke="#EE1D48" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path d="M12 4V2" stroke="#EE1D48" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path d="M4 12H2" stroke="#EE1D48" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path d="M12 20V22" stroke="#EE1D48" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path d="M20 12H22" stroke="#EE1D48" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                        </svg>
-                                    </span>
-                                </a>
-                                <div class="d-flex gap-1">
-                                    <button id="searchBtn" type="submit">{{ __('frontend.search') }}</button>
-                                    <button id="pickupBtn" class="button">{{ __('frontend.pickup') }}</button>
-                                </div>
+                            </form>
+        {{--                    <form id="form2" method="GET" action="{{ route('filters') }}" class="pickup-from-frm">--}}
+        {{--                        <input type="hidden" id="restaurant" name="restaurant"  value="{{$restaurant->slug}}">--}}
+        {{--                    </form>--}}
+                        </div>
+
+                        <div class="col-12 col-md-5 col-lg-6">
+                            <div class="banner-image">
+        {{--                        <img src="{{ asset('images/' . setting('banner_image')) }}"--}}
+        {{--                            alt="hero">--}}
+
+
                             </div>
                         </div>
-                    </form>
-{{--                    <form id="form2" method="GET" action="{{ route('filters') }}" class="pickup-from-frm">--}}
-{{--                        <input type="hidden" id="restaurant" name="restaurant"  value="{{$restaurant->slug}}">--}}
-{{--                    </form>--}}
-                </div>
-
-                <div class="col-12 col-md-5 col-lg-6">
-                    <div class="banner-image">
-                        <img src="{{ asset('images/' . setting('banner_image')) }}"
-                            alt="hero">
-
-
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    
     <!--======== BANNER PART END ========-->
 
     <!--========  AWESOME STUFF START ========-->
@@ -187,7 +205,7 @@
         </section>
     @endif
     <!--========== Cusines PART END =========-->
-
+    @include('frontend.partials._cookies')
 @endsection
 
 @push('js')

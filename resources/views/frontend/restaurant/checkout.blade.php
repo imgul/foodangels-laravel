@@ -351,7 +351,7 @@
                                     <span>{{ __('frontend.delivery_charge') }}</span>
                                     <span>
                                         <span class="get_delivery_charge" id="delivery_chearge">
-                                            {{ $restaurant->lowestDeliveryCharge()->min_order }}
+                                            {{ $restaurant->lowestDeliveryCharge()?->min_order }}
                                         </span>
                                     </span>
                                 </li>

@@ -78,21 +78,6 @@
                                                         @endforeach
                                                     </select>
 
-                                                    <!-- <div wire:ignore.self class="mt-1" style="display: none"
-                                    id="variationInfo{{ $type->id }}">
-                                    <span wire:ignore class="optional-price" id="variationItemsInfo{{ $type->id }}">
-                                    </span>
-                                    <a wire:ignore class="ml-4 text-primary option-info" data-toggle="collapse"
-                                        href="javascript:void(0)" onclick="showInfo('infoVariation{{ $type->id }}')"
-                                        role="button" aria-expanded="false">{{ __('frontend.product_info') }}
-                                                    </a>
-                                                    <div wire:ignore class="collapse" id="infoVariation{{  $type->id }}">
-                                        <div wire:ignore class="card card-body">
-                                            <span class="text-black-50"
-                                                id="VariationProductInfo{{  $type->id }}"></span>
-                                        </div>
-                                    </div>
-                                </div> -->
                                                 </div>
                                             @endif
                                         @endforeach
@@ -113,15 +98,18 @@
                                                                 $i++;
                                                             @endphp
                                                             @if($option['type'] == 0)
-                                                                @if($i <= 2) <input wire:change="changeOption($option['id'])" wire:model="options" id="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}" type="checkbox" value="{{ $option['id'] }}" name="options[]">
-                                                                <label class="optional-checkbox" for="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}">{{$option['name']}}
+                                                                @if($i <= 2)
+                                                               
+                                                                <div class="mb-1">
+        
+                                                                    <input wire:change="changeOption($option['id'])" wire:model="options" id="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}" type="checkbox" value="{{ $option['id'] }}" name="options[]">
+                                                                    <label class="optional-checkbox fs-6 fw-normal" for="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}">{{$option['name']}}
                                                                     <span class="optional-price"> @if($option['unit_price'])+
-                                                                        {{currencyName($option['unit_price'])}}@endif</span>
+                                                                            {{currencyName($option['unit_price'])}}@endif</span>
+                                                                            
+                                                                 </div>
                                                                     @if($option['product_info'])
-                                                                        <!--<a class="ml-4 text-primary option-info" data-toggle="collapse"-->
-                                                                        <!--    href="javascript:void(0)" onclick="showInfo('info{{ $option['id'] }}')"-->
-                                                                        <!--    role="button" aria-expanded="false">{{ __('frontend.product_info') }}-->
-                                                                        <!--</a>-->
+                                                                     
 
                                                                     @endif
                                                                     <div class="collapse" id="info{{ $option['id'] }}">

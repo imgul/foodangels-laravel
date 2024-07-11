@@ -35,6 +35,10 @@ class SearchController extends FrontendController
 
     public function filter(Request $request)
     {
+        $request->validate([
+            's' => 'required'
+        ]);
+
         $restaurant = Restaurant::where(['status' => Status::ACTIVE, 'current_status' => Status::ACTIVE])->first();
 
         $current_time = now()->format('H:i:s');

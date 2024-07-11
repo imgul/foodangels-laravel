@@ -44,6 +44,85 @@
         @endif
     </script> 
 
+
+<script>
+        // Create cookie
+        function setCookie(cname, cvalue,userIP, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            let expires = "expires="+ d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            document.cookie = 'userIP' + "=" + userIP + ";" + expires + ";path=/";
+        }
+
+        // Delete cookie
+        function deleteCookie(cname) {
+            const d = new Date();
+            d.setTime(d.getTime() + (24*60*60*1000));
+            let expires = "expires="+ d.toUTCString();
+            document.cookie = cname + "=;" + expires + ";path=/";
+        }
+        // Set cookie consent
+        function acceptCookieConsent(){
+            deleteCookie('user_cookie_consent');
+            deleteCookie('userIP');
+            $.ajax({
+                type : 'GET',
+                url : '{{route('cookies-set')}}',
+                dataType: 'json',
+                success : function (data) {
+                    setCookie('user_cookie_consent', data.userAgent,data.userIP, 30);
+                    document.getElementById("cookieNotice").style.display = "none";
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            });
+            $("body").removeClass("hide-body");
+        }
+        
+        function cancel(){
+            deleteCookie('user_cookie_consent');
+            deleteCookie('userIP');
+            $.ajax({
+                type : 'GET',
+                url : '{{route('cookies-cancel')}}',
+                dataType: 'json',
+                success : function (data) {
+                    setCookie('user_cookie_consent', data.userAgent,data.userIP, 30);
+                    document.getElementById("cookieNotice").style.display = "none";
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            });
+            $("body").removeClass("hide-body");
+        }
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i <ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        let cookie_consent = getCookie("user_cookie_consent");
+        if(cookie_consent != ""){
+            document.getElementById("cookieNotice").style.display = "none";
+        }else{
+            if (document.getElementById("cookieNotice")) {
+                document.getElementById("cookieNotice").style.display = "block";
+            }
+        }
+    </script>
+
     @livewireScripts
 
     @stack('livewire')
