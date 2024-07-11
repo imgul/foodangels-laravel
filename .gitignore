@@ -17,5 +17,5 @@
 #/.fleet
 #/.idea
 #/.vscode
-#/storage/logs
+/storage/logs
 #/storage/installed
