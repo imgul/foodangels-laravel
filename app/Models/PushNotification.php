@@ -20,4 +20,8 @@ class PushNotification extends BaseModel implements HasMedia
         }
         return asset('assets/img/default/notification.png');
     }
+
+    public function reads() {
+        return $this->belongsToMany(User::class, 'push_notification_reads', 'push_notification_id', 'customer_id');
+    }
 }

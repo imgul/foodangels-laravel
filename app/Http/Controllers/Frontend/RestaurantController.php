@@ -70,6 +70,7 @@ class RestaurantController extends FrontendController
         foreach ($products as $product) {
             $product_categories = $product->categories_orderBy;
             if (!blank($product_categories)) {
+
                 foreach ($product_categories as $product_category) {
                     $categories[$product_category->id] = $product_category;
                     $categories_products[$product_category->id][] = $product;
@@ -78,6 +79,11 @@ class RestaurantController extends FrontendController
                 $other_products[] = $product;
             }
         }
+
+        usort($categories, function($a, $b) {
+            return $a->orders - $b->orders;
+        });
+
 
         
         $this->data['categories'] = $categories;

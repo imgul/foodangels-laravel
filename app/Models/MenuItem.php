@@ -53,7 +53,7 @@ class MenuItem extends BaseModel implements HasMedia
 
     public function categories_orderBy()
     {
-        return $this->belongsToMany(Category::class, 'category_menu_items')->orderBy('orders');
+        return $this->categories()->orderBy('orders');
     }
 
 

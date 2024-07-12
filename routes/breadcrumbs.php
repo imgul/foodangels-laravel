@@ -921,3 +921,9 @@ Breadcrumbs::for('user/view', function ( $trail) {
     $trail->parent('user');
     $trail->push(trans('validation.attributes.view'));
 });
+
+
+Breadcrumbs::for('redeem-setting', function ( $trail) {
+    $trail->parent('setting');
+    $trail->push(trans('setting.redeem_setting'));
+});

@@ -10,6 +10,7 @@ use App\Libraries\MyString;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\BackendController;
+use App\Models\RedeemSetting;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
 
@@ -23,12 +24,12 @@ class SettingController extends BackendController
         $this->data['siteTitle'] = 'Settings';
         $this->middleware(['permission:setting']);
         $this->middleware('license-activate');
-
     }
 
     // Site Setting
     public function index()
     {
+
         $this->data['language'] = Language::where('status', Status::ACTIVE)->get();
         return view('admin.setting.site', $this->data);
     }
@@ -51,7 +52,7 @@ class SettingController extends BackendController
 
             $site_logo                 = request('site_logo');
             $originalName = $site_logo->getClientOriginalName();
-            $settingArray['site_logo'] = time() . '_' .$originalName;
+            $settingArray['site_logo'] = time() . '_' . $originalName;
             $uniqueName =  $settingArray['site_logo'];
             $request->site_logo->move(public_path('images/'), $uniqueName);
         } else {
@@ -65,7 +66,7 @@ class SettingController extends BackendController
             }
             $fav_icon                 = request('fav_icon');
             $originalName = $fav_icon->getClientOriginalName();
-            $settingArray['fav_icon'] = time() . '_' .$originalName;
+            $settingArray['fav_icon'] = time() . '_' . $originalName;
             $uniqueName =  $settingArray['fav_icon'];
             $request->fav_icon->move(public_path('images'), $uniqueName);
         } else {
@@ -78,7 +79,7 @@ class SettingController extends BackendController
             }
             $banner_image                 = request('banner_image');
             $originalName = $banner_image->getClientOriginalName();
-            $settingArray['banner_image'] = time() . '_' .$originalName;
+            $settingArray['banner_image'] = time() . '_' . $originalName;
             $uniqueName =  $settingArray['banner_image'];
             $request->banner_image->move(public_path('images'), $uniqueName);
         } else {
@@ -92,7 +93,7 @@ class SettingController extends BackendController
             }
             $app_mockup                 = request('app_mockup');
             $originalName = $app_mockup->getClientOriginalName();
-            $settingArray['app_mockup'] = time() . '_' .$originalName;
+            $settingArray['app_mockup'] = time() . '_' . $originalName;
             $uniqueName =  $settingArray['app_mockup'];
             $request->app_mockup->move(public_path('images'), $uniqueName);
         } else {
@@ -154,7 +155,7 @@ class SettingController extends BackendController
             }
             $customer_app_logo                 = request('customer_app_logo');
             $originalName = $customer_app_logo->getClientOriginalName();
-            $settingArray['customer_app_logo'] = time() . '_' .$originalName;
+            $settingArray['customer_app_logo'] = time() . '_' . $originalName;
             $uniqueName =  $settingArray['customer_app_logo'];
             $request->customer_app_logo->move(public_path('images/app/'), $uniqueName);
         } else {
@@ -168,7 +169,7 @@ class SettingController extends BackendController
             }
             $customer_splash_screen_logo                 = request('customer_splash_screen_logo');
             $originalName  = $customer_splash_screen_logo->getClientOriginalName();
-            $settingArray['customer_splash_screen_logo'] = time() . '_' .$originalName;
+            $settingArray['customer_splash_screen_logo'] = time() . '_' . $originalName;
             $uniqueName = $settingArray['customer_splash_screen_logo'];
             $request->customer_splash_screen_logo->move(public_path('images/app/'), $uniqueName);
         } else {
@@ -183,8 +184,8 @@ class SettingController extends BackendController
             }
             $vendor_app_logo                 = request('vendor_app_logo');
             $originalName  = $vendor_app_logo->getClientOriginalName();
-            $settingArray['vendor_app_logo'] = time() . '_' .$originalName;
-            $uniqueName = $settingArray['vendor_app_logo'] ;
+            $settingArray['vendor_app_logo'] = time() . '_' . $originalName;
+            $uniqueName = $settingArray['vendor_app_logo'];
             $request->vendor_app_logo->move(public_path('images/app/'), $uniqueName);
         } else {
             unset($settingArray['vendor_app_logo']);
@@ -197,8 +198,8 @@ class SettingController extends BackendController
             }
             $vendor_splash_screen_logo                 = request('vendor_splash_screen_logo');
             $originalName  =  $vendor_splash_screen_logo->getClientOriginalName();
-            $settingArray['vendor_splash_screen_logo'] = time() . '_' .$originalName;
-            $uniqueName = $settingArray['vendor_splash_screen_logo'] ;
+            $settingArray['vendor_splash_screen_logo'] = time() . '_' . $originalName;
+            $uniqueName = $settingArray['vendor_splash_screen_logo'];
             $request->vendor_splash_screen_logo->move(public_path('images/app/'), $uniqueName);
         } else {
             unset($settingArray['vendor_splash_screen_logo']);
@@ -212,8 +213,8 @@ class SettingController extends BackendController
             }
             $delivery_app_logo                 = request('delivery_app_logo');
             $originalName  = $delivery_app_logo->getClientOriginalName();
-            $settingArray['delivery_app_logo'] = time() . '_' .$originalName;
-            $uniqueName =  $settingArray['delivery_app_logo'] ;
+            $settingArray['delivery_app_logo'] = time() . '_' . $originalName;
+            $uniqueName =  $settingArray['delivery_app_logo'];
             $request->delivery_app_logo->move(public_path('images/app/'), $uniqueName);
         } else {
             unset($settingArray['delivery_app_logo']);
@@ -227,8 +228,8 @@ class SettingController extends BackendController
             }
             $delivery_splash_screen_logo                 = request('delivery_splash_screen_logo');
             $originalName = $delivery_splash_screen_logo->getClientOriginalName();
-            $settingArray['delivery_splash_screen_logo'] = time() . '_' .$originalName;
-            $uniqueName = $settingArray['delivery_splash_screen_logo'] ;
+            $settingArray['delivery_splash_screen_logo'] = time() . '_' . $originalName;
+            $uniqueName = $settingArray['delivery_splash_screen_logo'];
             $request->delivery_splash_screen_logo->move(public_path('images/app/'),  $uniqueName);
         } else {
             unset($settingArray['delivery_splash_screen_logo']);
@@ -264,15 +265,15 @@ class SettingController extends BackendController
     {
         if ($request->settingtypepayment == 'stripe') {
             $this->stripeSetting($request);
-        }else if ($request->settingtypepayment == 'paytm') {
+        } else if ($request->settingtypepayment == 'paytm') {
             $this->paytmSetting($request);
-        }else if ($request->settingtypepayment == 'phonepe') {
+        } else if ($request->settingtypepayment == 'phonepe') {
             $this->phonepeSetting($request);
-        }else if ($request->settingtypepayment == 'sslcommerz') {
+        } else if ($request->settingtypepayment == 'sslcommerz') {
             $this->sslcommerzSetting($request);
         } else if ($request->settingtypepayment == 'razorpay') {
             $this->razorpaySetting($request);
-        }  else if ($request->settingtypepayment == 'paystack') {
+        } else if ($request->settingtypepayment == 'paystack') {
             $this->paystackSetting($request);
         } else if ($request->settingtypepayment == 'paypal') {
             $this->paypalSetting($request);
@@ -282,7 +283,8 @@ class SettingController extends BackendController
         return redirect(route('admin.setting.payment'))->withSuccess('The Payment setting updated successfully.');
     }
 
-    private function sslcommerzSetting($request){
+    private function sslcommerzSetting($request)
+    {
         $niceNames    = [];
         $settingArray = $this->validate($request, $this->sslcommerzValidateArray(), [], $niceNames);
 
@@ -311,7 +313,8 @@ class SettingController extends BackendController
     }
 
 
-    private function paytmSetting($request){
+    private function paytmSetting($request)
+    {
         $niceNames    = [];
         $settingArray = $this->validate($request, $this->paytmValidateArray(), [], $niceNames);
 
@@ -336,7 +339,8 @@ class SettingController extends BackendController
         Setting::save();
     }
 
-    private function razorpaySetting($request) {
+    private function razorpaySetting($request)
+    {
         $niceNames    = [];
         $settingArray = $this->validate($request, $this->razorpayValidateArray(), [], $niceNames);
         MyString::setEnv('RAZORPAY_KEY', $settingArray['razorpay_key']);
@@ -828,5 +832,25 @@ class SettingController extends BackendController
         return [
             'license_code'      => 'required|string|max:255',
         ];
+    }
+
+    public function redeemSetting()
+    {
+        $data['redeem_setting'] = RedeemSetting::first();
+        return view('admin.setting.redeem', $data);
+    }
+
+    public function redeemSettingUpdate(Request $request) {
+
+      $validated =  $request->validate([
+            'reward_value' => 'required|numeric|gt:0',
+            'score_value' => 'required|numeric|gt:0'
+        ]);
+
+        $redeem_setting = RedeemSetting::find($request->id);
+        $redeem_setting->update($validated);
+
+        return redirect(route('admin.setting.redeem'))->withSuccess('Redeem setting updated successfully.');
+
     }
 }
