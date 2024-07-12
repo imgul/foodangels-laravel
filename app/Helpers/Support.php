@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use App\Models\PushNotification;
+
 class Support
 {
     public static function checking()
@@ -27,6 +29,22 @@ class Support
             return $e->getMessage();
         }
         return $data;
+    }
 
+    public static function notificationCount()
+    {
+        // $count = PushNotification::query()->where('customer_id', auth()->id())->orWhere('customer_id', null)->count();
+
+        $userId = auth()->id();
+        $count = PushNotification::query()
+            ->leftJoin('push_notification_reads', function ($join) use ($userId) {
+                $join->on('push_notifications.id', '=', 'push_notification_reads.push_notification_id')
+                    ->where('push_notification_reads.customer_id', '=', $userId);
+            })
+            ->where(function ($query) {
+                $query->whereNull('push_notification_reads.customer_id');
+            })
+            ->count();
+        return $count;
     }
 }

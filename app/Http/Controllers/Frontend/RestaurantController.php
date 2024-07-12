@@ -51,6 +51,7 @@ class RestaurantController extends FrontendController
         $this->loadVouchers();
         $this->loadViewData();
 
+
         return view('frontend.restaurant.show', $this->data);
     }
 
@@ -60,14 +61,16 @@ class RestaurantController extends FrontendController
         $other_products = [];
         $categories_products = [];
 
-        $products = MenuItem::with(['categories', 'media', 'variations', 'options'])
+        $products = MenuItem::with(['categories_orderBy', 'media', 'variations', 'options'])
             ->where('restaurant_id', $this->restaurant->id)
             ->where('status', MenuItemStatus::ACTIVE)
             ->get();
 
+
         foreach ($products as $product) {
-            $product_categories = $product->categories;
+            $product_categories = $product->categories_orderBy;
             if (!blank($product_categories)) {
+
                 foreach ($product_categories as $product_category) {
                     $categories[$product_category->id] = $product_category;
                     $categories_products[$product_category->id][] = $product;
@@ -77,7 +80,14 @@ class RestaurantController extends FrontendController
             }
         }
 
+        usort($categories, function($a, $b) {
+            return $a->orders - $b->orders;
+        });
+
+
+        
         $this->data['categories'] = $categories;
+
         $this->data['other_products'] = $other_products;
         $this->data['categories_products'] = $categories_products;
     }

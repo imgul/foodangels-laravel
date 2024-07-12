@@ -248,4 +248,8 @@ class User extends Authenticatable implements JWTSubject, HasMedia
         return $this->shop->products->count;
     }
 
+    public function notification_read() {
+        return $this->belongsToMany(PushNotification::class, 'push_notification_reads', 'customer_id', 'push_notification_id');
+    }
+
 }

@@ -121,4 +121,5 @@ return array (
     'sslcommerz_store_password' => 'SSLCommerz-Shop-Passwort',
     'sslcommerz_mode' => 'SSLCommerz-Modus',
     'update_sslcommerz_setting' => 'SSLCommerz-Einstellungen aktualisieren',
+    'redeem_setting' => 'Einstellung einlösen'
   );

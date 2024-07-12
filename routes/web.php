@@ -69,6 +69,7 @@ use App\Http\Controllers\Admin\CashOnDeliveryOrderBalanceReportController;
 use App\Http\Controllers\Admin\RestaurantController as RestaurantsController;
 use App\Http\Controllers\Admin\ReservationController as ReservationsController;
 use App\Http\Controllers\Frontend\CookiesController;
+use App\Http\Controllers\Frontend\NotificationController;
 
 Route::group(['middleware' => ['installed', 'license-activate']], function () {
     Auth::routes(['verify' => false]);
@@ -167,6 +168,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['installed'], 'as' => 'admin
     Route::get('login', [LoginController::class, 'showLoginForm']);
 });
 
+Route::get('notifications', [NotificationController::class, 'index'])->name('notifications');
+Route::post('/read_notification', [NotificationController::class, 'readNotification'])->name('read.notification');
+
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'installed', 'license-activate', 'backend_permission'], 'as' => 'admin.'], function () {
     Route::get('dashboard',                                 [DashboardController::class, 'index'])->name('dashboard.index');
     Route::post('day-wise-income-order',                    [DashboardController::class, 'dayWiseIncomeOrder'])->name('dashboard.day-wise-income-order');
@@ -203,6 +207,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'installed', 'licens
         Route::match(['get', 'put'], 'google-map',          [SettingController::class, 'googleMapSetting'])->name('google-map');
         Route::get('purchasekey',                           [SettingController::class, 'purchaseKeySetting'])->name('purchasekey');
         Route::post('purchasekey',                          [SettingController::class, 'purchaseKeySettingUpdate'])->name('purchasekey-update');
+        Route::get('redeem-setting',                       [SettingController::class, 'redeemSetting'])->name('redeem');
+        Route::put('redeem-setting',                       [SettingController::class, 'redeemSettingUpdate'])->name('redeem');
     });
 
     Route::resource('page',                                  PageController::class);
