@@ -22,6 +22,10 @@ class HomeController extends FrontendController
 
     public function index()
     {
+         // Set German as the default locale if not already set
+        if (!Session()->has('applocale')) {
+            Session()->put('applocale', 'de');
+        }
         $this->data['vouchers']               = $this->getValidVouchers();
         $this->data['cuisines']               = $this->getActiveCuisines();
         $this->data['bestSellingRestaurants'] = $this->getBestSellingRestaurants();

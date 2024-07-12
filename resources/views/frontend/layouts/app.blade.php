@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 @include('frontend.partials._head')
 
 <body  @stack('body-data')>

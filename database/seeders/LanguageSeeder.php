@@ -9,12 +9,7 @@ use Illuminate\Database\Seeder;
 class LanguageSeeder extends Seeder
 {
     public array $languageOptions = [
-        [
-            'name'      => 'English',
-            'code'      => 'en',
-            'flag_icon' => '🇬🇧',
-            'status'    => Status::ACTIVE,
-        ],
+        
         [
             'name'      => 'German',
             'code'      => 'de',
@@ -22,11 +17,11 @@ class LanguageSeeder extends Seeder
             'status'    => Status::ACTIVE,
         ],
         [
-            'name'      => 'Bangla',
-            'code'      => 'bn',
-            'flag_icon' => '🇧🇩',
+            'name'      => 'English',
+            'code'      => 'en',
+            'flag_icon' => '🇬🇧',
             'status'    => Status::ACTIVE,
-        ],
+        ], 
     ];
 
 

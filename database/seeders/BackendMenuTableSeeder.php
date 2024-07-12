@@ -356,6 +356,9 @@ class BackendMenuTableSeeder extends Seeder
                 'priority'  => 68,
                 'status'    => 1,
             ],
+            
+             
+
             [
                 'name'      => 'reservation_report',
                 'link'      => 'reservation-report',

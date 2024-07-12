@@ -54,5 +54,6 @@ return array (
   'user'                          => 'Users',
   'menu_items_type'               => 'Menu Item Types',
   'menu-items-type'               => 'Menu Item Types',
-  'tax'               => 'Tax',
+  'tax'               => 'Tax',  
+
 );

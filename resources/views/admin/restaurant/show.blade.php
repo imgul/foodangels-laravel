@@ -182,11 +182,11 @@
                                 </div>
                                 <div class="single-profile">
                                     <p><b>{{ __('levels.opening_time') }}: </b>
-                                        {{ date('h:i A', strtotime($restaurant->opening_time)) }}</p>
+                                        {{ date('H:i:s', strtotime($restaurant->opening_time)) }}</p>
                                 </div>
                                 <div class="single-profile">
                                     <p><b>{{ __('levels.closing_time') }}: </b>
-                                        {{ date('h:i A', strtotime($restaurant->closing_time)) }}</p>
+                                        {{ date('H:i:s', strtotime($restaurant->closing_time)) }}</p>
                                 </div>
                                 @if (isset($restaurant->cuisines))
                                     <div class="single-full-profile">
