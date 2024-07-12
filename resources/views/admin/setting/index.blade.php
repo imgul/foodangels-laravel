@@ -28,6 +28,7 @@
                     @if(env('DEMO_MODE') == false)
                     <a href="{{ route('admin.setting.purchasekey') }}" class="list-group-item list-group-item-action {{ (request()->is('admin/setting/purchasekey')) ? 'active' : '' }}">{{ __('setting.purchase_key_setting') }}</a>
                     @endif
+                    <a href="{{ route('admin.setting.redeem') }}" class="list-group-item list-group-item-action {{ Route::is('admin.setting.redeem') ? 'active' : '' }}">{{ __('setting.redeem_setting') }}</a>
                 </div>
             </div>
         </div>

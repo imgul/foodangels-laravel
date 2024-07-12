@@ -122,5 +122,6 @@ return array (
   'sslcommerz_store_password'   => 'SslCommerz Store Password',
   'sslcommerz_mode'             => 'SslCommerz Mode',
   'update_sslcommerz_setting'   => 'Update SslCommerz Setting',
+  'redeem_setting' => 'Redeem Setting'
 );
 
