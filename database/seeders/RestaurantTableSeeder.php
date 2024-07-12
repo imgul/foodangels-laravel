@@ -37,6 +37,36 @@ class RestaurantTableSeeder extends Seeder{
             'editor_id'       => 1,
             'waiter_status'   => WaiterStatus::ACTIVE,
         ],
+        [
+            'id' => 2,
+            'user_id'         => "7",
+
+            'name' => 'Vegi Devils',
+            'slug' => 'vegi-devils',
+            'description' => 'Halal Vegan',
+            'lat' => '51.02113',
+            'long' => '6.7552295',
+            'opening_time' => '08:15:00',
+            'closing_time' => '23:15:00',
+            'address' => 'Venloer str 100',
+            'status' => 10,
+            'current_status' => 10,
+            'delivery_status' => 10,
+            'pickup_status' => 10,
+            'table_status' => 0,
+            'applied' => 0,
+            'creator_type' => 'App\\User',
+            'creator_id' => 1,
+            'editor_type' => 'App\\User',
+            'editor_id' => 1,
+            'created_at' => '2022-11-02 17:10:56',
+            'updated_at' => '2023-04-09 12:56:16',
+            'waiter_status' => 0,
+            'week_days_opening' => '08:00:00',
+            'week_days_closing' => '23:00:00',
+            'weekend_opening' => '14:00:00',
+            'weekend_closing' => '22:00:00',
+        ],        
 
 
         // [
@@ -224,6 +254,10 @@ class RestaurantTableSeeder extends Seeder{
         // ]
     ];
 
+    // public array $restaurants = array(
+    //     array('id' => '1','name' => 'FOODANGELS','slug' => 'foodangels','description' => 'Adresse eingeben und loslegen.','lat' => '50.9779016','long' => '6.9300706','opening_time' => '12:00:00','closing_time' => '22:00:00','address' => 'Etzelstraße 231, 50739 Köln, Germany','status' => '5','current_status' => '5','delivery_status' => '5','pickup_status' => '5','table_status' => '0','applied' => '0','creator_type' => 'App\\User','creator_id' => '1','editor_type' => 'App\\User','editor_id' => '1','created_at' => '2022-10-17 20:38:04','updated_at' => '2024-05-07 15:32:11','waiter_status' => '0','week_days_opening' => '12:00:00','week_days_closing' => '22:00:00','weekend_opening' => '14:00:00','weekend_closing' => '22:00:00'),
+    //     array('id' => '2','name' => 'Vegi Devils','slug' => 'vegi-devils','description' => 'Halal Vegan','lat' => '51.02113','long' => '6.7552295','opening_time' => '08:15:00','closing_time' => '23:15:00','address' => 'Venloer str 100','status' => '10','current_status' => '10','delivery_status' => '10','pickup_status' => '10','table_status' => '0','applied' => '0','creator_type' => 'App\\User','creator_id' => '1','editor_type' => 'App\\User','editor_id' => '1','created_at' => '2022-11-02 17:10:56','updated_at' => '2023-04-09 12:56:16','waiter_status' => '0','week_days_opening' => '08:00:00','week_days_closing' => '23:00:00','weekend_opening' => '14:00:00','weekend_closing' => '22:00:00')
+    //   );
 
     /**
      * Run the database seeds.

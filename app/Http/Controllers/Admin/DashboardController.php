@@ -69,6 +69,10 @@ class DashboardController extends BackendController
         $totalUsers = User::role($role->name)->where(['status' => UserStatus::ACTIVE])->latest()->get();
         $totalRestaurants = Restaurant::where(['status' => RestaurantStatus::ACTIVE])->get();
         $recentOrders     = Order::with('user')->orderBy('id', 'desc')->whereDate('created_at', date('Y-m-d'))->orderowner()->get();
+        $recentO      = Order::with('user')->orderBy('id', 'desc')->whereDate('created_at', date('Y-m-d'))->orderowner()->get();
+        
+        
+        
         $yearlyOrders     = Order::with('user')->orderBy('id', 'desc')->where('status', '!=', OrderStatus::CANCEL)->whereYear('created_at', date('Y'))->orderowner()->get();
         $totalIncome      = 0;
         $totalOwnerIncome = 0;
@@ -166,7 +170,9 @@ class DashboardController extends BackendController
         $this->data['totalCashIncome']             = $totalCashIncome;
         $this->data['recentOrders']            = $recentOrders;
         $this->data['userCredit']            = currencyFormat(auth()->user()->balance->balance > 0 ? auth()->user()->balance->balance : 0 );
+        $this->data['recentO']             = count($recentO);
 
+        // dd($this->data);
 
         return view('admin.dashboard.index', $this->data);
     }

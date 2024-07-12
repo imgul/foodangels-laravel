@@ -30,7 +30,6 @@
                                     <strong>{{ __('order.billed_to') }}:</strong><br>
                                     {{ $order->user->name ?? null }}<br>
                                     @if(auth()->user()->myrole !=3)
-                                    {{ __('levels.phone').':'. $order->user->phone ?? null }}<br>
                                     {{ orderAddress($order->address) }}
                                     @else
                                     {{ __('levels.email').':'. substr($order->user->email, 0, 2).'****'.substr($order->user->email, strpos($order->user->email, "@"))}}<br>

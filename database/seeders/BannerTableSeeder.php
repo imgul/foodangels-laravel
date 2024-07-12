@@ -16,30 +16,30 @@ class BannerTableSeeder extends Seeder{
             "restaurant_id" => 2,
             "status"        => Status::ACTIVE,
         ],
-        [
-            "restaurant_id" => 3,
-            "status"        => Status::ACTIVE,
-        ],
-        [
-            "restaurant_id" => 4,
-            "status"        => Status::ACTIVE,
-        ],
-        [
-            "restaurant_id" => 5,
-            "status"        => Status::ACTIVE,
-        ],
-        [
-            "restaurant_id" => 6,
-            "status"        => Status::ACTIVE,
-        ],
-        [
-            "restaurant_id" => 7,
-            "status"        => Status::ACTIVE,
-        ],
-        [
-            "restaurant_id" => 8,
-            "status"        => Status::ACTIVE,
-        ],
+        // [
+        //     "restaurant_id" => 3,
+        //     "status"        => Status::ACTIVE,
+        // ],
+        // [
+        //     "restaurant_id" => 4,
+        //     "status"        => Status::ACTIVE,
+        // ],
+        // [
+        //     "restaurant_id" => 5,
+        //     "status"        => Status::ACTIVE,
+        // ],
+        // [
+        //     "restaurant_id" => 6,
+        //     "status"        => Status::ACTIVE,
+        // ],
+        // [
+        //     "restaurant_id" => 7,
+        //     "status"        => Status::ACTIVE,
+        // ],
+        // [
+        //     "restaurant_id" => 8,
+        //     "status"        => Status::ACTIVE,
+        // ],
     ];
 
     /**

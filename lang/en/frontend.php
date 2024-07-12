@@ -196,10 +196,10 @@ return array (
   'min' => 'Min.',
   'free' => 'Free',
   'your_privacy' => 'Privacy Settings',
-  'cookies_title' => 'Datenschutzeinstellungen
-  Wir verwenden Cookies und andere Technologien auf unserer Website. Einige von ihnen sind essenziell, während andere uns helfen, diese Website und Ihre Erfahrung zu verbessern. Personenbezogene Daten können verarbeitet werden (z. B. IP-Adressen), z. B. für personalisierte Anzeigen und Inhalte oder Anzeigen- und Inhaltsmessung. Weitere Informationen über die Verwendung Ihrer Daten finden Sie in unserer Datenschutzerklärung. Hier finden Sie eine Übersicht über alle verwendeten Cookies. Sie können Ihre Einwilligung zu ganzen Kategorien geben oder sich weitere Informationen anzeigen lassen und so nur bestimmte Cookies auswählen.',
-  'cookies_title_phone' => 'Datenschutzeinstellungen
-  Wir verwenden Cookies und andere Technologien auf unserer Website. Einige von ihnen sind essenziell, während andere uns helfen, diese Website und Ihre Erfahrung zu verbessern.',
+  'cookies_title' => 'Privacy Settings
+  We use cookies and other technologies on our website. Some of them are essential, while others help us to improve this website and your experience. Personal data may be processed (e.g. IP addresses), e.g. B. for personalized ads and content or ad and content measurement. Further information about the use of your data can be found in our privacy policy. Here you will find an overview of all cookies used. You can give your consent to entire categories or display further information and thus only select certain cookies.',
+  'cookies_title_phone' => 'Privacy Settings
+  We use cookies and other technologies on our website. Some of them are essential, while others help us to improve this website and your experience.',
   'accept_all_cookies' => 'Accept All Cookies',
   'cookies_cancel' => 'Cancel'
   
