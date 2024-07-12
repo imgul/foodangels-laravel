@@ -148,8 +148,8 @@
                                         class="lni lni-cog"></i><span>{{ __('topbar.account') }}</span></a>
                                 <a href="{{ route('account.order') }}"><i
                                         class="lni lni-cart-full"></i><span>{{ __('topbar.my_orders') }}</span></a>
-                                <a href="{{ route('account.reservations') }}"><i
-                                        class="lni lni-coffee-cup"></i><span>{{ __('topbar.reservations') }}</span></a>
+                                {{-- <a href="{{ route('account.reservations') }}"><i
+                                        class="lni lni-coffee-cup"></i><span>{{ __('topbar.reservations') }}</span></a> --}}
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <i class="lni lni-lock-alt"></i><span>{{ __('topbar.logout') }}</span>

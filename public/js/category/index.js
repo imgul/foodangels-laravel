@@ -35,7 +35,7 @@ function load_data(status = "", requested = "") {
             { data: "id", name: "id" },
             { data: "image", name: "image" },
             { data: "name", name: "name" },
-            { data: "created_by", name: "created_by" },
+            { data: "created_at", name: "created_at" },
             { data: "status", name: "status" },
             { data: "action", name: "action" },
         ],
