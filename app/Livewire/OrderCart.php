@@ -92,6 +92,7 @@ class OrderCart extends Component
 
     public function addCart($item)
     {
+
         $status = true;
         if (!blank($this->carts) && count($this->carts['items']) != 0) {
             foreach ($this->carts['items'] as $key => $cart) {

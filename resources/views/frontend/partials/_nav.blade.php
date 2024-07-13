@@ -20,8 +20,10 @@
 
 
                 <div class="header-group">
+
+                <a href="{{ route('rewards') }}" class="header-cart"><i class="fa fa-gift text-white"></i></a>
                    
-                <a href="{{ route('notifications') }}" class="header-cart" id="cartLink">
+                <a href="{{ route('notifications') }}" class="header-cart" id="">
                     <i class="fa-regular fa-bell text-white"></i>
 
                        

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Models\Tax;
 
 use App\Enums\CategoryStatus;
@@ -178,8 +179,8 @@ class MenuItemController extends BackendController
             if (!empty($request->status) && (int) $request->status) {
                 $queryArray['status'] = $request->status;
             }
-            if (auth()->user()->myrole != 1 && auth()->user()->restaurant){
-                $queryArray['restaurant_id'] =auth()->user()->restaurant->id;
+            if (auth()->user()->myrole != 1 && auth()->user()->restaurant) {
+                $queryArray['restaurant_id'] = auth()->user()->restaurant->id;
             }
 
             if (!blank($queryArray)) {
@@ -206,8 +207,8 @@ class MenuItemController extends BackendController
                     }
 
                     if (auth()->user()->can('menu-items_delete')) {
-                        $retAction .= '<form id="detete-'.$menuItem->id.'" class="float-left pl-2" action="' . route('admin.menu-items.destroy', $menuItem) . '" method="POST">' . method_field('DELETE') . csrf_field() .
-                         '<button type="button" data-id="'.$menuItem->id.'"
+                        $retAction .= '<form id="detete-' . $menuItem->id . '" class="float-left pl-2" action="' . route('admin.menu-items.destroy', $menuItem) . '" method="POST">' . method_field('DELETE') . csrf_field() .
+                            '<button type="button" data-id="' . $menuItem->id . '"
                          class="btn btn-sm btn-icon btn-danger delete confirm-delete"  data-toggle="modal" data-target="#exampleModal" title="Delete">
                          <i class="fa fa-trash"></i>
                          </button></form>';
@@ -328,54 +329,55 @@ class MenuItemController extends BackendController
     {
         $menuItem = MenuItem::owner()->findOrFail($id);
 
-        $this->data['menuItemTypes']        = MenuItemTypeModel::where('status',Status::ACTIVE)->get();
-        $this->data['menuItemObj']          = MenuItem::where(['status'=>Status::ACTIVE,'restaurant_id'=>$menuItem->restaurant_id])->get(['name', 'unit_price','discount_price', 'id']);
-        $this->data['categoryObj']          = Category::where(['status'=>Status::ACTIVE])->get(['name', 'id']);
+
+        $this->data['menuItemTypes']        = MenuItemTypeModel::where('status', Status::ACTIVE)->get();
+        $this->data['menuItemObj']          = MenuItem::where(['status' => Status::ACTIVE, 'restaurant_id' => $menuItem->restaurant_id])->get(['name', 'unit_price', 'discount_price', 'id']);
+        $this->data['categoryObj']          = Category::where(['status' => Status::ACTIVE])->get(['name', 'id']);
 
         $this->data['menuItem']             = $menuItem;
-        $this->data['menu_item_variations'] = $menuItem->variations->groupBy(['type','menu_item_type_id']);
-        $this->data['menu_item_options']    = $menuItem->options->groupBy(['type','menu_item_type_id']);
-        $Variationdata = MenuItemVariation::where(['menu_item_id'=>$menuItem->id])->first();
-        $Optiondata = MenuItemOption::where(['menu_item_id'=>$menuItem->id])->first();
-        if(isset($Variationdata)){
-            $this->data['vTypeID'] = MenuItemTypeModel::where(['id'=>$Variationdata->menu_item_type_id])->first();
-        }else{
+        $this->data['menu_item_variations'] = $menuItem->variations->groupBy(['type', 'menu_item_type_id']);
+        $this->data['menu_item_options']    = $menuItem->options->groupBy(['type', 'menu_item_type_id']);
+        $Variationdata = MenuItemVariation::where(['menu_item_id' => $menuItem->id])->first();
+        $Optiondata = MenuItemOption::where(['menu_item_id' => $menuItem->id])->first();
+        if (isset($Variationdata)) {
+            $this->data['vTypeID'] = MenuItemTypeModel::where(['id' => $Variationdata->menu_item_type_id])->first();
+        } else {
             $this->data['vTypeID'] = [];
         }
-        if(isset($Optiondata)){
-            $this->data['oTypeID'] = MenuItemTypeModel::where(['id'=>$Optiondata->menu_item_type_id])->first();
-        }else{
+        if (isset($Optiondata)) {
+            $this->data['oTypeID'] = MenuItemTypeModel::where(['id' => $Optiondata->menu_item_type_id])->first();
+        } else {
             $this->data['oTypeID'] = [];
         }
         return view('admin.menu-item.modify', $this->data);
     }
 
-//    public function modifyOld($id)
-//    {
-//        $menuItem = MenuItem::owner()->findOrFail($id);
-//
-//        $this->data['menuItemTypes']        = MenuItemTypeModel::where('status',Status::ACTIVE)->get();
-//        $this->data['menuItemObj']          = MenuItem::where(['status'=>Status::ACTIVE,'restaurant_id'=>$menuItem->restaurant_id])->get(['name', 'unit_price','discount_price', 'id']);
-//        $this->data['categoryObj']          = Category::where(['status'=>Status::ACTIVE])->get(['name', 'id']);
-//
-//        $this->data['menuItem']             = $menuItem;
-//        $this->data['menu_item_variations'] = $menuItem->variations;
-//        $this->data['menu_item_options']    = $menuItem->options;
-//        $Variationdata = MenuItemVariation::where(['menu_item_id'=>$menuItem->id])->first();
-//        $Optiondata = MenuItemOption::where(['menu_item_id'=>$menuItem->id])->first();
-//        if(isset($Variationdata)){
-//            $this->data['vTypeID'] = MenuItemTypeModel::where(['id'=>$Variationdata->menu_item_type_id])->first();
-//        }else{
-//            $this->data['vTypeID'] = [];
-//        }
-//        if(isset($Optiondata)){
-//            $this->data['oTypeID'] = MenuItemTypeModel::where(['id'=>$Optiondata->menu_item_type_id])->first();
-//        }else{
-//            $this->data['oTypeID'] = [];
-//        }
-//
-//        return view('admin.menu-item.modify', $this->data);
-//    }
+    //    public function modifyOld($id)
+    //    {
+    //        $menuItem = MenuItem::owner()->findOrFail($id);
+    //
+    //        $this->data['menuItemTypes']        = MenuItemTypeModel::where('status',Status::ACTIVE)->get();
+    //        $this->data['menuItemObj']          = MenuItem::where(['status'=>Status::ACTIVE,'restaurant_id'=>$menuItem->restaurant_id])->get(['name', 'unit_price','discount_price', 'id']);
+    //        $this->data['categoryObj']          = Category::where(['status'=>Status::ACTIVE])->get(['name', 'id']);
+    //
+    //        $this->data['menuItem']             = $menuItem;
+    //        $this->data['menu_item_variations'] = $menuItem->variations;
+    //        $this->data['menu_item_options']    = $menuItem->options;
+    //        $Variationdata = MenuItemVariation::where(['menu_item_id'=>$menuItem->id])->first();
+    //        $Optiondata = MenuItemOption::where(['menu_item_id'=>$menuItem->id])->first();
+    //        if(isset($Variationdata)){
+    //            $this->data['vTypeID'] = MenuItemTypeModel::where(['id'=>$Variationdata->menu_item_type_id])->first();
+    //        }else{
+    //            $this->data['vTypeID'] = [];
+    //        }
+    //        if(isset($Optiondata)){
+    //            $this->data['oTypeID'] = MenuItemTypeModel::where(['id'=>$Optiondata->menu_item_type_id])->first();
+    //        }else{
+    //            $this->data['oTypeID'] = [];
+    //        }
+    //
+    //        return view('admin.menu-item.modify', $this->data);
+    //    }
 
     public function modifyUpdate(Request $request, $id)
     {
@@ -384,8 +386,8 @@ class MenuItemController extends BackendController
         $variations     = $request->variations;
         $options        = $request->options;
 
-        if($request->type == 'add'){
-            if(!blank($variations)){
+        if ($request->type == 'add') {
+            if (!blank($variations)) {
                 foreach ($variations as $variation) {
                     $menuItemVariation = new MenuItemVariation();
                     $menuItemVariation->menu_item_id              = $variation['menuItemID'];
@@ -399,7 +401,7 @@ class MenuItemController extends BackendController
                     $menuItemVariation->save();
                 }
             }
-            if(!blank($options)){
+            if (!blank($options)) {
                 foreach ($options as $option) {
                     $menuItemOption = new MenuItemOption();
                     $menuItemOption->menu_item_id              = $option['menuItemID'];
@@ -413,8 +415,8 @@ class MenuItemController extends BackendController
                     $menuItemOption->save();
                 }
             }
-        }else if($request->type == 'update'){
-            if(!blank($variations)){
+        } else if ($request->type == 'update') {
+            if (!blank($variations)) {
                 MenuItemVariation::where('menu_item_id', $id)->delete();
                 foreach ($variations as $variation) {
                     $menuItemVariation = new MenuItemVariation();
@@ -429,7 +431,7 @@ class MenuItemController extends BackendController
                     $menuItemVariation->save();
                 }
             }
-            if(!blank($options)){
+            if (!blank($options)) {
                 MenuItemOption::where('menu_item_id', $id)->delete();
                 foreach ($options as $option) {
                     $menuItemOption = new MenuItemOption();
@@ -443,10 +445,9 @@ class MenuItemController extends BackendController
                     $menuItemOption->type                      = $option['type'];
                     $menuItemOption->save();
                 }
-
             }
-        }else{
-            if(!blank($variations)){
+        } else {
+            if (!blank($variations)) {
                 MenuItemVariation::where('menu_item_id', $id)->delete();
                 foreach ($variations as $variation) {
                     $menuItemVariation = new MenuItemVariation();
@@ -460,12 +461,10 @@ class MenuItemController extends BackendController
                     $menuItemVariation->type                      = $variation['type'];
                     $menuItemVariation->save();
                 }
-
-            }else{
+            } else {
                 MenuItemVariation::where('menu_item_id', $id)->delete();
-
             }
-            if(!blank($options)){
+            if (!blank($options)) {
                 MenuItemOption::where('menu_item_id', $id)->delete();
                 foreach ($options as $option) {
                     $menuItemOption = new MenuItemOption();
@@ -479,8 +478,7 @@ class MenuItemController extends BackendController
                     $menuItemOption->type                      = $option['type'];
                     $menuItemOption->save();
                 }
-
-            }else {
+            } else {
                 MenuItemOption::where('menu_item_id', $id)->delete();
             }
         }
@@ -611,21 +609,26 @@ class MenuItemController extends BackendController
         return $menuNumber;
     }
 
-    public  function getCategoryMenuItem(Request $request){
-        $menuItem = MenuItem::owner()->findOrFail($request->menuItemID);
-//        dd($request->all());
-//        dd($menuItem);
-        if($request->category_id){
-            $menuItems = MenuItem::where(['status'=>Status::ACTIVE,'restaurant_id'=>$menuItem->restaurant_id])->whereHas('categories', function ($query) use ($request) {
+    public  function getCategoryMenuItem(Request $request)
+    {
 
-                $query->where('category_id', $request->category_id);
+        if ($request->menuItemID) {
+            $menuItem = MenuItem::owner()->findOrFail($request->menuItemID);
+            $restaurant_id = $menuItem->restaurant_id;
+        } else {
+            $restuarant = Restaurant::query()->where('status', Status::ACTIVE)->first();
 
-            })->get(['name', 'unit_price','discount_price', 'id']);
-        }else {
-            $menuItems     = MenuItem::where(['status'=>Status::ACTIVE,'restaurant_id'=>$menuItem->restaurant_id])->get(['name', 'unit_price','discount_price', 'id']);
+            $restaurant_id = $restuarant->id;
         }
 
-//        dd($menuItems);
+        if ($request->category_id) {
+            $menuItems = MenuItem::where(['status' => Status::ACTIVE, 'restaurant_id' => $restaurant_id])->whereHas('categories', function ($query) use ($request) {
+
+                $query->where('category_id', $request->category_id);
+            })->get(['name', 'unit_price', 'discount_price', 'id']);
+        } else {
+            $menuItems     = MenuItem::where(['status' => Status::ACTIVE, 'restaurant_id' => $restaurant_id])->get(['name', 'unit_price', 'discount_price', 'id']);
+        }
 
 
 

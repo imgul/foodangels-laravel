@@ -927,3 +927,12 @@ Breadcrumbs::for('redeem-setting', function ( $trail) {
     $trail->parent('setting');
     $trail->push(trans('setting.redeem_setting'));
 });
+
+Breadcrumbs::for('rewards', function ( $trail) {
+    $trail->push(trans('setting.rewards'), route('admin.rewards'));
+});
+
+Breadcrumbs::for('rewards_create', function ( $trail) {
+    $trail->parent('rewards');
+    $trail->push(trans('setting.rewards_create'));
+});

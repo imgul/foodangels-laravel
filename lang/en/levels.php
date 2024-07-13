@@ -278,5 +278,6 @@ return array(
   'customer_report'                   => 'Customer Report',
   'restaurant_phone'                  => "Restaurant Phone",
   'instructions'                      => "Instructions:",
-  'other'                             => "Others"
+  'other'                             => "Others",
+  'redeemed' => 'Redeemed'
 );

@@ -28,7 +28,7 @@ class ShowPage extends Component
     public function mount()
     {
         $products = MenuItem::with('categories')->with('media')->with('variations')->with('options')->where(['restaurant_id' => $this->restaurant->id])->get();
-        foreach($products as $key=>$product) {
+        foreach($products as $key => $product) {
             $product_categories = $product->categories;
             if(!blank($product_categories)) {
                 foreach($product_categories as $product_category) {

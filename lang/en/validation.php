@@ -254,6 +254,7 @@ return array (
     'push-notification'                     => 'Push Notification',
     'purchasekey_settings'                  => 'Purchasekey Settings',
     'update-log'                            => 'Update Log',
-    'user'                                  => 'Users'
+    'user'                                  => 'Users',
+    'promo' => 'Promo'
   ),
 );

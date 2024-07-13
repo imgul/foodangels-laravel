@@ -29,7 +29,7 @@ class AdministratorController extends BackendController
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
         return view('admin.administrators.index', $this->data);
     }
 

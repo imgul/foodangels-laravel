@@ -171,7 +171,7 @@
                         </table>
 
                         <ul class="order-price-list">
-                            @if ($order->discount->amount > 0 && Schema::hasColumn('coupons', 'slug'))
+                            @if (isset($order->discount->amount) > 0 && Schema::hasColumn('coupons', 'slug'))
                                 <li>
                                     <span>{{ __('frontend.discount') }}</span>
                                     <span class="pe-xxl-5 pe-xl-4 pe-lg-1 pe-md-2">{{ currencyFormat($order->discount->amount) }}</span>

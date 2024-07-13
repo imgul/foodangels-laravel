@@ -20,6 +20,9 @@ use App\Enums\ProductReceiveStatus;
 use App\Models\Address;
 use App\Models\BestSellingCategory;
 use App\Models\Discount;
+use App\Models\LoyaltyScore;
+use App\Models\LoyaltyUser;
+use App\Models\RedeemSetting;
 
 class OrderService
 {
@@ -183,7 +186,7 @@ class OrderService
     {
         $order = Order::orderowner()->findOrFail($orderId);
         if (!blank($order)) {
-            if($order->order_type == OrderTypeStatus::DELIVERY){
+            if ($order->order_type == OrderTypeStatus::DELIVERY) {
                 if ($order->payment_method == PaymentMethod::CASH_ON_DELIVERY && $order->payment_status == PaymentStatus::UNPAID) {
                     $addFund = app(TransactionService::class)->addFund(0, $order->user->balance_id, PaymentMethod::CASH_ON_DELIVERY, $order->total, $orderId);
                     if ($addFund->status) {
@@ -240,8 +243,7 @@ class OrderService
                         ]);
                     }
                 }
-
-            }elseif($order->order_type == OrderTypeStatus::PICKUP) {
+            } elseif ($order->order_type == OrderTypeStatus::PICKUP) {
 
                 if ($order->payment_method == PaymentMethod::CASH_ON_DELIVERY && $order->payment_status == PaymentStatus::UNPAID) {
                     $addFund = app(TransactionService::class)->addFund(0, $order->user->balance_id, PaymentMethod::CASH_ON_DELIVERY, $order->total, $orderId);
@@ -269,7 +271,6 @@ class OrderService
                     $amount              = ($order->sub_total - ($order->sub_total / 100) * $this->commission);
                     $transfer            = app(TransactionService::class)->transfer($this->adminBalanceId, $restaurantBalanceId, $amount, $orderId);
                 }
-
             }
 
 
@@ -429,14 +430,14 @@ class OrderService
                 ]);
             }
         } else {
-            if($data['address'] == ''){
+            if ($data['address'] == '') {
                 $latitude = 0.0;
                 $longitude = 0.0;
                 $address = json_encode([
                     'address' => '',
                     'apartment' => ''
                 ]);
-            }else {
+            } else {
                 $address = Address::find($data['address']);
                 $latitude = $address->latitude;
                 $longitude = $address->longitude;
@@ -467,6 +468,9 @@ class OrderService
 
         $order   = Order::create($order);
         $orderId = $order->id;
+
+        $this->addLoyalty($order->user_id);
+
         OrderHistory::create([
             'order_id'        => $orderId,
             'previous_status' => null,
@@ -568,5 +572,31 @@ class OrderService
             ]);
         }
         return ResponseService::response();
+    }
+
+    public function addLoyalty($userId)
+    {
+        $redeem_setting = RedeemSetting::first();
+        $score_value = $redeem_setting->score_value;
+        $reward_value = $redeem_setting->reward_value;
+
+        $loyalty_id = LoyaltyScore::updateOrCreate(
+            ['customer_id' => $userId],
+            ['customer_id' => $userId]
+        )->increment('score', $score_value);
+
+        $loyalty = LoyaltyScore::find($loyalty_id);
+
+        if ($loyalty->score >= $reward_value) {
+
+            LoyaltyUser::create([
+                'customer_id' => $userId,
+                'scores' => $loyalty->score,
+            ]);
+
+            $loyalty->update([
+                'score' => 0
+            ]);
+        }
     }
 }

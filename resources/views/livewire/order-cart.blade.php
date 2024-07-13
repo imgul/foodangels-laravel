@@ -117,7 +117,7 @@
                 @if ($delivery_type == \App\Enums\DeliveryType::DELIVERY)
                 <li class="cart-amount-item">
                     <span>{{ __('frontend.delivery_charge') }}</span>
-                    @if (setting('free_delivery') == 1 && $branch->postalCode()->max_order <= $subTotalAmount) <span> {{ __('levels.free') }}</span>
+                    @if (setting('free_delivery') == 1) <span> {{ __('levels.free') }}</span>
                         @else
                         <span>{{ setting('currency_code') }}{{ $delivery_charge }}</span>
                         @endif

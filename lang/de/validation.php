@@ -256,5 +256,6 @@ return array (
     'update-log'                            => 'Update Log',
     'user'                                  => 'Users',
     'menu-items-type'                                  => 'Menu Items Type',
+    'promo' => 'Promo'
   ),
 );

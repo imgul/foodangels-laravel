@@ -61,21 +61,21 @@ class CheckoutController extends FrontendController
         if ($this->user) {
             $this->data['is_auth'] = true;
 
-//            $this->data['addresses'] = Address::where('user_id', $this->user->id)->get();
-//            $this->data['lastAddress'] = '';
+            //            $this->data['addresses'] = Address::where('user_id', $this->user->id)->get();
+            //            $this->data['lastAddress'] = '';
             $this->data['delivery_address'] = DeliveryAddress::where('user_id', $this->user->id)->first();
-//            dd( $this->data['delivery_address']);
+            //            dd( $this->data['delivery_address']);
 
-//            $lastAddress = Order::select('address')->where('user_id', $this->user->id)->latest()->first();
-//            if (!blank($lastAddress)) {
-//                if (isJson($lastAddress->address)) {
-//                    $this->data['lastAddress'] = Address::where('address', json_decode($lastAddress->address, true)['address'])->first();
-//                }
-//            }
-//
-//            if (blank($this->data['lastAddress'])) {
-//                $this->data['lastAddress'] = Address::where('user_id', $this->user->id)->first();
-//            }
+            //            $lastAddress = Order::select('address')->where('user_id', $this->user->id)->latest()->first();
+            //            if (!blank($lastAddress)) {
+            //                if (isJson($lastAddress->address)) {
+            //                    $this->data['lastAddress'] = Address::where('address', json_decode($lastAddress->address, true)['address'])->first();
+            //                }
+            //            }
+            //
+            //            if (blank($this->data['lastAddress'])) {
+            //                $this->data['lastAddress'] = Address::where('user_id', $this->user->id)->first();
+            //            }
         }
 
         $this->data['menuitems']    = session()->get('cart');
@@ -120,7 +120,7 @@ class CheckoutController extends FrontendController
 
     public function store(Request $request)
     {
-    //    dd($request->all());
+        //    dd($request->all());
         $this->user = null;
         if (auth()->check()) {
             $this->user = auth()->user();
@@ -181,13 +181,13 @@ class CheckoutController extends FrontendController
                 // save delivery address
                 $this->saveDeliveryAddress($request);
             } else {
-                 // update delivery address
+                // update delivery address
                 $this->updateDeliveryAddress($request, $address);
             }
         }
 
         $validator = Validator::make($request->all(), $validation);
-        if($this->user) {
+        if ($this->user) {
             $validator->after(function ($validator) use ($request, $restaurant) {
                 if ($request->payment_type === PaymentMethod::WALLET) {
                     if ((float)$this->user->balance->balance < (float)(session()->get('cart')['totalAmount'] + session()->get('delivery_charge'))) {
@@ -213,6 +213,8 @@ class CheckoutController extends FrontendController
 
         session()->put('checkoutRequest', $request->all());
         $paymentType = $request->payment_type;
+
+
         if ($paymentType == PaymentMethod::STRIPE) {
             return $this->processStripePayment($restaurant);
         } elseif ($paymentType == PaymentMethod::PAYSTACK) {
@@ -228,6 +230,7 @@ class CheckoutController extends FrontendController
         } elseif ($paymentType == PaymentMethod::RAZORPAY) {
             return $this->processRazorpayPayment($request);
         } else {
+         
             return $this->processDefaultPayment();
         }
     }
@@ -235,13 +238,13 @@ class CheckoutController extends FrontendController
     public function createUser($request)
     {
         // validate request
-//        $validator = Validator::make($request->all(), [
-//            'first_name' => 'required',
-//            'last_name' => 'required',
-//            'email' => 'required|email',
-//            'mobile' => 'required',
-//        ]);
-//        $validator->validate();
+        //        $validator = Validator::make($request->all(), [
+        //            'first_name' => 'required',
+        //            'last_name' => 'required',
+        //            'email' => 'required|email',
+        //            'mobile' => 'required',
+        //        ]);
+        //        $validator->validate();
         $address = $request->street_name . ', ' . $request->house_number . ', ' . $request->post_code . ', ' . $request->city . ', ' . $request->floor;
 
         // Find user
@@ -558,6 +561,7 @@ class CheckoutController extends FrontendController
         $response = $this->createPaypalOrder($provider);
 
         if (isset($response['id']) && $response['id'] != null) {
+
             return $this->redirectPaypalApproval($response['links']);
         } else {
             return redirect(route('checkout.index'))->withError('You have canceled the transaction.');
@@ -566,6 +570,7 @@ class CheckoutController extends FrontendController
 
     protected function createPaypalOrder($provider)
     {
+        
         return $provider->createOrder([
             'intent' => 'CAPTURE',
             'application_context' => [
@@ -587,6 +592,7 @@ class CheckoutController extends FrontendController
     {
         foreach ($links as $link) {
             if ($link['rel'] == 'approve') {
+
                 return redirect()->away($link['href']);
             }
         }
@@ -632,15 +638,15 @@ class CheckoutController extends FrontendController
             $order = Order::find($orderService->order_id);
             $this->clearSessionData();
             $this->sendOrderNotifications($order);
-//            dd("found Order");
-            if (!auth()->check()){
+            //            dd("found Order");
+            if (!auth()->check()) {
                 // login user
-//                $user = User::find($order->user_id);
+                //                $user = User::find($order->user_id);
                 Auth::login($this->user);
             }
             return redirect(route('account.order.show', $order->id))->withSuccess('You order completed successfully.');
         } else {
-//            dd("not found Order");
+            //            dd("not found Order");
             return redirect(route('checkout.index'))->withError($orderService->message);
         }
     }

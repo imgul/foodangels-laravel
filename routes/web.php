@@ -68,8 +68,11 @@ use App\Http\Controllers\Admin\RestaurantOwnerSalesReportController;
 use App\Http\Controllers\Admin\CashOnDeliveryOrderBalanceReportController;
 use App\Http\Controllers\Admin\RestaurantController as RestaurantsController;
 use App\Http\Controllers\Admin\ReservationController as ReservationsController;
+use App\Http\Controllers\Admin\RewardController;
 use App\Http\Controllers\Frontend\CookiesController;
 use App\Http\Controllers\Frontend\NotificationController;
+use App\Http\Controllers\Frontend\RewardController as FrontendRewardController;
+use App\Http\Controllers\RedeemController;
 
 Route::group(['middleware' => ['installed', 'license-activate']], function () {
     Auth::routes(['verify' => false]);
@@ -171,6 +174,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['installed'], 'as' => 'admin
 Route::get('notifications', [NotificationController::class, 'index'])->name('notifications');
 Route::post('/read_notification', [NotificationController::class, 'readNotification'])->name('read.notification');
 
+Route::get('rewards',                [FrontendRewardController::class, 'index'])->name('rewards');
+
+
+Route::get('redeem/{id}',                [RedeemController::class, 'store'])->name('redeem');
+
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'installed', 'license-activate', 'backend_permission'], 'as' => 'admin.'], function () {
     Route::get('dashboard',                                 [DashboardController::class, 'index'])->name('dashboard.index');
     Route::post('day-wise-income-order',                    [DashboardController::class, 'dayWiseIncomeOrder'])->name('dashboard.day-wise-income-order');
@@ -180,6 +188,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'installed', 'licens
     Route::post('profile/save-address',                     [ProfileController::class, 'saveAddress'])->name('profile.save-address');
     Route::delete('profile/delete-address/{id}',            [ProfileController::class, 'deleteAddress'])->name('profile.delete-address');
     Route::put('profile/profileBank/{bank}',                [ProfileController::class, 'profileBank'])->name('profile-bank');
+
+    Route::get('rewards',                [RewardController::class, 'index'])->name('rewards');
+    Route::get('rewards/create',                [RewardController::class, 'create'])->name('rewards.create');
+
+    Route::post('rewards',                [RewardController::class, 'store'])->name('rewards.store');
 
     Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
         Route::get('/',                                     [SettingController::class, 'index'])->name('index');
@@ -402,4 +415,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'installed', 'licens
     Route::resource('user',                     UserController::class);
     Route::get('get-users',                     [UserController::class, 'getUsers'])->name('users.get-users');
     Route::post('category/position', [CategoryController::class, 'categoryPosition'])->name('category.position');
+
+    
 });

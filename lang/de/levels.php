@@ -278,5 +278,6 @@ return array(
     'customer_report'                   => 'Kundenbericht',
     'restaurant_phone'                  => "Telefonnummer des Restaurants",
     'instructions'                      => "Anweisungen:",
-    'other'                             => "Andere"
+    'other'                             => "Andere",
+    'redeemed' => 'eingelöst'
   );
