@@ -106,6 +106,21 @@
                                             </div>
                                         @enderror
                                     </div>
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="tax">{{ __('levels.tax_rate') }}</label>
+                                        <select id="tax" name="tax" class="form-control @error('tax') is-invalid @enderror">
+                                            <option value="">{{__("levels.select_tax_rate")}}</option>
+                                            @foreach($taxes as $tax)
+                                            <option value="{{ $tax->rate }}" {{ ($menuItem->tax_id == $tax->rate) ? 'selected' : '' }}>{{ $tax->label.' ('.$tax->rate.'%)' }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('tax')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col">

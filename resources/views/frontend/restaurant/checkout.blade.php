@@ -37,8 +37,8 @@
 
                                 <fieldset class="checkout-fieldset">
                                     <div class="form-address">
-                                        <div class="d-flex gap-2 justify-content-between">
-                                            <div class="form-group w-100">
+                                        <div class="row justify-content-between">
+                                            <div class="col-12 col-lg-6 form-group">
                                                 <label class="form-label required"> {{ __('levels.street_name') }}</label>
                                                 <input id="street_name" type="text" required
                                                        class="form-control @error('street_name') is-invalid @enderror street_name"
@@ -50,7 +50,7 @@
                                                 </div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group w-100">
+                                            <div class="col-12 col-lg-6 form-group">
                                                 <label class="form-label required"> {{ __('levels.house_number') }}</label>
                                                 <input id="house_number" type="text" required
                                                        class="form-control @error('house_number') is-invalid @enderror house_number"
@@ -63,8 +63,8 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="d-flex gap-2 justify-content-between">
-                                            <div class="form-group w-100">
+                                        <div class="row justify-content-between">
+                                            <div class="col-12 col-md-6 form-group">
                                                 <label class="form-label required"> {{ __('levels.post_code') }}</label>
                                                 <input id="post_code" type="number" required
                                                        class="form-control @error('post_code') is-invalid @enderror post_code"
@@ -77,7 +77,7 @@
                                                 @enderror
                                                 <div class="post_code text-danger"></div>
                                             </div>
-                                            <div class="form-group w-100">
+                                            <div class="col-12 col-md-6 form-group">
                                             <label class="form-label"> {{ __('levels.city') }}</label>
                                             <input id="city" type="text"
                                                    class="form-control @error('city') is-invalid @enderror city"
@@ -90,8 +90,8 @@
                                             @enderror
                                         </div>
                                         </div>
-                                        <div class="d-flex gap-2 justify-content-between">
-                                            <div class="form-group w-100">
+                                        <div class="row justify-content-between">
+                                            <div class="col-12 col-md-6 form-group">
                                                 <label class="form-label"> {{ __('levels.floor') }}</label>
                                                 <input id="floor" type="text"
                                                        class="form-control @error('floor') is-invalid @enderror floor"
@@ -103,7 +103,7 @@
                                                 </div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group w-100">
+                                            <div class="col-12 col-md-6 form-group">
                                             <label class="form-label"> {{ __('levels.company_name') }}</label>
                                             <input id="company_name" type="text"
                                                    class="form-control @error('company_name') is-invalid @enderror company_name"
@@ -116,8 +116,8 @@
                                             @enderror
                                         </div>
                                         </div>
-                                        <div class="d-flex gap-2 justify-content-between">
-                                            <div class="form-group w-100">
+                                        <div class="row justify-content-between">
+                                            <div class="col-12 form-group">
                                             <label class="form-label"> {{ __('levels.add_note') }}</label>
                                             <input id="note" type="text"
                                                    class="form-control @error('note') is-invalid @enderror note"
@@ -152,8 +152,8 @@
                                 <h3>{{ __('frontend.personal_details') }}</h3>
                             </div>
 
-                            <div class="d-flex gap-2 justify-content-between">
-                                <div class="form-group w-100">
+                            <div class="row justify-content-between">
+                                <div class="col-12 col-md-6 form-group">
                                     <label class="form-label required">{{ __('frontend.first_name') }}</label>
                                     <input class="form-control first_name @error('first_name') is-invalid @enderror"
                                            type="text" id="first_name" name="first_name" required
@@ -165,7 +165,7 @@
                                     </div>
                                     @enderror
                                 </div>
-                                <div class="form-group w-100">
+                                <div class="col-12 col-md-6 form-group">
                                 <label class="form-label required">{{ __('frontend.last_name') }}</label>
                                 <input class="form-control last_name @error('last_name') is-invalid @enderror"
                                        type="text" id="last_name" name="last_name" required
@@ -179,8 +179,8 @@
                             </div>
                             </div>
 
-                            <div class="d-flex gap-2 justify-content-between">
-                                <div class="form-group w-100">
+                            <div class="row justify-content-between">
+                                <div class="col-12 col-md-6 form-group">
                                     <label class="form-label required">{{ __('frontend.email_address') }}</label>
                                     <input class="form-control email @error('email') is-invalid @enderror" type="email"
                                            id="email" name="email" required
@@ -192,7 +192,7 @@
                                     </div>
                                     @enderror
                                 </div>
-                                <div class="form-group w-100">
+                                <div class="col-12 col-md-6 form-group">
                                 <label class="form-label required">{{ __('frontend.phone_number') }}</label>
                                 <input class="form-control mobile @error('mobile') is-invalid @enderror phone"
                                        type="tel" id="number" name="mobile" onkeypress='validate(event)' required
@@ -214,8 +214,8 @@
                             <div class="form-group mb-0">
                                 <label class="form-label required">{{ __('frontend.payment_type') }}</label>
 
-                                <div class="d-flex gap-2 justify-content-between">
-                                    <div class="form-group w-50">
+                                <div class="row justify-content-between">
+                                    <div class="col-12  form-group">
                                         <select class="form-select" name="payment_type" id="payment_type"
                                                 onchange="myPaymentFunction()"
                                                 class="form-control @error('payment_type') is-invalid @enderror ">
@@ -335,7 +335,7 @@
                                                 @endforeach
                                             @endif
                                         </dl>
-                                        <h4>{{ setting('currency_code') }}{{ $item['totalPrice'] }} </h4>
+                                        <h4>{{ currencyFormat($item['totalPrice']) }} </h4>
                                     </li>
                                 @endforeach
                             @endif
@@ -343,7 +343,7 @@
                         <ul class="checkout-summary-price-list">
                             <li>
                                 <span>{{ __('frontend.subtotal') }}</span>
-                                <span class="sub_aj"> {{ setting('currency_code') }}{{ $menuitems['subTotalAmount'] }}</span>
+                                <span class="sub_aj"> {{ currencyFormat($menuitems['subTotalAmount']) }}</span>
                             </li>
 
                             @if ($menuitems['delivery_type'] != true)
@@ -359,7 +359,7 @@
                             @if (Schema::hasColumn('coupons', 'slug'))
                                 <li>
                                     <span>{{ __('frontend.discount') }}</span>
-                                    <span> {{ setting('currency_code') }}{{ $menuitems['coupon_amount'] }} </span>
+                                    <span> {{ currencyFormat($menuitems['coupon_amount']) }} </span>
                                 </li>
                             @endif
 
@@ -544,8 +544,9 @@
     <script>
         $(document).ready(function() {
             let address = localStorage.getItem('address');
-            address = JSON.parse(address);
+          
             if (address) {
+                address = JSON.parse(address);
                 $('#street_name').val(address.street);
                 $('#city').val(address.city);
                 $('#post_code').val(address.postalCode);
@@ -559,7 +560,7 @@
             }, 1000);
 
 
-            $("#post_code").change(function(){
+            $("#post_code").on('input', function() {
                 var postCode = $('#post_code').val();
                 $.ajax({
                     type:'POST',

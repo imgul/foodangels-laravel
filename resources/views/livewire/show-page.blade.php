@@ -46,14 +46,14 @@
                                                 <div class="product-card-info">
                                                     <div class="product-card-price">
                                                         @if ($menu_item['discount_price'] > 0)
-                                                            <del>{{ setting('currency_code') }}{{ $menu_item['unit_price'] }}
+                                                            <del>{{ currencyFormat($menu_item['unit_price']) }}
                                                             </del>
                                                             <span>
-                                                                {{ setting('currency_code') }}{{ $menu_item['unit_price'] - $menu_item['discount_price'] }}
+                                                               {{ currencyFormat($menu_item['unit_price'] - $menu_item['discount_price']) }}
                                                             </span>
                                                         @else
                                                             <span>
-                                                                {{ setting('currency_code') }}{{ $menu_item['unit_price'] - $menu_item['discount_price'] }}
+                                                               {{ currencyFormat($menu_item['unit_price'] - $menu_item['discount_price']) }}
                                                             </span>
                                                         @endif
                                                     </div>
@@ -131,14 +131,14 @@
                                         <div class="product-card-info">
                                             <div class="product-card-price">
                                                 @if ($other_product['discount_price'] > 0)
-                                                    <del>{{ setting('currency_code') }}{{ $other_product['unit_price'] }}
+                                                    <del>{{ currencyFormat($other_product['unit_price']) }}
                                                     </del>
                                                     <span>
-                                                        {{ setting('currency_code') }}{{ $other_product['unit_price'] - $other_product['discount_price'] }}
+                                                       {{ currencyFormat($other_product['unit_price'] - $other_product['discount_price']) }}
                                                     </span>
                                                 @else
                                                     <span>
-                                                        {{ setting('currency_code') }}{{ $other_product['unit_price'] - $other_product['discount_price'] }}
+                                                       {{ currencyFormat($other_product['unit_price'] - $other_product['discount_price']) }}
                                                     </span>
                                                 @endif
                                             </div>

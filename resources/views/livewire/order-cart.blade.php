@@ -72,7 +72,7 @@
                     @endif
                 </div>
                 <div class="cart-action-group">
-                    <h5 class="cart-price"> {{ setting('currency_code') }}{{ $content['totalPrice'] }} </h5>
+                    <h5 class="cart-price"> {{ currencyFormat($content['totalPrice']) }} </h5>
 
                     <div class="cart-counter">
                         <button wire:click.prevent="removeItemQty('{{ $key }}')" class="fa-solid fa-minus cart-counter-minus"></button>
@@ -111,7 +111,7 @@
             <ul class="cart-amount-list">
                 <li class="cart-amount-item">
                     <span>{{ __('frontend.subtotal') }}</span>
-                    <span>{{ setting('currency_code') }}{{ $subTotalAmount }}</span>
+                    <span>{{ currencyFormat($subTotalAmount) }}</span>
                 </li>
 
                 @if ($delivery_type == \App\Enums\DeliveryType::DELIVERY)
@@ -119,7 +119,7 @@
                     <span>{{ __('frontend.delivery_charge') }}</span>
                     @if (setting('free_delivery') == 1) <span> {{ __('levels.free') }}</span>
                         @else
-                        <span>{{ setting('currency_code') }}{{ $delivery_charge }}</span>
+                        <span>{{ currencyFormat($delivery_charge) }}</span>
                         @endif
                 </li>
                 @endif
@@ -127,13 +127,13 @@
                 @if (Schema::hasColumn('coupons', 'slug'))
                 <li class="cart-amount-item">
                     <span>{{ __('frontend.discount') }}</span>
-                    <span>{{ setting('currency_code') }}{{ $discountAmount }} </span>
+                    <span>{{ currencyFormat($discountAmount) }} </span>
                 </li>
                 @endif
 
                 <li class="cart-amount-item">
                     <span>{{ __('frontend.total') }}</span>
-                    <span>{{ setting('currency_code') }}{{ $totalPayAmount }} </span>
+                    <span>{{ currencyFormat($totalPayAmount) }} </span>
                 </li>
             </ul>
         </div>

@@ -509,7 +509,7 @@ class OrderService
                     'item_total'                => ($item['unit_price'] * $item['quantity']),
                     'menu_item_variation_id' => $item['menu_item_variation_id'],
                     'options'                   => json_encode($item['options']),
-                    'instructions'              => $item['instructions'][0],
+                    'instructions'              => $item['instructions'],
                     'options_total'             => $optionTotal,
                     'created_at'                => date('Y-m-d H:i:s'),
                     'updated_at'                => date('Y-m-d H:i:s'),

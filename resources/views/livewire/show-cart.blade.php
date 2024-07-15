@@ -17,15 +17,15 @@
                     <div class="product-modal-group">
                         <dl class="product-modal-subset mb-0">
                             <dt>{{ __('frontend.price') }} </dt>
-                            <span class="fw-bold"> {{ setting('currency_code') }}
+                            <span class="fw-bold"> 
 {{--                                @if($price)--}}
 {{--                                    Price is: {{ $price }}--}}
 {{--                                @endif--}}
                                 @if($cartPrice)
-                                    {{ $cartPrice }}
+                                    {{ currencyFormat($cartPrice) }}
                                 @endif
 {{--                                @if(!$price && !$cartPrice)--}}
-{{--                                    {{ $menuItem->unit_price - $menuItem->discount_price }}--}}
+{{--                                    {{ currencyFormat($menuItem->unit_price - $menuItem->discount_price) }}--}}
 {{--                                @endif--}}
 {{--                                @if($price)--}}
 {{--                                    {{ $price }}--}}

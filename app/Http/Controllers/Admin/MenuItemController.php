@@ -124,6 +124,8 @@ class MenuItemController extends BackendController
         $this->data['categories']          = Category::where(['status' => CategoryStatus::ACTIVE])->get();
         $this->data['menuItem_categories'] = $menuItem->categories()->pluck('id')->toArray();
         $this->data['restaurants'] = Restaurant::where(['status' => Status::ACTIVE])->get();
+        $this->data['taxes'] = Tax::where(['status' => Status::ACTIVE])->get();
+
 
         return view('admin.menu-item.edit', $this->data);
     }
@@ -136,6 +138,7 @@ class MenuItemController extends BackendController
      */
     public function update(MenuItemRequest $request, $id)
     {
+
         $menuItem                 = MenuItem::owner()->findOrFail($id);
         $menuItem->restaurant_id  = $request->get('restaurant_id');
         $menuItem->name           = $request->get('name');

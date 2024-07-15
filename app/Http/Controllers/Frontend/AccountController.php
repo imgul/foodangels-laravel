@@ -74,7 +74,6 @@ class AccountController extends FrontendController
 
     public function getOrder()
     {
-
         $this->data['orders'] = auth()->user()->orders()->latest()->paginate(8);
         $this->data['reports'] = pluck(Report::select('status', 'order_id')->get(), 'status', 'order_id');
         return view('frontend.account.my-order', $this->data);
@@ -156,6 +155,17 @@ class AccountController extends FrontendController
         $this->data['order'] = Order::where('user_id', auth()->id())->findOrFail($id);
         $this->data['items'] = OrderLineItem::with('menuItem', 'variation')->with('restaurant')->where(['order_id' => $this->data['order']->id])->get();
 
+        $total_taxe = 0;
+
+        foreach($this->data['items'] as $key) {
+
+            $single_tax = ($key->unit_price * $key->menuItem->tax_id) / 100;
+
+            $total_taxe += $single_tax;
+        }
+
+        $this->data['total_tax'] = $total_taxe;
+       
         return view('frontend.account.order_details', $this->data);
     }
 

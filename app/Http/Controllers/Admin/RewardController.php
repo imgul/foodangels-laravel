@@ -18,7 +18,7 @@ class RewardController extends Controller
     {
         $data['rewards'] = Reward::query()->with(['user'])->get();
 
-        return view('admin.rewards.index', $da);
+        return view('admin.rewards.index', $data);
     }
 
     public function create()
