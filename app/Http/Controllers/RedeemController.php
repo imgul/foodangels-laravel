@@ -6,6 +6,7 @@ use App\Enums\OrderStatus;
 use App\Enums\Status;
 use App\Models\Order;
 use App\Models\OrderLineItem;
+use App\Models\Restaurant;
 use App\Models\Reward;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,8 @@ class RedeemController extends Controller
                 'total' => $total,
                 'sub_total' => $total,
                 'paid_amount' => 0,
-                'status' => OrderStatus::PENDING
+                'status' => OrderStatus::PENDING,
+                'restaurant_id' => Restaurant::query()->first()->id
             ]);
 
             $order_id = $order->id;
