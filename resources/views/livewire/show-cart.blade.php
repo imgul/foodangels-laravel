@@ -144,10 +144,13 @@
                                                                     </div>
                                                                 @endif
                                                             @else
-                                                                @if($i <= 2) <input wire:model="options" class="form-checkbox" id="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}" type="checkbox" value="{{ $option['id'] }}" name="options[]">
-                                                                <label class="optional-checkbox" for="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}">{{$option->relatedmenuitem['name']}}
-                                                                    <span class="optional-price"> +
-                                                    {{currencyName($option->relatedmenuitem['unit_price'])}}</span>
+                                                                @if($i <= 2) 
+                                                                <div class="mb-1">
+                                                                    <input wire:model="options" class="form-checkbox" id="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}" type="checkbox" value="{{ $option['id'] }}" name="options[]">
+                                                                    <label class="optional-checkbox fs-6 fw-normal" for="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}">{{$option->relatedmenuitem['name']}}
+                                                                        <span class="optional-price"> +
+                                                        {{currencyName($option->relatedmenuitem['unit_price'])}}</span>
+                                                                </div>
                                                                     @if($option->relatedmenuitem['product_info'])<a class="ml-4 text-primary option-info" href="javascript:void(0)" onclick="showInfo('info{{ $option['id'] }}')" class="product_info">{{ __('frontend.product_info') }}</a>@endif
                                                                 </label>
 

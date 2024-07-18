@@ -34,4 +34,5 @@ return array(
     'done' => 'Erledigt',
     'accepted' => 'Akzeptiert',
     'Accepted' => 'Akzeptiert',
+    'tax_id' => 'UST ID : '
   );

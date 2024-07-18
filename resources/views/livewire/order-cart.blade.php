@@ -72,6 +72,9 @@
                     @endforeach
                     @endif
                 </div>
+
+
+                
                 <div class="cart-action-group">
                     <h5 class="cart-price"> {{ currencyFormat($content['totalPrice']) }} </h5>
 
@@ -118,10 +121,10 @@
                 @if ($delivery_type == \App\Enums\DeliveryType::DELIVERY)
                 <li class="cart-amount-item">
                     <span>{{ __('frontend.delivery_charge') }}</span>
-                    @if (setting('free_delivery') == 1) <span> {{ __('levels.free') }}</span>
-                        @else
-                        <span>{{ currencyFormat($delivery_charge) }}</span>
-                        @endif
+                    @if (setting('basic_delivery_charge') == 0) <span> {{ __('levels.free') }}</span>
+                    @else
+                    <span>{{ currencyFormat($delivery_charge) }}</span>
+                    @endif
                 </li>
                 @endif
 
@@ -166,4 +169,3 @@
     <!--~~~~ WHEN CART IS EMPTY CODE END ~~~~~~-->
     @endif
 </div>
-

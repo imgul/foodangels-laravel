@@ -468,7 +468,7 @@ class OrderController extends BackendController
         $this->data['delivery_tax'] = Tax::find(setting('delivery_tax'));
         $this->data['address']      = OrderAddress::where('order_id',$id)->first();
 
-        $this->data['items']        = OrderLineItem::with('menuItem')->where(['order_id' => $this->data['order']->id])->get();
+        $this->data['items']        = OrderLineItem::with('menuItem', 'variation')->where(['order_id' => $this->data['order']->id])->get();
         $order          = $this->data['order'];
         $taxes          = [];
         $taxIncluded    = [];
@@ -495,6 +495,18 @@ class OrderController extends BackendController
         if ($order->advance_order == AdvanceOrderStatus::YES) {
             $orderTime = date('H:i',strtotime($order->advance_order_time));
         }
+
+        $total_tax = 0;
+
+        foreach($this->data['items'] as $key) {
+
+            $single_tax = (($key->unit_price * $key->quantity) * $key->menuItem->taxInfo->rate) / 100;
+
+            $total_tax += $single_tax;
+        }
+
+        $this->data['total_tax'] = $total_tax;
+
         $this->data['orderTime'] = $orderTime;
         $this->data['taxes'] = $taxes;
         $this->data['taxIncluded'] = $taxIncluded;

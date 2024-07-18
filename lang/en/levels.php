@@ -279,5 +279,7 @@ return array(
   'restaurant_phone'                  => "Restaurant Phone",
   'instructions'                      => "Instructions:",
   'other'                             => "Others",
-  'redeemed' => 'Redeemed'
+  'redeemed' => 'Redeemed',
+  'Barzahlung bei Lieferung' => 'Cash upon delivery',
+
 );

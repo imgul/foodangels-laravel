@@ -49,7 +49,7 @@
                 <span>{{date('d.m.Y', strtotime($order->created_at))}}</span>
                 <span>{{date('H:i:s', strtotime($order->created_at))}}</span>
             </div>
-            <p class="text-center mt-2 mb-0"><b>{{trans('order_type.'.$order->order_type)}}</b> - {{$order->order_code}}</p>
+            <p class="text-center mt-2 mb-0"><b>{{ trans('order_type.'.$order->order_type)}}</b> - {{$order->order_code}}</p>
             <div class="customer-details">
                 <p class="mb-1"><b>{{ ucfirst($order->user->name)}},</b></p>
                 <!-- <p class="mb-0"><b>{{-- $address->street --}},{{-- $address->house_number --}}</b></p>
@@ -60,10 +60,10 @@
             
             <h3 class="m-1 text-center" >Order time:</h3>
             
-           @if($order->day != 'immediately')      
-            <h3 class="m-1 text-center"><b>{{date('H:i:s', strtotime($order->choose_time))}}</b></h3>
+           @if($order->time_slot != 'As soon as possible')      
+            <h3 class="m-1 text-center"><b>{{ date('H:i:s', strtotime($order->time_slot)) }} </b></h3>
             @else
-            <h5 class="m-1 text-center"><b>{{__('frontend.as_soon_as_possible')}}</b></h5>
+            <h5 class="m-1 text-center"><b>{{ __('frontend.as_soon_as_possible') }}</b></h5>
             @endif
             <hr class="m-0" style="opacity: 0.9 !important; border-top:2px solid">   
             <div class="items px-2 mt-1 ">
@@ -81,11 +81,16 @@
                 <?php
                 $option = explode(',', $item->Options);
                  ?>
-                <p class="mb-0" style="margin-left: 2.7rem;">{{ $item->Variations }}</p>
-                @foreach($option as $value)
-                 <p class="mb-0" style="margin-left: 2.7rem;">{{ $value }}</p>
+                <p class="mb-0" style="margin-left: 2.7rem;"> 
+                    {{ $item->variation ? ' ( ' . $item->variation['name'] . ' )' : '' }}
+                  
+                </p>
+                @if ($item->options)
+                    @foreach (json_decode($item->options, true) as $option)
+                    <p class="mb-0" style="margin-left: 2.7rem;">{{ $option['name'] }}</p>
 
-                @endforeach
+                    @endforeach
+                @endif
                 <h2 style="font-size:14px; font-weight:600; padding-top:13px; ">{{ __('levels.instructions') }}<span style="font-weight:600; padding-left:15px;">{{ $item->instructions }}</span></h2>
                 <hr class="m-0" style="opacity: 0.9 !important; border-top:2px solid">
                 @endforeach
@@ -110,10 +115,21 @@
                     @endif
                 </div>
             </div>
+
+            <div class="px-2" style="float:right">
+                <div class="d-flex">
+                    <span style="margin-right:2rem">{{__('levels.tax')}}</span>
+                    <span> {{currencyFormat($total_tax)}}</span>
+                    @if(isset($delivery_tax))
+                    <p class="float-right" style="margin-left:.5rem;margin-bottom:0;"> <b>{{ $delivery_tax->label }}</b></p>
+                    @endif
+                </div>
+            </div>
+
             <div class="px-2" style="float:right">
                 <div class="d-flex">
                     <span style="margin-right:2rem;font-weight: bold">{{__('levels.our_total')}}</span>
-                    <span style="font-weight: bold"> {{ currencyFormat($order->total)}}</span>
+                    <span style="font-weight: bold"> {{ currencyFormat($order->total + $total_tax)}}</span>
                     @if(isset($delivery_tax))
                         <p class="float-right" style="margin-left:.5rem;margin-bottom:0;"> <b>{{$delivery_tax->label}}</b></p>
                     @endif
@@ -125,7 +141,7 @@
                 <p class="mb-0"><b>
                     
                     @if($order->payment_method =='5')
-                    {{__('Barzahlung bei Lieferung')}}
+                    {{ __('levels.Barzahlung bei Lieferung') }}
                     @endif
                     @if($order->payment_method =='30')
                     {{__('EC-Karte')}}
@@ -137,35 +153,37 @@
                     {{__('levels.paid_online')}}
                     @endif
                 </b></p>
-                @if($order->payment_method =='10')
-                <p class=""><b>{{ currencyFormat($order->paid_amount)}}</b></p>
+                @if($order->payment_method == '10')
+                <p class=""><b>{{ currencyFormat($order->paid_amount + total_tax )}}</b></p>
                 @endif
-                @if($order->payment_method <>'10')
-                <p class=""><b>{{ currencyFormat($order->total)}}</b></p>
+                @if($order->payment_method <> '10')
+                <p class=""><b>{{ currencyFormat($order->total + $total_tax )}}</b></p>
                 @endif
 
             </div>
-            @if(!blank($taxes))
+            @if(!blank($total_tax))
             <table class="tax-table">
                 <thead>
                     <tr>
-                        <th>{{__('levels.tax')}}</th>
-                        <th>{{__('levels.included')}}</th>
-                        <th>{{__('levels.net')}}</th>
-                        <th>{{__('levels.gross')}}</th>
+                        <th>{{ __('levels.tax') }}</th>
+                        <th>{{ __('levels.included') }}</th>
+                        <th>{{ __('levels.net') }}</th>
+                        <th>{{ __('levels.gross') }}</th>
 
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($taxes as $key => $value)
+                    @foreach($items as $key)
                     <tr>
-                        <td>{{$key." = ".$value."%"}}</td>
-                        <td>{{$taxIncluded[$key]}}</td>
-                        <td>{{$taxNet[$key]}}</td>
-                        <td>{{$taxGross[$key]}}</td>
+                        <td>{{ $key->menuItem->taxInfo->label . "=" .  $key->menuItem->taxInfo->rate . "%" }}</td>
+                        <td>{{ currencyFormat($key->unit_price * $key->quantity) }}</td>
+                        <td>{{ currencyFormat((($key->unit_price * $key->quantity) * $key->menuItem->taxInfo->rate) / 100) }}</td>
+                        <td>{{ currencyFormat(($key->unit_price * $key->quantity) +  (($key->unit_price * $key->quantity) * $key->menuItem->taxInfo->rate) / 100) }}</td>
 
                     </tr>
                     @endforeach
+
+                    <tr><td colspan="4">Delivery Charges</td></tr>
                     <tr>
                         <td>{{$delivery_tax->label.' = '.$delivery_tax->rate.'%'}}</td>
                         <td>{{number_format(($order->delivery_charge*$delivery_tax->rate)/100,2)}}</td>

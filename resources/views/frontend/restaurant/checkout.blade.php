@@ -555,7 +555,7 @@
             setTimeout(() => {
                 let post_code_val = $('#post_code').val();
                 if (post_code_val) {
-                    $('#post_code').trigger('change');
+                    $('#post_code').trigger('input');
                 }
             }, 1000);
 

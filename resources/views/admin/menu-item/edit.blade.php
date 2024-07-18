@@ -112,7 +112,7 @@
                                         <select id="tax" name="tax" class="form-control @error('tax') is-invalid @enderror">
                                             <option value="">{{__("levels.select_tax_rate")}}</option>
                                             @foreach($taxes as $tax)
-                                            <option value="{{ $tax->rate }}" {{ ($menuItem->tax_id == $tax->rate) ? 'selected' : '' }}>{{ $tax->label.' ('.$tax->rate.'%)' }}</option>
+                                            <option value="{{ $tax->tax_id }}" {{ ($menuItem->tax_id == $tax->id) ? 'selected' : '' }}>{{ $tax->label.' ('.$tax->rate.'%)' }}</option>
                                             @endforeach
                                         </select>
                                         @error('tax')
