@@ -120,7 +120,7 @@ class CheckoutController extends FrontendController
 
     public function store(Request $request)
     {
-        //    dd($request->all());
+        //    dd(session()->get('cart')['delivery_charge']);
         $this->user = null;
         if (auth()->check()) {
             $this->user = auth()->user();
@@ -629,6 +629,7 @@ class CheckoutController extends FrontendController
     protected function processDefaultPayment()
     {
         $orderService = app(PaymentService::class)->payment(false, $this->user);
+        
         return $this->handleOrderServiceResponse($orderService);
     }
 

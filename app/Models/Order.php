@@ -164,4 +164,9 @@ class Order extends Model implements HasMedia
             }
         }
     }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class, 'branch_id');
+    }
 }

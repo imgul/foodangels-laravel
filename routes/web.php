@@ -319,7 +319,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'installed', 'licens
     Route::put('restaurant-update/{restaurant}',            [RestaurantsController::class, 'restaurantUpdate'])->name('restaurant.restaurant-update');
 
     Route::resource('orders',                                OrderController::class);
-    Route::get('orders/invoice/{order}', 'OrderController@invoice')->name('orders.invoice');
+    Route::get('orders/invoice/{order}', [OrderController::class, 'invoice'])->name('orders.invoice');
     Route::get('orders/{order}/delivery',                   [OrderController::class, 'delivery'])->name('orders.delivery');
     Route::get('get-orders',                                [OrderController::class, 'getOrder'])->name('orders.get-orders');
     Route::get('orders/order-file/{id}',                    [OrderController::class, 'getDownloadFile'])->name('orders.order-file');

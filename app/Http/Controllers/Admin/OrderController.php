@@ -24,6 +24,9 @@ use App\Http\Requests\OrderRequest;
 use App\Http\Services\OrderService;
 use App\Notifications\OrderUpdated;
 use App\Http\Controllers\BackendController;
+use App\Models\Tax;
+use App\Models\OrderAddress;
+use App\Enums\AdvanceOrderStatus;
 
 class OrderController extends BackendController
 {
@@ -454,5 +457,49 @@ class OrderController extends BackendController
             }
         }
         return view('admin.orders.live_order_data', $this->data);
+    }
+
+    public function invoice($id)
+    {
+        $this->data['order']        = Order::with('items')->orderowner()->findOrFail($id);
+        // echo "<pre>"; print_r($this->data['order']  ); die;
+        $paymentmethod        = Order::findOrFail($id);
+        $this->data['payment_method']= $paymentmethod->payment_method;
+        $this->data['delivery_tax'] = Tax::find(setting('delivery_tax'));
+        $this->data['address']      = OrderAddress::where('order_id',$id)->first();
+
+        $this->data['items']        = OrderLineItem::with('menuItem')->where(['order_id' => $this->data['order']->id])->get();
+        $order          = $this->data['order'];
+        $taxes          = [];
+        $taxIncluded    = [];
+        $taxNet         = [];
+        $taxGross       = [];
+        foreach ($order->items as $item) {
+            if(!blank($item->menuItem->taxInfo)){
+                if ( !isset($taxes[$item->menuItem->taxInfo->label])) {
+                    $taxes[$item->menuItem->taxInfo->label] = $item->menuItem->taxInfo->rate;
+                }
+                if (!isset($taxIncluded[$item->menuItem->taxInfo->label])) {
+                    $taxGross[$item->menuItem->taxInfo->label] = $item->item_total;
+                    $taxIncluded[$item->menuItem->taxInfo->label] = number_format(($item->item_total * $item->menuItem->taxInfo->rate) / 100,2);
+                    $taxNet[$item->menuItem->taxInfo->label] = number_format($taxGross[$item->menuItem->taxInfo->label] - $taxIncluded[$item->menuItem->taxInfo->label],2);
+                } else {
+                    $taxGross[$item->menuItem->taxInfo->label] =  $taxGross[$item->menuItem->taxInfo->label] + $item->item_total;
+                    $taxIncluded[$item->menuItem->taxInfo->label] = number_format($taxIncluded[$item->menuItem->taxInfo->label] + (($item->item_total * $item->menuItem->taxInfo->rate) / 100),2);
+                    $taxNet[$item->menuItem->taxInfo->label] =number_format($taxGross[$item->menuItem->taxInfo->label] - $taxIncluded[$item->menuItem->taxInfo->label],2);
+                }
+            }
+
+        }
+        $orderTime = null;
+        if ($order->advance_order == AdvanceOrderStatus::YES) {
+            $orderTime = date('H:i',strtotime($order->advance_order_time));
+        }
+        $this->data['orderTime'] = $orderTime;
+        $this->data['taxes'] = $taxes;
+        $this->data['taxIncluded'] = $taxIncluded;
+        $this->data['taxNet'] = $taxNet;
+        $this->data['taxGross'] = $taxGross;
+      return view('admin.orders.invoice', $this->data);
     }
 }

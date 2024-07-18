@@ -23,9 +23,10 @@ class PaymentService
             $delivery_charge = 0;
             $order_type = OrderTypeStatus::PICKUP;
         } else {
-            $delivery_charge = session()->get('delivery_charge');
+            $delivery_charge = session()->get('cart')['delivery_charge'];
             $order_type = OrderTypeStatus::DELIVERY;
         }
+
 
         $items = [];
 

@@ -24,7 +24,7 @@ class RewardController extends Controller
     public function create()
     {
 
-        $data['loyalty_users'] = LoyaltyUser::query()->with(['user'])->get();
+        $data['loyalty_users'] = LoyaltyUser::query()->with(['user'])->groupBy('customer_id')->get();
 
         $restuarant = Restaurant::query()->where('status', Status::ACTIVE)->first();
 
