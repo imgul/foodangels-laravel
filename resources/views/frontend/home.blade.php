@@ -66,7 +66,7 @@
                                             </span>
                                         </a>
                                         <div class="d-flex gap-1">
-                                            <button id="searchBtn" type="submit">{{ __('frontend.search') }}</button>
+                                            <!-- <button id="searchBtn" type="submit">{{ __('frontend.search') }}</button> -->
                                             <button id="pickupBtn" class="button">{{ __('frontend.pickup') }}</button>
                                         </div>
                                     </div>
