@@ -44,9 +44,17 @@
         </div>
     </div>
 
+    
+    
     @include('admin.layouts.components.script')
 
+    
+    
+    
     @yield('footer-js')
+
+
+
 
 </body>
 

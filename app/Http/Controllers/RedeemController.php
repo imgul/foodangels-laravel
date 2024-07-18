@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\OrderStatus;
 use App\Enums\Status;
+use App\Libraries\MyString;
 use App\Models\Order;
 use App\Models\OrderLineItem;
 use App\Models\Restaurant;
@@ -39,6 +40,12 @@ class RedeemController extends Controller
             ]);
 
             $order_id = $order->id;
+
+            $order->misc = json_encode([
+                'order_code' => 'ORD-' . MyString::code($order_id),
+                'remarks'    => isset($data['remarks']) ? $data['remarks'] : '',
+            ]);
+            $order->save();
 
 
             foreach ($reward->menuItems as $menu) {

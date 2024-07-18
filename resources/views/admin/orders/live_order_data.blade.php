@@ -84,8 +84,8 @@
                                 <div class="col-4 d-flex flex-column">
 
                                     <a href="{{route('admin.orders.invoice',$order)}}" class="btn btn-sm btn-info float-right d-block mb-2" data-toggle="tooltip" target="_blank" data-placement="top" title="" data-original-title="Invoice">{{__('Print')}}</a>
-                                    
-                                 
+
+
                                     <form id="chnagesaccept" action="{{ route('admin.orders.update', $order) }}" method="POST" class="d-block w-100">
                                         @method('PUT')
                                         @csrf
@@ -94,31 +94,9 @@
                                         <button type="submit" class=" chnagestatus btn btn-sm btn-success float-right mb-2">{{__('Accepted')}}</button>
                                     </form>
                                     <!-- <button type="submit" class=" chnagestatus btn btn-sm btn-danger float-right mb-2">{{__('Rejected')}}</button> -->
-                                    <button type="button" class="chnagestatus btn btn-sm btn-danger float-right mb-2" data-toggle="modal" data-target="#reason_Modal">{{__('Rejected')}}</button>
+                                    <button type="button" class="chnagestatus btn btn-sm btn-danger float-right mb-2" onclick="setOrderId('{{ $order->id }}')">{{__('Rejected')}}</button>
 
-                                    <!-- Modal -->
-                                    <div id="reason_Modal" class="modal fade" role="dialog">
-                                        <div class="modal-dialog">
 
-                                            <!-- Modal content-->
-                                            <div class="modal-content">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">Enter reason</h4>
-                                                <div class="modal-body">
-                                                    <form method="POST" action="{{ route('admin.orders.update', $order) }}" id="chnagesreject">
-                                                        @method('PUT')
-                                                        @csrf
-                                                        <input type="hidden" name="status" value="12">
-                                                        <input type="hidden" name="id" value="{{ $order->id}}">
-                                                        <textarea name="reason"></textarea>
-                                                        <button type="submit" class=" chnagestatus btn btn-sm btn-danger float-right mb-2">{{__('submit')}}</button>
-                                                    </form>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
 
 
 
@@ -148,13 +126,13 @@
                                 </div>
                                 <div class="col-4 d-flex flex-column">
 
-                                <form method="POST" action="{{ route('admin.orders.update', $order) }}" id="chnagesreject">
-                                    @method('PUT')
-                                    @csrf
-                                    <input type="hidden" name="status" value="15">
-                                    <input type="hidden" name="id" value="{{ $order->id}}">
-                                    <button type="submit" class=" chnagestatus btn btn-sm btn-info float-right mb-2">{{__('Complete')}}</button>
-                                </form>  
+                                    <form method="POST" action="{{ route('admin.orders.update', $order) }}" id="chnagesreject">
+                                        @method('PUT')
+                                        @csrf
+                                        <input type="hidden" name="status" value="15">
+                                        <input type="hidden" name="id" value="{{ $order->id}}">
+                                        <button type="submit" class=" chnagestatus btn btn-sm btn-info float-right mb-2">{{__('Complete')}}</button>
+                                    </form>
                                     <a href="{{route('admin.orders.edit',$order)}}" class="btn btn-sm btn-primary">{{__('order.details')}}</a>
                                 </div>
                             </div>
@@ -192,3 +170,36 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="reason_Modal">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Enter reason</h4>
+            <div class="modal-body">
+                <form method="POST" action="{{ route('admin.orders.update', $order) }}" id="chnagesreject">
+                    @method('PUT')
+                    @csrf
+                    <input type="hidden" name="status" value="12">
+                    <input type="hidden" name="order_id" id="order-id" value="{{ $order->id}}">
+                    <textarea name="reason"></textarea>
+                    <button type="submit" class=" chnagestatus btn btn-sm btn-danger float-right mb-2">{{__('submit')}}</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+    function setOrderId(id) {
+        $('#order-id').val(id);
+        $('#reason_Modal').appendTo("body").modal('show');
+    }
+   
+</script>

@@ -52,8 +52,8 @@
             <p class="text-center mt-2 mb-0"><b>{{ trans('order_type.'.$order->order_type)}}</b> - {{$order->order_code}}</p>
             <div class="customer-details">
                 <p class="mb-1"><b>{{ ucfirst($order->user->name)}},</b></p>
-                <!-- <p class="mb-0"><b>{{-- $address->street --}},{{-- $address->house_number --}}</b></p>
-                <p class="mb-0"><b>{{-- $address->postcode --}},{{-- $address->city --}}</b></p> -->
+                <p class="mb-0"><b>{{ $order->user->address }}</b></p>
+                <!-- <p class="mb-0"><b>{{-- $address->postcode --}},{{-- $address->city --}}</b></p> -->
                 <p class="mb-0"><b>{{__('levels.tel')}}. {{$order->user->phone}}</b></p>
             </div>
             <hr class="m-0" style="opacity: 0.9 !important; border-top:2px solid">
