@@ -184,7 +184,7 @@
                     @method('PUT')
                     @csrf
                     <input type="hidden" name="status" value="12">
-                    <input type="hidden" name="order_id" id="order-id" value="{{ $order->id}}">
+                    <input type="hidden" name="id" id="order-id" value="{{ $order->id}}">
                     <textarea name="reason"></textarea>
                     <button type="submit" class=" chnagestatus btn btn-sm btn-danger float-right mb-2">{{__('submit')}}</button>
                 </form>

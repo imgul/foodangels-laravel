@@ -116,7 +116,7 @@ class OrderController extends BackendController
      */
     public function update(OrderRequest $request, $id)
     {
-       $id = $request->order_id;
+       $id = $request->id; // order_id
         $orderService = app(OrderService::class)->orderUpdate($id, $request->status);
         $order = Order::findOrFail($id);
 
