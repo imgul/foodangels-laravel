@@ -159,7 +159,7 @@ class AccountController extends FrontendController
 
         foreach($this->data['items'] as $key) {
 
-            $single_tax = (($key->unit_price * $key->quantity) * $key->menuItem->taxInfo->rate) / 100;
+            $single_tax = (($key->unit_price * $key->quantity) * ($key->menuItem?->taxInfo?->rate ?? 0)) / 100;
 
             $total_taxe += $single_tax;
         }

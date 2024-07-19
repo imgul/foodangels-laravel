@@ -175,10 +175,10 @@
                 <tbody>
                     @foreach($items as $key)
                     <tr>
-                        <td>{{ $key->menuItem->taxInfo->label . "=" .  $key->menuItem->taxInfo->rate . "%" }}</td>
+                        <td>{{ $key->menuItem?->taxInfo?->label . "=" .  ($key->menuItem?->taxInfo?->rate ?? 0) . "%" }}</td>
                         <td>{{ currencyFormat($key->unit_price * $key->quantity) }}</td>
-                        <td>{{ currencyFormat((($key->unit_price * $key->quantity) * $key->menuItem->taxInfo->rate) / 100) }}</td>
-                        <td>{{ currencyFormat(($key->unit_price * $key->quantity) +  (($key->unit_price * $key->quantity) * $key->menuItem->taxInfo->rate) / 100) }}</td>
+                        <td>{{ currencyFormat((($key->unit_price * $key->quantity) * ($key->menuItem?->taxInfo?->rate ?? 0)) / 100) }}</td>
+                        <td>{{ currencyFormat(($key->unit_price * $key->quantity) +  (($key->unit_price * $key->quantity) * ($key->menuItem?->taxInfo?->rate ?? 0)) / 100) }}</td>
 
                     </tr>
                     @endforeach
