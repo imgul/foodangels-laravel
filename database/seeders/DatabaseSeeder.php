@@ -72,5 +72,9 @@ class DatabaseSeeder extends Seeder
         $this->call(PushNotificationsSeeder::class);// New
 
         $this->call(RedeemSettingSeeder::class);
+
+        $this->call(TaxTableSeeder::class);
+
+        $this->call(RestaurantPostalCodeTableSeeder::class);
     }
 }

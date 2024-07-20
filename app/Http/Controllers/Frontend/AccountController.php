@@ -155,11 +155,12 @@ class AccountController extends FrontendController
         $this->data['order'] = Order::where('user_id', auth()->id())->findOrFail($id);
         $this->data['items'] = OrderLineItem::with('menuItem', 'variation')->with('restaurant')->where(['order_id' => $this->data['order']->id])->get();
 
+
         $total_taxe = 0;
 
         foreach($this->data['items'] as $key) {
 
-            $single_tax = (($key->unit_price * $key->quantity) * ($key->menuItem?->taxInfo?->rate ?? 0)) / 100;
+            $single_tax = (($key->unit_price * $key->quantity) * $key->menuItem->taxInfo?->rate ?: 0) / 100;
 
             $total_taxe += $single_tax;
         }

@@ -555,12 +555,12 @@
             setTimeout(() => {
                 let post_code_val = $('#post_code').val();
                 if (post_code_val) {
-                    $('#post_code').trigger('input');
+                    $('#post_code').trigger('change');
                 }
             }, 1000);
 
 
-            $("#post_code").on('input', function() {
+            $("#post_code").on('change', function() {
                 var postCode = $('#post_code').val();
                 $.ajax({
                     type:'POST',

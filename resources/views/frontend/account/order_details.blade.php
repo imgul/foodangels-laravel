@@ -187,7 +187,7 @@
                         </li>
                         <li>
                             <span>{{ __('frontend.total') }}</span>
-                            <span class="pe-xxl-5 pe-xl-4 pe-lg-1 pe-md-2">{{ currencyFormat($order->total + $total_tax) }}</span>
+                            <span class="pe-xxl-5 pe-xl-4 pe-lg-1 pe-md-2">{{ currencyFormat($order->total) }}</span>
                         </li>
                     </ul>
                 </div>

@@ -8,7 +8,6 @@
     <link rel="icon" href="{{ asset("images/".setting('fav_icon')) }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <style>
-        
         @media print {
 
             html,
@@ -17,7 +16,7 @@
                 height: auto;
                 margin-left: auto;
                 margin-right: auto;
-                color:#000;
+                color: #000;
                 /* position: absolute; */
             }
         }
@@ -39,9 +38,9 @@
 </head>
 
 <body>
-    <div class="container pt-5"  style="width:310px !important;font-family:monospace;font-size:12px;">
+    <div class="container pt-5" style="width:310px !important;font-family:monospace;font-size:12px;">
 
-        <div class="printDiv" style="width:300px" id="printDiv" >
+        <div class="printDiv" style="width:300px" id="printDiv">
             <!-- <div class="logo d-flex justify-content-center">
                 <img width="80px" src="http://picsum.photos/seed/{{ rand(0, 100000) }}/50" alt="">
             </div> -->
@@ -57,15 +56,15 @@
                 <p class="mb-0"><b>{{__('levels.tel')}}. {{$order->user->phone}}</b></p>
             </div>
             <hr class="m-0" style="opacity: 0.9 !important; border-top:2px solid">
-            
-            <h3 class="m-1 text-center" >Order time:</h3>
-            
-           @if($order->time_slot != 'As soon as possible')      
+
+            <h3 class="m-1 text-center">Order time:</h3>
+
+            @if($order->time_slot != 'As soon as possible')
             <h3 class="m-1 text-center"><b>{{ date('H:i:s', strtotime($order->time_slot)) }} </b></h3>
             @else
             <h5 class="m-1 text-center"><b>{{ __('frontend.as_soon_as_possible') }}</b></h5>
             @endif
-            <hr class="m-0" style="opacity: 0.9 !important; border-top:2px solid">   
+            <hr class="m-0" style="opacity: 0.9 !important; border-top:2px solid">
             <div class="items px-2 mt-1 ">
                 @foreach($items as $item)
                 <div class="d-flex justify-content-between">
@@ -80,16 +79,16 @@
                 </div>
                 <?php
                 $option = explode(',', $item->Options);
-                 ?>
-                <p class="mb-0" style="margin-left: 2.7rem;"> 
+                ?>
+                <p class="mb-0" style="margin-left: 2.7rem;">
                     {{ $item->variation ? ' ( ' . $item->variation['name'] . ' )' : '' }}
-                  
+
                 </p>
                 @if ($item->options)
-                    @foreach (json_decode($item->options, true) as $option)
-                    <p class="mb-0" style="margin-left: 2.7rem;">{{ $option['name'] }}</p>
+                @foreach (json_decode($item->options, true) as $option)
+                <p class="mb-0" style="margin-left: 2.7rem;">{{ $option['name'] }}</p>
 
-                    @endforeach
+                @endforeach
                 @endif
                 <h2 style="font-size:14px; font-weight:600; padding-top:13px; ">{{ __('levels.instructions') }}<span style="font-weight:600; padding-left:15px;">{{ $item->instructions }}</span></h2>
                 <hr class="m-0" style="opacity: 0.9 !important; border-top:2px solid">
@@ -102,7 +101,7 @@
                     <span style="margin-right:2rem">{{ __('levels.sub_total') }}</span>
                     <span> {{currencyFormat($order->sub_total)}}</span>
                     @if(isset($delivery_tax))
-                        <p class="float-right" style="margin-left:.5rem;margin-bottom:0;"> <b>{{$delivery_tax->label}}</b></p>
+                    <p class="float-right" style="margin-left:.5rem;margin-bottom:0;"> <b>{{$delivery_tax->label}}</b></p>
                     @endif
                 </div>
             </div>
@@ -118,20 +117,10 @@
 
             <div class="px-2" style="float:right">
                 <div class="d-flex">
-                    <span style="margin-right:2rem">{{__('levels.tax')}}</span>
-                    <span> {{currencyFormat($total_tax)}}</span>
-                    @if(isset($delivery_tax))
-                    <p class="float-right" style="margin-left:.5rem;margin-bottom:0;"> <b>{{ $delivery_tax->label }}</b></p>
-                    @endif
-                </div>
-            </div>
-
-            <div class="px-2" style="float:right">
-                <div class="d-flex">
                     <span style="margin-right:2rem;font-weight: bold">{{__('levels.our_total')}}</span>
-                    <span style="font-weight: bold"> {{ currencyFormat($order->total + $total_tax)}}</span>
+                    <span style="font-weight: bold"> {{ currencyFormat($order->total)}}</span>
                     @if(isset($delivery_tax))
-                        <p class="float-right" style="margin-left:.5rem;margin-bottom:0;"> <b>{{$delivery_tax->label}}</b></p>
+                    <p class="float-right" style="margin-left:.5rem;margin-bottom:0;"> <b>{{$delivery_tax->label}}</b></p>
                     @endif
                 </div>
             </div>
@@ -139,51 +128,49 @@
             <p class="mb-0" style="margin-top: 5px !important;"><b>{{ request()->getHost() }}</b></p>
             <div class="d-flex justify-content-between" style="width:90%; height: 25px !important;">
                 <p class="mb-0"><b>
-                    
-                    @if($order->payment_method =='5')
-                    {{ __('levels.Barzahlung bei Lieferung') }}
-                    @endif
-                    @if($order->payment_method =='30')
-                    {{__('EC-Karte')}}
-                    @endif
-                    @if($order->payment_method =='10')
-                    {{('Paypal')}}
-                    @endif
-                    @if($order->payment_method <>'10' && $order->payment_method <>'30'&& $order->payment_method <>'5')
-                    {{__('levels.paid_online')}}
-                    @endif
-                </b></p>
+
+                        @if($order->payment_method =='5')
+                        {{ __('levels.Barzahlung bei Lieferung') }}
+                        @endif
+                        @if($order->payment_method =='30')
+                        {{__('EC-Karte')}}
+                        @endif
+                        @if($order->payment_method =='10')
+                        {{('Paypal')}}
+                        @endif
+                        @if($order->payment_method <>'10' && $order->payment_method <>'30'&& $order->payment_method <>'5')
+                                    {{__('levels.paid_online')}}
+                                    @endif
+                    </b></p>
                 @if($order->payment_method == '10')
-                <p class=""><b>{{ currencyFormat($order->paid_amount + total_tax )}}</b></p>
+                <p class=""><b>{{ currencyFormat($order->paid_amount )}}</b></p>
                 @endif
                 @if($order->payment_method <> '10')
-                <p class=""><b>{{ currencyFormat($order->total + $total_tax )}}</b></p>
-                @endif
+                    <p class=""><b>{{ currencyFormat($order->total) }}</b></p>
+                    @endif
 
             </div>
-            @if(!blank($total_tax))
+            @if(!blank($taxes))
             <table class="tax-table">
                 <thead>
                     <tr>
-                        <th>{{ __('levels.tax') }}</th>
-                        <th>{{ __('levels.included') }}</th>
-                        <th>{{ __('levels.net') }}</th>
-                        <th>{{ __('levels.gross') }}</th>
+                        <th>{{__('levels.tax')}}</th>
+                        <th>{{__('levels.included')}}</th>
+                        <th>{{__('levels.net')}}</th>
+                        <th>{{__('levels.gross')}}</th>
 
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($items as $key)
+                    @foreach($taxes as $key => $value)
                     <tr>
-                        <td>{{ $key->menuItem?->taxInfo?->label . "=" .  ($key->menuItem?->taxInfo?->rate ?? 0) . "%" }}</td>
-                        <td>{{ currencyFormat($key->unit_price * $key->quantity) }}</td>
-                        <td>{{ currencyFormat((($key->unit_price * $key->quantity) * ($key->menuItem?->taxInfo?->rate ?? 0)) / 100) }}</td>
-                        <td>{{ currencyFormat(($key->unit_price * $key->quantity) +  (($key->unit_price * $key->quantity) * ($key->menuItem?->taxInfo?->rate ?? 0)) / 100) }}</td>
+                        <td>{{$key." = ".$value."%"}}</td>
+                        <td>{{$taxIncluded[$key]}}</td>
+                        <td>{{$taxNet[$key]}}</td>
+                        <td>{{$taxGross[$key]}}</td>
 
                     </tr>
                     @endforeach
-
-                    <tr><td colspan="4">Delivery Charges</td></tr>
                     <tr>
                         <td>{{$delivery_tax->label.' = '.$delivery_tax->rate.'%'}}</td>
                         <td>{{number_format(($order->delivery_charge*$delivery_tax->rate)/100,2)}}</td>

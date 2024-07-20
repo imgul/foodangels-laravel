@@ -201,6 +201,6 @@ return array (
   Wir verwenden Cookies und andere Technologien auf unserer Website. Einige von ihnen sind essenziell, während andere uns helfen, diese Website und Ihre Erfahrung zu verbessern.',
   'accept_all_cookies' => 'Alle Cookies akzeptieren',
   'cookies_cancel' => 'Stornieren',
-  'tax' => 'Steuer'
+  'tax' => 'Steuer (Inbegriffen)'
 
   );

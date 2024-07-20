@@ -202,5 +202,5 @@ return array (
   We use cookies and other technologies on our website. Some of them are essential, while others help us to improve this website and your experience.',
   'accept_all_cookies' => 'Accept All Cookies',
   'cookies_cancel' => 'Cancel',
-  'tax' => 'Tax'
+  'tax' => 'Tax (Included)'
 );

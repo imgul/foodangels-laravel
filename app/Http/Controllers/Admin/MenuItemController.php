@@ -139,6 +139,7 @@ class MenuItemController extends BackendController
     public function update(MenuItemRequest $request, $id)
     {
 
+
         $menuItem                 = MenuItem::owner()->findOrFail($id);
         $menuItem->restaurant_id  = $request->get('restaurant_id');
         $menuItem->name           = $request->get('name');
