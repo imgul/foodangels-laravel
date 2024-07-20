@@ -188,6 +188,7 @@ return array (
   'are_you_sure' => 'Are you sure to delete this?',
   'only_pickup' => 'Only Pickup',
   'show_more' => 'Show More',
+  'show_less' => 'Show Less',
   'selected_address' => 'Your Selected Address',
   'subject' => 'Subject',
   'paytm' => 'Paytm',
