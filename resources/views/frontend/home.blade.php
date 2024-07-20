@@ -130,15 +130,15 @@
                                 <div class="col-sm-6">
                                     <h3>{{ __('Monday') }} - {{ __('Friday') }}</h3>
                                     <div class="hours">
-                                        {{ date('H:i', strtotime($restaurant->week_days_opening)) }} <br>
-                                        {{ date('H:i', strtotime($restaurant->week_days_closing)) }}
+                                        {{ date('H:i', strtotime($restaurant->opening_time)) }} <br>
+                                        {{ date('H:i', strtotime($restaurant->closing_time)) }}
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <h3>{{ __('Saturday') }} - {{ __('Sunday') }}</h3>
                                     <div class="hours">
-                                        {{ date('H:i', strtotime($restaurant->weekend_opening)) }} <br>
-                                        {{ date('H:i', strtotime($restaurant->weekend_closing)) }}
+                                        {{ date('H:i', strtotime($restaurant->opening_time)) }} <br>
+                                        {{ date('H:i', strtotime($restaurant->closing_time)) }}
                                     </div>
                                 </div>
 
