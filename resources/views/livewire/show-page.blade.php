@@ -31,8 +31,8 @@
                                                         {{ \Illuminate\Support\Str::limit($menu_item['name'], 20) }}
                                                     </h4>
                                                 @else
-                                                    <a href="#variation-{{ $menu_item['id'] }}"
-                                                        wire:click.prevent="addToCartModal({{ $menu_item['id'] }})">
+                                                    <a href="#variation-{{ $menu_item['id'] }}" wire:key="{{ $menu_item['id'] }}"
+                                                        wire:click.prevent="addToCartModal({{$menu_item['id']}},{{ isset($relatedPromo[$menu_item['id']]->amount) ? promoPrice($menu_item['unit_price'],$menu_item['discount_price'],$relatedPromo[$menu_item['id']]->amount):$menu_item['unit_price'] - $menu_item['discount_price'] }})">
                                                         <h4 class="product-card-title">
                                                             {{ \Illuminate\Support\Str::limit($menu_item['name'], 20) }}
                                                         </h4>
