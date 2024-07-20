@@ -141,7 +141,7 @@
                                     <dl class="order-table-item">
                                         <dt>
                                             {{ $item->menuItem->name }}
-                                            {{ $item->variation ? ' ( ' . $item->variation['name'] . ' )' : '' }}
+                                            {{ $item->variation ? ' (' . ($item->variation->relatedMenuItem?->name ?: $item->variation->name ) . ')' : '' }}
                                         </dt>
                                         @if ($item->options)
                                         <dd>

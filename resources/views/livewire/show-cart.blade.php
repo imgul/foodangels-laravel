@@ -60,13 +60,16 @@
                                                         <!--     Select-->
                                                         <!-- </option>-->
                                                         <!-- @endif -->
+
+                                                        <option value="" selected disabled>--Select--</option>
                                                         @foreach($menuItemVariations[$type->id] as $key => $variation)
 
                                                             @if($variation['type'] == 0)
 
                                                                 <option value="{{ $variation['id'] }}" data-productInfo="{{ $variation['product_info'] }}"  <?php if(isset($variationsType[$type->id]) && $variationsType[$type->id] ==  $variation['id'] )  echo 'selected';  ?>   >
                                                                     {{ $variation['name'] }}
-                                                                    @if($variation['unit_price'])( + {{ currencyName($variation['unit_price']) }})@endif
+                                                                    @if($variation['unit_price'])( + {{ currencyName($variation['unit_price']) }})
+                                                                    @endif
                                                                 </option>
                                                             @else
                                                                 <option value="{{ $variation['id'] }}" data-productInfo="{{$variation['relatedmenuitem']['product_info'] }}"  <?php if(isset($variationsType[$type->id]) && $variationsType[$type->id] == $variation['id'] )  echo 'selected';?>  >

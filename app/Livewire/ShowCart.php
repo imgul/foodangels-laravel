@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Livewire;
 
 use App\Enums\Status;
@@ -48,20 +49,19 @@ class ShowCart extends Component
 
     public function submit($restaurant_id, $menu_id)
     {
-        
+
 
         session()->put('session_cart_restaurant_id', $restaurant_id);
         session()->put('session_cart_restaurant', $this->restaurant->slug);
 
-        $allpromottedMenus = PromotionMenus::with('promo')->where('restaurant_id', $restaurant_id)->where('menu_id',$menu_id)->first();
+        $allpromottedMenus = PromotionMenus::with('promo')->where('restaurant_id', $restaurant_id)->where('menu_id', $menu_id)->first();
 
 
         $this->promoPrice = $this->menuItem->unit_price - $this->menuItem->discount_price;
         //   echo"<pre>"; print_r($allpromottedMenus); die;
-        if (isset($allpromottedMenus) && $allpromottedMenus->promo->status ==5) {
+        if (isset($allpromottedMenus) && $allpromottedMenus->promo->status == 5) {
             $this->promoPrice = promoPrice($this->menuItem->unit_price, $this->menuItem->discount_price, $allpromottedMenus->promo->amount);
             $this->promoId = $allpromottedMenus->promo->id;
-
         }
 
         $this->restaurant_id = $restaurant_id;
@@ -71,10 +71,12 @@ class ShowCart extends Component
         $totalPrice = $this->promoPrice;
         $discount   = $this->menuItem->discount_price;
         $variationArray = [];
+
         if (!blank($this->variations)) {
             $variations = MenuItemVariation::whereIn('id', $this->variations)->get();
             $j = 0;
             // echo "<pre>"; print_r($variations); die;
+
             foreach ($variations as $variation) {
 
                 if ($variation->type == 0) {
@@ -88,10 +90,9 @@ class ShowCart extends Component
                 }
 
                 if ($variation->unit_price) {
-                    if ($variation->menu_item_type_id ==13) {
+                    if ($variation->menu_item_type_id == 13) {
                         $totalPrice = $variation->unit_price;
-                    }
-                    else{
+                    } else {
                         $totalPrice += $variation->unit_price;
                     }
                     // $totalPrice += $variation->unit_price;
@@ -101,7 +102,8 @@ class ShowCart extends Component
                 $j++;
             }
         }
-        
+
+
         $optionArray = [];
         if (!blank($this->options)) {
             $options = MenuItemOption::whereIn('id', $this->options)->get();
@@ -127,22 +129,22 @@ class ShowCart extends Component
         }
         $instructions = !blank($this->instructions) ? $this->instructions : "";
 
-       
-        $test = session()->get('session_'.$menu_id, []);
+
+        $test = session()->get('session_' . $menu_id, []);
         $test[0] = $instructions;
-        session()->put('session_'.$menu_id, $test);
-        $getInstruction = session()->get('session_'.$menu_id, []);
+        session()->put('session_' . $menu_id, $test);
+        $getInstruction = session()->get('session_' . $menu_id, []);
 
         $sessionRestaurantId = $this->menuItem->restaurant_id;
         $postCode = session()->get('postal_code');
 
-        $RestaurantPostalCode = RestaurantPostalCode::where(['postal_code'=>$postCode,'restaurant_id'=>$sessionRestaurantId])->first();
+        $RestaurantPostalCode = RestaurantPostalCode::where(['postal_code' => $postCode, 'restaurant_id' => $sessionRestaurantId])->first();
         // dd($RestaurantPostalCode);
-        if($RestaurantPostalCode){
+        if ($RestaurantPostalCode) {
             $delivery_charge = $RestaurantPostalCode->delivery_charge;
             $min_order = $RestaurantPostalCode->min_order;
             $max_order = $RestaurantPostalCode->max_order;
-        }elseif ($this->restaurant->postalCode()){
+        } elseif ($this->restaurant->postalCode()) {
             $delivery_charge = $this->restaurant->postalCode()->delivery_charge;
             $min_order = $this->restaurant->postalCode()->min_order;
             $max_order = $this->restaurant->postalCode()->max_order;
@@ -162,10 +164,11 @@ class ShowCart extends Component
             'images'          => $this->menuItem->images,
             'menuItem_id'     => $this->menuItem->id,
             'instructions'    => $instructions,
-            'promoId'=>$this->promoId,
+            'promoId' => $this->promoId,
         ];
         //   echo "<pre>"; print_r($cartItem); die;
-//        $this->emit('addCart', $cartItem);
+        //        $this->emit('addCart', $cartItem);
+        
         $this->dispatch('addCart', $cartItem);
         $this->resetFields();
     }
@@ -217,12 +220,12 @@ class ShowCart extends Component
 
     public function CartModal($itemID, $price)
     {
-//        $this->resetFields();
-//        $this->menuItem = MenuItem::with('variations')->with('options')->where('id', $itemID)->first();
-//        if (!blank($this->menuItem->variations)) {
-//            $this->variationID = $this->menuItem->variations->first()->id;
-//        }
-//        $this->price = $price;
+        //        $this->resetFields();
+        //        $this->menuItem = MenuItem::with('variations')->with('options')->where('id', $itemID)->first();
+        //        if (!blank($this->menuItem->variations)) {
+        //            $this->variationID = $this->menuItem->variations->first()->id;
+        //        }
+        //        $this->price = $price;
 
         $this->quantity = 1;
         $this->instructions = '';
@@ -241,14 +244,14 @@ class ShowCart extends Component
         $this->menuItem             = MenuItem::with('variations')->with('options')->where(['id' => $itemID])->first();
         $this->menuItemVariations   = $this->menuItem->variations->groupBy('menu_item_type_id')->toBase();
         $this->menuItemOptions      = $this->menuItem->options->groupBy('menu_item_type_id')->toBase();
-        $this->menuItemTypes        = MenuItemType::where('status', Status::ACTIVE)->orderBy('id','desc')->get();
+        $this->menuItemTypes        = MenuItemType::where('status', Status::ACTIVE)->orderBy('id', 'desc')->get();
         if ($price > 0) {
             $this->promoPrice = $price;
         } else {
             $this->promoPrice  = $this->menuItem->unit_price - $this->menuItem->discount_price;
         }
         $this->cartPrice = $this->promoPrice;
-//        $this->price = $this->promoPrice;
+        //        $this->price = $this->promoPrice;
     }
 
     private function setVariationData($variation, &$variationArray, &$variationId, &$totalPrice, &$discount)
@@ -299,9 +302,9 @@ class ShowCart extends Component
             $totalOptionPrice = 0;
             $this->variations = [];
 
-            if(!blank($this->variationsType)) {
+            if (!blank($this->variationsType)) {
                 foreach ($this->variationsType as  $variationType) {
-                    if($variationType !='') {
+                    if ($variationType != '') {
                         $this->variations[] = $variationType;
                     }
                 }
@@ -314,25 +317,23 @@ class ShowCart extends Component
 
 
                     if ($variation->unit_price) {
-                        if ($variation->menu_item_type_id ==13) {
+                        if ($variation->menu_item_type_id == 13) {
                             $this->promoPrice = $variation->unit_price;
-//                            $this->price = $variation->unit_price;
-                        }
-                        else{
+                            //                            $this->price = $variation->unit_price;
+                        } else {
                             $totalPrice += $variation->unit_price;
                         }
                     } elseif (!blank($variation->relatedmenuitem)) {
                         $totalPrice += $variation->relatedmenuitem->unit_price;
                     }
-
                 }
             }
             if (!blank($this->options)) {
                 $options = MenuItemOption::whereIn('id', $this->options)->get();
-                foreach ($options as $option){
-                    if($option->unit_price){
+                foreach ($options as $option) {
+                    if ($option->unit_price) {
                         $totalOptionPrice += $option->unit_price;
-                    }elseif (!blank($option->relatedmenuitem)) {
+                    } elseif (!blank($option->relatedmenuitem)) {
                         $totalOptionPrice += $option->relatedmenuitem->unit_price;
                     }
                 }
@@ -348,7 +349,7 @@ class ShowCart extends Component
         return view('livewire.show-cart');
     }
 
-    public function changeVariation($value,$typeID)
+    public function changeVariation($value, $typeID)
     {
         $this->variations = [];
         $this->variationsType[$typeID] = $value;

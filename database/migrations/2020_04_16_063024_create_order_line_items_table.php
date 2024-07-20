@@ -23,6 +23,7 @@ return new class extends Migration
             $table->decimal('discounted_price', 13, 2)->default(0);
             $table->decimal('item_total', 13, 2);
             $table->unsignedBigInteger('menu_item_variation_id')->nullable();
+            $table->longText('variations')->nullable();
             $table->longText('options')->nullable();
             $table->longText('instructions')->nullable();
             $table->unsignedDouble('options_total')->nullable();

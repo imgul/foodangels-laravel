@@ -110,6 +110,7 @@ class OrderCart extends Component
             $this->carts['items'][] = $item;
         }
 
+
         $this->totalCartAmount();
     }
 

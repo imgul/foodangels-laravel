@@ -73,7 +73,7 @@
                                     <td>{{ $itemKey+1 }}</td>
                                     <td>{{ $item->menuItem->name }}
                                         @if(!blank($item->variation))
-                                        <small class="basic-color">{{ ' ( '.json_decode($item->variation,true)['name'].' )'}}</small>
+                                        <small class="basic-color">({{  $item->variation->relatedMenuItem?->name ?: $item->variation->name }})</small>
                                         @endif
 
                                         @if(!blank($item->options))

@@ -74,6 +74,7 @@ class OrderController extends BackendController
 
     
         $this->data['items'] = OrderLineItem::with('menuItem', 'variation')->with('restaurant')->where(['order_id' => $this->data['order']->id])->get();
+
         
         return view('admin.orders.view', $this->data);
     }
@@ -437,6 +438,7 @@ class OrderController extends BackendController
 
     public function getLiveOrders()
     {
+
         $orderCount            = Order::with('restaurant', 'user')->whereDate('created_at', Carbon::today())->orderowner()->orderBy('id', 'desc')->get();
         $this->data['total_order']     = $orderCount->count();
         $this->data['pending_order']   = $orderCount->where('status', OrderStatus::PENDING)->count();
@@ -507,6 +509,7 @@ class OrderController extends BackendController
             $total_tax += $single_tax;
         }
 
+      
         $this->data['total_tax'] = $total_tax;
 
         $this->data['orderTime'] = $orderTime;

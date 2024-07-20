@@ -71,6 +71,13 @@
 
                             <hr>
                             @if($new_orders)
+                            <script>
+                                    var beep = new Audio('{{ asset("beep.mp3") }}');
+                                    beep.play();
+
+                                    var audio = new Audio('{{ asset("voice.mp3") }}');
+                                    audio.play();
+                            </script>
                             @foreach($new_orders as $order)
                             <div class="row p-3 ticket">
                                 <div class="list-info col-8">
@@ -101,7 +108,7 @@
 
 
 
-                                    <a href="{{route('admin.orders.edit',$order)}}" class="btn btn-sm btn-primary">{{__('order.details')}} </a>
+                                    <a href="{{route('admin.orders.show',$order)}}" class="btn btn-sm btn-primary">{{__('order.details')}} </a>
                                 </div>
                             </div>
                             <hr>
@@ -133,7 +140,7 @@
                                         <input type="hidden" name="id" value="{{ $order->id}}">
                                         <button type="submit" class=" chnagestatus btn btn-sm btn-info float-right mb-2">{{__('Complete')}}</button>
                                     </form>
-                                    <a href="{{route('admin.orders.edit',$order)}}" class="btn btn-sm btn-primary">{{__('order.details')}}</a>
+                                    <a href="{{route('admin.orders.show',$order)}}" class="btn btn-sm btn-primary">{{__('order.details')}}</a>
                                 </div>
                             </div>
                             <hr>
@@ -157,7 +164,7 @@
                                     <p>{{currencyFormat($order->total)}}</p>
                                 </div>
                                 <div class="col-4 align-self-center text-center">
-                                    <a href="{{route('admin.orders.edit',$order)}}" class="btn btn-sm btn-primary">{{__('order.details')}}</a>
+                                    <a href="{{route('admin.orders.show',$order)}}" class="btn btn-sm btn-primary">{{__('order.details')}}</a>
                                 </div>
                             </div>
                             <hr>
@@ -196,10 +203,10 @@
 </div>
 
 <script>
-
     function setOrderId(id) {
         $('#order-id').val(id);
         $('#reason_Modal').appendTo("body").modal('show');
     }
-   
+
+
 </script>
