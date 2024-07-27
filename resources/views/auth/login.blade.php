@@ -66,46 +66,10 @@
                                     </div>
                                 </div>
 
-
                                 <input type="submit" class="form-btn" value="Login">
 
-                                @if (setting('facebook_key') || setting('google_key'))
-                                    <div class="auth-divide"><span>{{ __('or login with ') }}</span></div>
-                                @endif
-
-                                <nav class="auth-sync">
-                                    @if (setting('google_key'))
-                                        <a href="{{ route('social-login', 'google') }}">
-                                            <img src="{{ asset('frontend/images/social/google.png') }}" alt="social">
-                                            <span>{{ __('Google') }}</span>
-                                        </a>
-                                    @endif
-
-                                    @if (setting('facebook_key'))
-                                        <a href="{{ route('social-login', 'facebook') }}">
-                                            <img src="{{ asset('frontend/images/social/facebook.png') }}" alt="social">
-                                            <span>{{ __('Facebook ') }}</span>
-                                        </a>
-                                    @endif
-                                </nav>
                             </form>
                         </div>
-
-                        @if (env('DEMO_MODE'))
-                        <div class="card demo-login mx-auto text-center mt-2 border-0">
-
-                            <div class="card-body border-0">
-                                <h5 class="mb-2">{{ __('For Quick Demo Login Click Below...') }}</h5>
-                                <div class="buttons">
-                                    <button id="demoadmin" class="btn btn-sm btn-primary">{{ __('Admin') }}</button>
-                                    <button id="democustomer" class="btn  btn-sm  btn-info ">{{ __('Customer') }}</button>
-                                    <button id="demorestaurantowner"
-                                        class="btn btn-success  btn-sm">{{ __('Restaurant Owner') }}</button>
-                                    <button id="demodeliveryboy" class="btn btn-warning  btn-sm ">{{ __('Delivery Boy') }}</button>
-                                </div>
-                            </div>
-                        </div>
-                       @endif
 
                     </div>
                 </div>
@@ -117,5 +81,4 @@
 @endsection
 
 @push('js')
-    <script src="{{ asset('frontend/js/demo-login.js') }}"></script>
 @endpush
