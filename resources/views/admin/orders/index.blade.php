@@ -105,6 +105,7 @@
                                         <th>{{ __('levels.date') }}</th>
                                         <th>{{ __('levels.order_type') }}</th>
                                         <th>{{ __('levels.status') }}</th>
+                                        <th>{{ __('order.payment_method') }}</th>
                                         <th>{{ __('levels.total') }}</th>
                                         <th>{{ __('levels.actions') }}</th>
                                     </tr>

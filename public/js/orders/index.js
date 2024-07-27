@@ -30,6 +30,7 @@ $(document).ready(function () {
           {data : 'created_at', name : 'created_at'},
           {data : 'order_type', name : 'order_type'},
           {data : 'status', name : 'status'},
+          {data: 'payment_method', name: 'payment_method'},
           {data : 'total', name : 'total'},
           {data : 'action', name : 'action'},
         ],

@@ -69,12 +69,12 @@ class OrderController extends BackendController
      */
     public function show($id)
     {
-        
+
         $this->data['order'] = Order::orderowner()->findOrFail($id);
 
-    
+
         $this->data['items'] = OrderLineItem::with('menuItem', 'variation')->with('restaurant')->where(['order_id' => $this->data['order']->id])->get();
-        
+
         return view('admin.orders.view', $this->data);
     }
 
@@ -244,11 +244,12 @@ class OrderController extends BackendController
                     $orderArray[$i]['statusData'] = $statusData;
                     $orderArray[$i]['activeStatus'] = $activeStatus;
                     $orderArray[$i]['statusColor'] = $statusColor;
+                    $orderArray[$i]['payment_method'] = $order->payment_method;
                     $i++;
                 }
             }
 
-            return Datatables::of($orderArray)
+            $datatables = Datatables::of($orderArray)
                 ->addColumn('action', function ($order) {
                     $retAction = '';
 
@@ -284,6 +285,9 @@ class OrderController extends BackendController
                 ->editColumn('total', function ($order) {
                     return currencyFormat($order->total);
                 })
+                ->editColumn('payment_method', function ($order) {
+                    return $order->getPaymentMethod;
+                })
                 ->editColumn('status', function ($order) {
                     if ($order->statusData) {
                         return '<div class="dropdown">
@@ -299,6 +303,10 @@ class OrderController extends BackendController
                     return $order->setID;
                 })->escapeColumns([])
                 ->make(true);
+
+//            dd($datatables);
+
+            return $datatables;
         }
     }
 
