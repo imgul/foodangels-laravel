@@ -21,19 +21,19 @@
 
                 <div class="header-group">
 
-                <a href="{{ route('rewards') }}" class="header-cart"><i class="fa fa-gift text-white"></i></a>
-                   
+{{--                <a href="{{ route('rewards') }}" class="header-cart"><i class="fa fa-gift text-white"></i></a>--}}
+
                 <a href="{{ route('notifications') }}" class="header-cart" id="">
                     <i class="fa-regular fa-bell text-white"></i>
 
-                       
-                    
+
+
                             <sup>
                                 {{ \App\Helpers\Support::notificationCount() }}
                             </sup>
-               
+
                     </a>
-                
+
                 <a href="{{ $href }}" class="header-cart" id="cartLink">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                             xmlns="http://www.w3.org/2000/svg">

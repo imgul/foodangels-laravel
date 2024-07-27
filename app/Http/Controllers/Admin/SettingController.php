@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\MenuItem;
 use Setting;
 use App\Enums\Status;
 use App\Helpers\Support;
@@ -836,6 +837,7 @@ class SettingController extends BackendController
 
     public function redeemSetting()
     {
+        $data['menu_items'] = MenuItem::all();
         $data['redeem_setting'] = RedeemSetting::first();
         return view('admin.setting.redeem', $data);
     }
@@ -844,7 +846,9 @@ class SettingController extends BackendController
 
       $validated =  $request->validate([
             'reward_value' => 'required|numeric|gt:0',
-            'score_value' => 'required|numeric|gt:0'
+            'score_value' => 'required|numeric|gt:0',
+            'reward_menu_item_id' => 'required|numeric|exists:menu_items,id',
+            'status' => 'required|numeric|in:0,1',
         ]);
 
         $redeem_setting = RedeemSetting::find($request->id);

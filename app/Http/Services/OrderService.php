@@ -469,7 +469,8 @@ class OrderService
         $order   = Order::create($order);
         $orderId = $order->id;
 
-        $this->addLoyalty($order->user_id);
+        $this->giveReward($order->user_id);
+//        $this->addLoyalty($order->user_id);
 
         OrderHistory::create([
             'order_id'        => $orderId,
@@ -572,6 +573,90 @@ class OrderService
             ]);
         }
         return ResponseService::response();
+    }
+
+    public function giveReward($userId)
+    {
+        $redeem_setting = RedeemSetting::first();
+        $status = $redeem_setting->status;
+        $score_value = $redeem_setting->score_value;
+        $reward_value = $redeem_setting->reward_value;
+        $reward_menu_item_id = $redeem_setting->reward_menu_item_id;
+
+        $loyalty_id = LoyaltyScore::updateOrCreate(
+            ['customer_id' => $userId],
+            ['customer_id' => $userId]
+        )->increment('score', $score_value);
+
+        $loyalty = LoyaltyScore::find($loyalty_id);
+
+        if ($status == 1 && $loyalty->score >= $reward_value) {
+
+//            LoyaltyUser::create([
+//                'customer_id' => $userId,
+//                'scores' => $loyalty->score,
+//            ]);
+            // give reward
+//            OrderLineItem::create([
+//                'order_id' => null,
+//                'restaurant_id' => null,
+//                'menu_item_id' => $reward_menu_item_id,
+//                'quantity' => 1,
+//                'unit_price' => 0,
+//                'discounted_price' => 0,
+//                'item_total' => 0,
+//                'menu_item_variation_id' => null,
+//                'options' => json_encode([]),
+//                'instructions' => null,
+//                'options_total' => 0,
+//                'created_at' => date('Y-m-d H:i:s'),
+//                'updated_at' => date('Y-m-d H:i:s'),
+//            ]);
+            $total = 0;
+
+            $menu_item = MenuItem::find($reward_menu_item_id);
+
+            $total += $menu_item->unit_price;
+
+            $order = Order::create([
+                'user_id' => $userId,
+                'total' => $total,
+                'sub_total' => $total,
+                'paid_amount' => 0,
+                'status' => OrderStatus::PENDING,
+                'restaurant_id' => Restaurant::query()->first()->id
+            ]);
+
+            $order_id = $order->id;
+
+            $order->misc = json_encode([
+                'order_code' => 'ORD-' . MyString::code($order_id),
+                'remarks'    => 'Rewarded Order',
+            ]);
+            $order->save();
+
+
+//            foreach ($reward->menuItems as $menu) {
+//
+//                $menus[] = ['menu_item_id' => $menu->id, 'order_id' => $order_id, 'quantity' => 1, 'unit_price' => $menu->unit_price, 'item_total' => $menu->unit_price];
+//            }
+
+            $menu = [
+                'menu_item_id' => $menu_item->id,
+                'order_id' => $order_id,
+                'quantity' => 1,
+                'unit_price' => $menu_item->unit_price,
+                'item_total' => $menu_item->unit_price,
+                'instructions' => 'This is a Rewarded 100% Free Gift Order.',
+            ];
+
+
+            OrderLineItem::insert($menu);
+
+            $loyalty->update([
+                'score' => 0
+            ]);
+        }
     }
 
     public function addLoyalty($userId)

@@ -12,9 +12,9 @@
     </div>
 
     <ul class="navbar-nav navbar-right">
-        <li class="dropdown">
-            <a data-toggle="tooltip" data-placement="bottom" title="" href="{{ route('admin.rewards') }}" class="nav-link nav-link-lg beep"><i class="fa fa-gift"></i></a>
-        </li>
+{{--        <li class="dropdown">--}}
+{{--            <a data-toggle="tooltip" data-placement="bottom" title="" href="{{ route('admin.rewards') }}" class="nav-link nav-link-lg beep"><i class="fa fa-gift"></i></a>--}}
+{{--        </li>--}}
 
         <li class="dropdown">
             <a data-toggle="tooltip" data-placement="bottom" title="Go to Frontend" href="{{ route('home') }}" class="nav-link nav-link-lg beep" target="_blank"><i class="fa fa-globe"></i></a>

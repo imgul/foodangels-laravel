@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('score_value')->default(1);
             $table->integer('reward_value')->default(1);
+            $table->integer('reward_menu_item_id')->default(NULL);
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }
