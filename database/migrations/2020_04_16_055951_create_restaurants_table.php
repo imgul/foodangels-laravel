@@ -23,6 +23,10 @@ return new class extends Migration
             $table->string('long')->nullable();
             $table->time('opening_time')->nullable();
             $table->time('closing_time')->nullable();
+            $table->time('week_days_opening')->nullable();
+            $table->time('week_days_closing')->nullable();
+            $table->time('weekend_opening')->nullable();
+            $table->time('weekend_closing')->nullable();
             $table->longText('address')->nullable();
             $table->unsignedTinyInteger('status');
             $table->unsignedTinyInteger('current_status');
@@ -32,7 +36,7 @@ return new class extends Migration
             $table->boolean('applied')->nullable();
             $table->auditColumn();
             $table->timestamps();
-            
+
         });
     }
 

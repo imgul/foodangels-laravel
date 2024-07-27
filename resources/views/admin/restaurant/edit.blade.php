@@ -58,6 +58,48 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <label for="week_days_opening">{{ __('levels.week_days_opening') }}</label><span class="text-danger">*</span>
+                                        <input id="week_days_opening" type="text" name="week_days_opening" class="form-control form-control-sm timepicker @error('week_days_opening') is-invalid @enderror" value="{{ old('week_days_opening', $restaurant->week_days_opening) }}">
+                                        @error('week_days_opening')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group col">
+                                        <label for="week_days_closing">{{ __('levels.week_days_closing') }}</label><span class="text-danger">*</span>
+                                        <input id="week_days_closing" type="text" name="week_days_closing" class="form-control form-control-sm timepicker @error('week_days_closing') is-invalid @enderror" value="{{ old('week_days_closing', $restaurant->week_days_closing) }}">
+                                        @error('week_days_closing')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <label for="weekend_opening">{{ __('levels.weekend_opening') }}</label><span class="text-danger">*</span>
+                                        <input id="weekend_opening" type="text" name="weekend_opening" class="form-control form-control-sm timepicker @error('weekend_opening') is-invalid @enderror" value="{{ old('weekend_opening', $restaurant->weekend_opening) }}">
+                                        @error('weekend_opening')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group col">
+                                        <label for="weekend_closing">{{ __('levels.weekend_closing') }}</label><span class="text-danger">*</span>
+                                        <input id="weekend_closing" type="text" name="weekend_closing" class="form-control form-control-sm timepicker @error('weekend_closing') is-invalid @enderror" value="{{ old('weekend_closing', $restaurant->weekend_closing) }}">
+                                        @error('weekend_closing')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="cuisines">{{ __('levels.cuisines') }} </label>
                                     <select id="cuisines" name="cuisines[]" class="form-control select2 @error('cuisines') is-invalid @enderror" multiple="multiple">

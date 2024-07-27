@@ -234,6 +234,10 @@ class RestaurantController extends BackendController
                 $restaurant->long            = $request->long;
                 $restaurant->opening_time    = date('H:i:s', strtotime($request->opening_time));
                 $restaurant->closing_time    = date('H:i:s', strtotime($request->closing_time));
+                $restaurant->week_days_opening    = date('H:i:s', strtotime($request->week_days_opening));
+                $restaurant->week_days_closing    = date('H:i:s', strtotime($request->week_days_closing));
+                $restaurant->weekend_opening    = date('H:i:s', strtotime($request->weekend_opening));
+                $restaurant->weekend_closing    = date('H:i:s', strtotime($request->weekend_closing));
                 $restaurant->address         = $request->restaurantaddress;
                 $restaurant->current_status  = $request->current_status;
                 $restaurant->waiter_status   = $request->waiter_status;
@@ -268,7 +272,7 @@ class RestaurantController extends BackendController
     public function show($id)
     {
 
-       
+
         $restaurant = Restaurant::restaurantowner()->findOrFail($id);
         if (blank($restaurant->user)) {
             return redirect(route('admin.restaurant.index'))->withError('The user not found.');

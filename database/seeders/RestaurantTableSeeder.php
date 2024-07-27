@@ -24,6 +24,10 @@ class RestaurantTableSeeder extends Seeder{
             'long'            =>"90.35950183868408",
             'opening_time'    => "09:00:00",
             'closing_time'    => "23:00:00",
+            'week_days_opening'    => "09:00:00",
+            'week_days_closing'    => "23:00:00",
+            'weekend_opening'    => "09:00:00",
+            'weekend_closing'    => "23:00:00",
             'address'         => "250 W 72nd St, New York, United State",
             'status'          => RestaurantStatus::ACTIVE,
             'current_status'  => CurrentStatus::YES,
@@ -66,7 +70,7 @@ class RestaurantTableSeeder extends Seeder{
             'week_days_closing' => '23:00:00',
             'weekend_opening' => '14:00:00',
             'weekend_closing' => '22:00:00',
-        ],        
+        ],
 
 
         // [
