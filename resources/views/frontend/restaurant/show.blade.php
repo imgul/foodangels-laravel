@@ -28,11 +28,11 @@
                         <div class="rest-profile">
                             <div class="rest-info">
                                 <h1 class="rest-name">
-                                    @if ($restaurant->is_open)
+{{--                                    @if ($restaurant->is_open)--}}
                                         <span class="dot on me-1" title="Open Now"></span>
-                                    @else
-                                        <span class="dot off me-1" title="Close Now"></span>
-                                    @endif
+{{--                                    @else--}}
+{{--                                        <span class="dot off me-1" title="Close Now"></span>--}}
+{{--                                    @endif--}}
                                     {{ $restaurant->name }}
                                 </h1>
                                 <p class="rest-title">

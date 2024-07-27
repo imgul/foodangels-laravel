@@ -107,6 +107,7 @@ class PaymentService
         $this->data['address']         = isset($request['address']) ?$request['address']: '';
         $this->data['mobile']          = $request['countrycode'].$request['mobile'];
         $this->data['time_slot']       = session('session_cart_time_slot');
+        $this->data['time_slot_tomorrow'] = $request['time_slot_tomorrow'] ?? null;
         $orderService = app(OrderService::class)->order($this->data);
 
         return $orderService;

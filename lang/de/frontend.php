@@ -201,6 +201,18 @@ return array (
   Wir verwenden Cookies und andere Technologien auf unserer Website. Einige von ihnen sind essenziell, während andere uns helfen, diese Website und Ihre Erfahrung zu verbessern.',
   'accept_all_cookies' => 'Alle Cookies akzeptieren',
   'cookies_cancel' => 'Stornieren',
-  'tax' => 'Steuer (Inbegriffen)'
+  'tax' => 'Steuer (Inbegriffen)',
+    'monday' => 'Montag',
+    'tuesday' => 'Dienstag',
+    'wednesday' => 'Mittwoch',
+    'thursday' => 'Donnerstag',
+    'friday' => 'Freitag',
+    'saturday' => 'Samstag',
+    'sunday' => 'Sonntag',
+    'opening_time' => 'Öffnungszeit',
+    'closing_time' => 'Schließzeit',
+    'closed' => 'Geschlossen',
+    'closed_restaurant_message' => 'Das Restaurant ist derzeit geschlossen. Bitte für morgen später bestellen.',
+    'select_time_slots_for_tomorrow' => 'Bitte wählen Sie einen Zeitpunkt für die morgige Bestellung aus',
 
   );

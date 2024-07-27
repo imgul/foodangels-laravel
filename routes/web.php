@@ -92,6 +92,7 @@ Route::group(['prefix' => 'install', 'as' => 'LaravelInstaller::', 'middleware' 
 Route::group(['middleware' => ['installed', 'license-activate']], function () {
     Route::get('/home',                                     [HomeController::class, 'index'])->name('home');
     Route::get('/',                                         [HomeController::class, 'index'])->name('home');
+    Route::get('restaurant/{restaurant}/closed',            [RestaurantController::class, 'closed'])->name('restaurant.closed');
     Route::get('restaurant/{restaurant}',                   [RestaurantController::class, 'show'])->name('restaurant.show');
     Route::post('restaurant/ratings',                       [RestaurantController::class, 'Ratings'])->name('restaurant.ratings-update')->middleware('auth');
 
@@ -388,9 +389,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'installed', 'licens
     Route::get('get-bank',                                  [BankController::class, 'getBank'])->name('get-bank');
 
 
-    
+
     //tax Route
-    Route::resource('tax', TaxController::class); 
+    Route::resource('tax', TaxController::class);
     Route::get('get-tax',  [TaxController::class, 'getTax'])->name('get-tax');
 
 
@@ -416,5 +417,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'installed', 'licens
     Route::get('get-users',                     [UserController::class, 'getUsers'])->name('users.get-users');
     Route::post('category/position', [CategoryController::class, 'categoryPosition'])->name('category.position');
 
-    
+
 });

@@ -296,17 +296,37 @@ class RestaurantService
         return $this->getMedia($request);
     }
 
-    public static function timeSlots(Restaurant $restaurant)
+    public static function timeSlots(Restaurant $restaurant, Bool $tomorrow = false)
     {
-        $current_time = \Illuminate\Support\Carbon::now();
+        $opening_time = Carbon::parse($restaurant->opening_time);
         $closing_time = Carbon::parse($restaurant->closing_time);
+
+        $currentDay = Carbon::now()->dayOfWeek;
+        if($tomorrow){
+            $currentDay = Carbon::now()->addDay()->dayOfWeek;
+        }
+
+        if ($currentDay >= \Illuminate\Support\Carbon::MONDAY && $currentDay <= Carbon::FRIDAY) {
+            $opening_time = Carbon::parse($restaurant->week_days_opening);
+            $closing_time = Carbon::parse($restaurant->week_days_closing);
+        } elseif ($currentDay == Carbon::SATURDAY || $currentDay == Carbon::SUNDAY) {
+            $opening_time = Carbon::parse($restaurant->weekend_opening);
+            $closing_time = Carbon::parse($restaurant->weekend_closing);
+        }
+
+        $current_time = \Illuminate\Support\Carbon::now();
+        if ($current_time->lessThan($opening_time)) {
+            $current_time = $opening_time;
+        }
+
 
         // Round current time to the next half-hour
         $minutes = $current_time->minute;
         if ($minutes > 0 && $minutes <= 30) {
             $current_time->minute(30);
         } else {
-            $current_time->minute(0)->addHour();
+            $current_time->minute(0);
+//            $current_time->minute(0)->addHour();
         }
         $current_time->second(0);
 
@@ -328,11 +348,28 @@ class RestaurantService
 //            $this->restaurant->is_open = true;
 //        }
 
-        $current_time = Carbon::now();
-        $opening_time = Carbon::parse($restaurant->opening_time);
-        $closing_time = Carbon::parse($restaurant->closing_time);
+//        $current_time = Carbon::now();
+//        $opening_time = Carbon::parse($restaurant->opening_time);
+//        $closing_time = Carbon::parse($restaurant->closing_time);
 
-        return $current_time->between($opening_time, $closing_time);
+//        return $current_time->between($opening_time, $closing_time);
+
+        $opening_time = $restaurant->opening_time;
+        $closing_time = $restaurant->closing_time;
+
+        $currentDay = Carbon::now()->dayOfWeek;
+
+        if ($currentDay >= \Illuminate\Support\Carbon::MONDAY && $currentDay <= Carbon::FRIDAY) {
+            $opening_time = $restaurant->week_days_opening;
+            $closing_time = $restaurant->week_days_closing;
+        } elseif ($currentDay == Carbon::SATURDAY || $currentDay == Carbon::SUNDAY) {
+            $opening_time = $restaurant->weekend_opening;
+            $closing_time = $restaurant->weekend_closing;
+        }
+
+        // Check if the current time falls within the opening hours
+        $currentTime = now()->format('H:i:s');
+        return $currentTime >= $opening_time && $currentTime < $closing_time;
     }
 
 

@@ -26,6 +26,11 @@
 
             <form id="payment-form" action="{{ route('checkout.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+
+                @if(request()->query('time_slot'))
+                    <input type="hidden" name="time_slot_tomorrow" value="{{ request()->query('time_slot') }}">
+                @endif
+
                 <div class="checkout-group">
                     <div class="checkout-delivery">
                         <div class="checkout-card">
@@ -544,7 +549,7 @@
     <script>
         $(document).ready(function() {
             let address = localStorage.getItem('address');
-          
+
             if (address) {
                 address = JSON.parse(address);
                 $('#street_name').val(address.street);

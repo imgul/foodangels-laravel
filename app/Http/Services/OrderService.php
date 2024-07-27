@@ -23,6 +23,7 @@ use App\Models\Discount;
 use App\Models\LoyaltyScore;
 use App\Models\LoyaltyUser;
 use App\Models\RedeemSetting;
+use Carbon\Carbon;
 
 class OrderService
 {
@@ -457,7 +458,7 @@ class OrderService
             'order_type'      => $data['order_type'],
             'address'         => $address,
             'mobile'          => $data['mobile'],
-            'time_slot'       => $data['time_slot'],
+            'time_slot'       => $data['time_slot_tomorrow'] ?? $data['time_slot'],
             'lat'             => $latitude,
             'long'            => $longitude,
             'misc'            => json_encode(["remarks" => '']),
@@ -465,6 +466,10 @@ class OrderService
             'payment_status'  => $data['payment_status'],
             'paid_amount'     => $data['paid_amount'],
         ];
+
+        if ($data['time_slot_tomorrow']) {
+            $order['updated_at'] = Carbon::now()->addDay()->toDateTimeString();
+        }
 
         $order   = Order::create($order);
         $orderId = $order->id;

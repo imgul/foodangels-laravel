@@ -142,6 +142,7 @@ class OrderController extends Controller
                 'user_id'         => auth()->user()->id,
                 'total'           => $request->total,
                 'delivery_charge' => $request->delivery_charge,
+                'time_slot_tomorrow' => $request->time_slot_tomorrow,
             ]);
 
             if(($request->paid_amount == '' || $request->paid_amount == 0) || $request->payment_method == PaymentMethod::CASH_ON_DELIVERY) {

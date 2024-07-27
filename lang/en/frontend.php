@@ -202,5 +202,15 @@ return array (
   We use cookies and other technologies on our website. Some of them are essential, while others help us to improve this website and your experience.',
   'accept_all_cookies' => 'Accept All Cookies',
   'cookies_cancel' => 'Cancel',
-  'tax' => 'Tax (Included)'
+  'tax' => 'Tax (Included)',
+    'monday' => 'Monday',
+    'tuesday' => 'Tuesday',
+    'wednesday' => 'Wednesday',
+    'thursday' => 'Thursday',
+    'friday' => 'Friday',
+    'saturday' => 'Saturday',
+    'sunday' => 'Sunday',
+    'closed' => 'Closed',
+    'closed_restaurant_message' => 'Restaurant is closed right now. Please order for later tomorrow.',
+    'select_time_slots_for_tomorrow' => 'Please select a time for tomorrow\'s order',
 );

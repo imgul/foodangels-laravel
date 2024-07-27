@@ -74,7 +74,7 @@
                 </div>
 
 
-                
+
                 <div class="cart-action-group">
                     <h5 class="cart-price"> {{ currencyFormat($content['totalPrice']) }} </h5>
 
@@ -89,19 +89,21 @@
 
         </ul>
         <div class="cart-price-group">
-            @if ($this->time_slots)
-            <div class="form-group">
-                <label for="time_slot">{{ __('frontend.time_slots') }}</label>
-                <select class="form-select" id="time_slot" name="time_slot" wire:model="time_slot" wire:change="changeTimeSlot">
-                    <option value="{{ __('frontend.as_soon_as_possible') }}">{{ __('frontend.as_soon_as_possible') }}</option>
-                    @foreach ($this->time_slots as $time_slot)
-                    <option value="{{ $time_slot }}">
-                        {{ $time_slot }}
-                    </option>
-                    @endforeach
-                </select>
+            @if(!request()->query('time_slot'))
+                @if ($this->time_slots)
+                    <div class="form-group">
+                        <label for="time_slot">{{ __('frontend.time_slots') }}</label>
+                        <select class="form-select" id="time_slot" name="time_slot" wire:model="time_slot" wire:change="changeTimeSlot">
+                            <option value="{{ __('frontend.as_soon_as_possible') }}">{{ __('frontend.as_soon_as_possible') }}</option>
+                            @foreach ($this->time_slots as $time_slot)
+                            <option value="{{ $time_slot }}">
+                                {{ $time_slot }}
+                            </option>
+                            @endforeach
+                        </select>
 
-            </div>
+                    </div>
+                @endif
             @endif
 
             @if (Schema::hasColumn('coupons', 'slug'))
@@ -143,9 +145,15 @@
         </div>
     </div>
     <div class="cart-amount-btn-div">
-        <a href="{{ route('checkout.index') }}" class="cart-amount-btn @if (!blank($carts) && !blank($carts['items']) && $isActiveCheckout) btn-checkout @else btn-checkout-disabled @endif" @if (!blank($carts) && !blank($carts['items']) && $isActiveCheckout && $restaurant->lowestDeliveryCharge()?->min_order <= $subTotalAmount) onclick="return true;" @else onclick="return showError('Minimum order amount is ${{  $restaurant->lowestDeliveryCharge()?->min_order }}');" @endif>
+        @if(request()->query('time_slot'))
+            <a href="{{ route('checkout.index', ['time_slot' => request()->query('time_slot')]) }}" class="cart-amount-btn @if (!blank($carts) && !blank($carts['items']) && $isActiveCheckout) btn-checkout @else btn-checkout-disabled @endif" @if (!blank($carts) && !blank($carts['items']) && $isActiveCheckout && $restaurant->lowestDeliveryCharge()?->min_order <= $subTotalAmount) onclick="return true;" @else onclick="return showError('Minimum order amount is ${{  $restaurant->lowestDeliveryCharge()?->min_order }}');" @endif>
                 {{ __('frontend.proceed_checkout') }}
-        </a>
+            </a>
+        @else
+            <a href="{{ route('checkout.index') }}" class="cart-amount-btn @if (!blank($carts) && !blank($carts['items']) && $isActiveCheckout) btn-checkout @else btn-checkout-disabled @endif" @if (!blank($carts) && !blank($carts['items']) && $isActiveCheckout && $restaurant->lowestDeliveryCharge()?->min_order <= $subTotalAmount) onclick="return true;" @else onclick="return showError('Minimum order amount is ${{  $restaurant->lowestDeliveryCharge()?->min_order }}');" @endif>
+                {{ __('frontend.proceed_checkout') }}
+            </a>
+        @endif
 
 
 

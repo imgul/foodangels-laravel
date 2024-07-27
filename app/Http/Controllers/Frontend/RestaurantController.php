@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Services\RestaurantService;
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\Coupon;
 use App\Models\Discount;
@@ -35,6 +36,20 @@ class RestaurantController extends FrontendController
 
     public function show(Restaurant $restaurant, Filepond $filepond)
     {
+        // get time_slot from query parameter
+        $time_slot = request()?->query('time_slot');
+        $this->data['time_slot'] = $time_slot;
+        // convert time slot to 24 hour format
+//        $this->data['time_slot_24h'] = Carbon::createFromFormat('h:i A', $time_slot)->format('H:i:s');
+
+        $this->data['isOpen'] = RestaurantService::isOpen($restaurant);
+
+        // dd(!$this->data['isOpen']);
+        if (!$this->data['isOpen'] && !$time_slot) {
+            return redirect()->route('restaurant.closed', $restaurant);
+//            $this->closed($restaurant, $filepond);
+        }
+
 //        $this->restaurant = $restaurant;
         $this->restaurant = Cache::remember("restaurant_{$restaurant->id}", 60, function() use ($restaurant) {
             return $restaurant->load(['media']);
@@ -85,7 +100,7 @@ class RestaurantController extends FrontendController
         });
 
 
-        
+
         $this->data['categories'] = $categories;
 
         $this->data['other_products'] = $other_products;
@@ -183,5 +198,34 @@ class RestaurantController extends FrontendController
         );
 
         return Redirect::back()->withSuccess('The Data ' . ($restaurantRating->wasRecentlyCreated ? 'Inserted' : 'Updated') . ' Successfully');
+    }
+
+    public function closed(Restaurant $restaurant)
+    {
+//        $timeSlots = $this->generateTimeSlots($opening_time, $closing_time);
+        $timeSlots = RestaurantService::timeSlots($restaurant, true);
+        $this->data['timeSlots'] = $timeSlots;
+
+
+        $this->restaurant = Cache::remember("restaurant_{$restaurant->id}", 60, function() use ($restaurant) {
+            return $restaurant->load(['media']);
+        });
+
+        if (session('session_cart_restaurant_id') != $this->restaurant->id) {
+            session()->forget('cart');
+        }
+
+        $this->loadCategoriesAndProducts();
+        $this->loadRatings();
+        $this->data['order_status'] = auth()->id() ? Order::where(['restaurant_id' => $this->restaurant->id, 'status' => OrderStatus::COMPLETED, 'user_id' => auth()->id()])->get() : [];
+        $this->loadVouchers();
+        $this->loadViewData();
+
+        $this->data['featured'] = MenuItem::where('restaurant_id', $this->restaurant->id)
+            ->where('status', MenuItemStatus::ACTIVE)
+            ->limit(8)
+            ->get();
+
+        return view('frontend.restaurant.closed', $this->data);
     }
 }
