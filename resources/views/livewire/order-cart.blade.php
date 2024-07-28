@@ -58,13 +58,16 @@
                     </svg>
                 </button>
 
+
                 <div class="cart-meta-group">
                     <h4 class="cart-name">
                         {{ $content['name'] }}
                     </h4>
                     <p>{{ $content['instructions'] }}</p>
-                    @if (isset($content['variation']['name']) && isset($content['variation']['price']))
-                    <h5 class="cart-size">{{ $content['variation']['name'] }} </h5>
+                    @if (isset($content['variations']))
+                         @foreach ($content['variations'] as $variation)
+                             <h5 class="cart-size">{{ $variation['name'] }} </h5>
+                         @endforeach
                     @endif
                     @if (!blank($content['options']))
                     @foreach ($content['options'] as $option)

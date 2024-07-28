@@ -60,13 +60,16 @@
                                                         <!--     Select-->
                                                         <!-- </option>-->
                                                         <!-- @endif -->
+
+                                                        <option value="" selected disabled>--Select--</option>
                                                         @foreach($menuItemVariations[$type->id] as $key => $variation)
 
                                                             @if($variation['type'] == 0)
 
                                                                 <option value="{{ $variation['id'] }}" data-productInfo="{{ $variation['product_info'] }}"  <?php if(isset($variationsType[$type->id]) && $variationsType[$type->id] ==  $variation['id'] )  echo 'selected';  ?>   >
                                                                     {{ $variation['name'] }}
-                                                                    @if($variation['unit_price'])( + {{ currencyName($variation['unit_price']) }})@endif
+                                                                    @if($variation['unit_price'])( + {{ currencyName($variation['unit_price']) }})
+                                                                    @endif
                                                                 </option>
                                                             @else
                                                                 <option value="{{ $variation['id'] }}" data-productInfo="{{$variation['relatedmenuitem']['product_info'] }}"  <?php if(isset($variationsType[$type->id]) && $variationsType[$type->id] == $variation['id'] )  echo 'selected';?>  >
@@ -128,7 +131,7 @@
                                                                 @else
                                                                     <div wire:ignore.self class="textarea" style="display: none">
                                                                         <input wire:change="changeOption($option['id'])" wire:model="options" class="form-checkbox" id="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}" type="checkbox" value="{{ $option['id'] }}" name="options[]">
-                                                                        <label class=" optional-checkbox" for="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}">{{$option['name']}}
+                                                                        <label class="optional-checkbox fs-6 fw-normal" for="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}">{{$option['name']}}
                                                                             <span class="optional-price"> @if($option['unit_price'])+
                                                                                 {{currencyName($option['unit_price'])}}@endif</span>
                                                                             @if($option['product_info'])
@@ -179,7 +182,7 @@
                                                         @endforeach
                                                         @if($count > 2)
                                                             <div class="mt-1">
-                                                                <a href="javascript:void(0)" wire:ignore id="seeMore" onclick="showOption()" class="mt-5" style="cursor: pointer"><i class="fas fa-angle-up see-icon"></i><u class="see-text">{{ __('frontend.show_more') }}</u></a>
+                                                                <a href="javascript:void(0)" wire:ignore id="seeMore" onclick="showOption()" class="mt-5" style="cursor: pointer"><i class="fas fa-angle-up see-icon"></i><u class="see-text fw-normal text-primary fs-6">{{ __('frontend.show_more') }}</u></a>
                                                             </div>
                                                         @endif
                                                     </div>
@@ -299,10 +302,10 @@
         Array.from(x).forEach((x) => {
             if (x.style.display === "none") {
                 x.style.display = "block";
-                document.getElementById("seeMore").innerHTML = '<i class="fas fa-angle-up see-icon"></i> <u class="see-text">' + '{{ __("frontend.show_less")}}' + '</u>';
+                document.getElementById("seeMore").innerHTML = '<i class="fas fa-angle-up see-icon"></i> <u class="see-text fw-normal text-primary fs-6">' + '{{ __("frontend.show_less")}}' + '</u>';
             } else {
                 x.style.display = "none";
-                document.getElementById("seeMore").innerHTML = '  <i class="fas fa-angle-up see-icon"></i> <u class="see-text">' + '{{ __('frontend.show_more ') }}' + '</u>';
+                document.getElementById("seeMore").innerHTML = '  <i class="fas fa-angle-up see-icon"></i> <u class="see-text fw-normal text-primary fs-6">' + '{{ __("frontend.show_more") }}' + '</u>';
             }
         })
     }

@@ -80,8 +80,9 @@
                 <?php
                 $option = explode(',', $item->Options);
                 ?>
+
                 <p class="mb-0" style="margin-left: 2.7rem;">
-                    {{ $item->variation ? ' ( ' . $item->variation['name'] . ' )' : '' }}
+                    {{ $item->variation ? ' (' . ($item->variation->relatedMenuItem?->name ?: $item->variation->name) . ')' : '' }}
 
                 </p>
                 @if ($item->options)

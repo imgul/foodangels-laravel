@@ -32,9 +32,11 @@ class PaymentService
 
         $cartItems = session()->get('cart')['items'] ?? [];
 
+    
+
         foreach ($cartItems as $cart) {
-            $menuItemVariationId = $cart['variation']['id'] ?? null;
-            $variation = $cart['variation'] ?? null;
+            $menuItemVariationId = $cart['variations'][0]['id'] ?? null;
+            $variation = $cart['variations'] ?? null;
             $options = $cart['options'] ?? null;
             $instructions = $cart['instructions'] ?? null;
 

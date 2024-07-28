@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             // street_name, house_number, floor (optional), city, postal_code, company_name (optional), note (optional), user_id (foreign key)
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('street_name');
-            $table->string('house_number');
+            $table->string('street_name')->nullable();
+            $table->string('house_number')->nullable();
             $table->string('floor')->nullable();
-            $table->string('city');
-            $table->string('postal_code');
+            $table->string('city')->nullable();
+            $table->string('postal_code')->nullable();
             $table->string('company_name')->nullable();
             $table->text('note')->nullable();
 

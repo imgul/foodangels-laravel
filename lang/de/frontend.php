@@ -187,6 +187,7 @@ return array (
     'are_you_sure'                    => 'Sind Sie sicher, dass Sie dies löschen möchten?',
     'only_pickup'                     => 'Nur Abholung',
     'show_more'                       => 'Mehr anzeigen',
+    'show_less'                       => 'zeige weniger',
     'selected_address'                => 'Ihre ausgewählte Adresse',
     'subject'                         => 'Betreff',
     'paytm'                           => 'Paytm',
