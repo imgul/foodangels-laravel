@@ -53,21 +53,21 @@
             </div>
             <div class="col-12 col-lg-3">
                 <div class="footer-contact">
-                    <h5 class="footer-title"> {{ __('Download Apps') }} </h5>
-                    <nav>
-                        @if (setting('android_app_link') || setting('ios_app_link'))
-                            @if (setting('android_app_link'))
-                                <a href="{{ setting('android_app_link') }}" target="_blank" class="d-block mb-2">
-                                    <img src="{{ asset('frontend/images/play.png') }}" alt="">
-                                </a>
-                            @endif
-                            @if (setting('ios_app_link'))
-                                <a href="{{ setting('ios_app_link') }}" target="_blank" class="d-block mb-2">
-                                    <img src="{{ asset('frontend/images/app.png') }}" alt="">
-                                </a>
-                            @endif
-                        @endif
-                    </nav>
+                    <h5 class="footer-title"> {{ __('Contact Us') }} </h5>
+{{--                    <nav>--}}
+{{--                        @if (setting('android_app_link') || setting('ios_app_link'))--}}
+{{--                            @if (setting('android_app_link'))--}}
+{{--                                <a href="{{ setting('android_app_link') }}" target="_blank" class="d-block mb-2">--}}
+{{--                                    <img src="{{ asset('frontend/images/play.png') }}" alt="">--}}
+{{--                                </a>--}}
+{{--                            @endif--}}
+{{--                            @if (setting('ios_app_link'))--}}
+{{--                                <a href="{{ setting('ios_app_link') }}" target="_blank" class="d-block mb-2">--}}
+{{--                                    <img src="{{ asset('frontend/images/app.png') }}" alt="">--}}
+{{--                                </a>--}}
+{{--                            @endif--}}
+{{--                        @endif--}}
+{{--                    </nav>--}}
                     <ul>
                         <li>
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
@@ -106,4 +106,3 @@
     </div>
 </footer>
 <!--======= FOOTER PART END =========-->
- 

@@ -21,9 +21,9 @@
 
     <!--======== BANNER PART START ==========-->
     <div class="color-overlay"></div>
-    
+
         <section class="banner py-0" data-background-image="{{ asset('frontend/images/default/Veganer-Halal-Ttiple1-Burger-Foodangels-Vegan.jpg') }}" style="background-repeat: no-repeat; background-size: cover; background-position: center; background-image: url({{ asset('frontend/images/default/Veganer-Halal-Ttiple1-Burger-Foodangels-Vegan.jpg') }}); height: calc(100vh - 70px); display: flex; align-items: center;">
-            <div id="overlay">  
+            <div id="overlay">
                 <div class="container h-100">
                     <div class="row align-items-center h-100">
                         <div class="col-12 col-md-7 col-lg-6">
@@ -40,7 +40,7 @@
                                     <div class="banner-search main-search-input-item location">
                                         <div id="autocomplete-container" class="me-auto ms-2 w-100">
                                             <input id="autocomplete-input" type="text" placeholder="{{ __('frontend.search') }}" name="s">
-                                        
+
                                         </div>
                                         <a href="javascript:void(0)">
                                             <span id="locationIcon" onclick="getLocation()">
@@ -92,7 +92,7 @@
                 </div>
             </div>
         </section>
-    
+
     <!--======== BANNER PART END ========-->
 
     <!--========  AWESOME STUFF START ========-->
@@ -182,28 +182,28 @@
     <!--======== MADE WITH LOVE END ========-->
 
     <!--========= Cusines PART START ========-->
-    @if (!blank($bestSellingCuisines))
-        <section class="category section-gap-66">
-            <div class="container">
-                <h2 class="section-title borderd">{{ __('frontend.popular_cuisines') }} </h2>
-                <div class="row">
+{{--    @if (!blank($bestSellingCuisines))--}}
+{{--        <section class="category section-gap-66">--}}
+{{--            <div class="container">--}}
+{{--                <h2 class="section-title borderd">{{ __('frontend.popular_cuisines') }} </h2>--}}
+{{--                <div class="row">--}}
 
-                    @foreach ($bestSellingCuisines as $key => $bestSellingCusine)
-                        <div class="col-6 col-md-4 col-lg-3">
-                            <a href="{{ route('search', ['cuisines' => [$bestSellingCusine->slug], 'expedition' => 'all']) }}"
-                                class="category-card">
-                                <img class="bestSellingCusineImage" src="{{ $bestSellingCusine->image }}"
-                                    alt="category">
+{{--                    @foreach ($bestSellingCuisines as $key => $bestSellingCusine)--}}
+{{--                        <div class="col-6 col-md-4 col-lg-3">--}}
+{{--                            <a href="{{ route('search', ['cuisines' => [$bestSellingCusine->slug], 'expedition' => 'all']) }}"--}}
+{{--                                class="category-card">--}}
+{{--                                <img class="bestSellingCusineImage" src="{{ $bestSellingCusine->image }}"--}}
+{{--                                    alt="category">--}}
 
-                                <h4> {{ Str::of(strip_tags($bestSellingCusine->name))->limit(18) }}</h4>
-                            </a>
-                        </div>
-                    @endforeach
+{{--                                <h4> {{ Str::of(strip_tags($bestSellingCusine->name))->limit(18) }}</h4>--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
+{{--                    @endforeach--}}
 
-                </div>
-            </div>
-        </section>
-    @endif
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </section>--}}
+{{--    @endif--}}
     <!--========== Cusines PART END =========-->
     @include('frontend.partials._cookies')
 @endsection
