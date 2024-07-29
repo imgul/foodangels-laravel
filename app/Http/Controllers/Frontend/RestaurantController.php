@@ -36,8 +36,12 @@ class RestaurantController extends FrontendController
 
     public function show(Restaurant $restaurant, Filepond $filepond)
     {
-        // get time_slot from query parameter
+        session()->forget('time_slot');
+
         $time_slot = request()?->query('time_slot');
+        if  ($time_slot) {
+            session(['time_slot' => $time_slot]);
+        }
         $this->data['time_slot'] = $time_slot;
         // convert time slot to 24 hour format
 //        $this->data['time_slot_24h'] = Carbon::createFromFormat('h:i A', $time_slot)->format('H:i:s');

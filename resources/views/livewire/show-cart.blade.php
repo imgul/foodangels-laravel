@@ -111,6 +111,10 @@
                                                                             {{currencyName($option['unit_price'])}}@endif</span>
                                                                     </label>
 
+                                                                    @if($option['product_info'])
+                                                                        <a onclick="showProductInfo('{{ $option['product_info'] }}')" productdetail=" {{ $option['product_info']}}"><i class="fa fa-info-circle menu-readmore-btn" aria-hidden="true" style="padding-left: 30px; position: relative;right: 14px;"></i></a>
+                                                                    @endif
+
                                                                  </div>
                                                                     @if($option['product_info'])
 
@@ -123,10 +127,6 @@
                                                                     </div>
                                                                 </label>
 
-                                                                @if($option['product_info'])
-                                                                    <a onclick="showProductInfo('{{ $option['product_info'] }}')" productdetail=" {{ $option['product_info']}}"><i class="fa fa-info-circle menu-readmore-btn" aria-hidden="true" style="padding-left: ;position: relative;right: 14px;"></i></a>
-                                                                @endif
-
 
 
                                                                 @else
@@ -135,9 +135,12 @@
                                                                         <label class="optional-checkbox fs-6 fw-normal" for="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}">{{$option['name']}}
                                                                             <span class="optional-price"> @if($option['unit_price'])+
                                                                                 {{currencyName($option['unit_price'])}}@endif</span>
+{{--                                                                            @if($option['product_info'])--}}
+{{--                                                                                <a class="ml-4 text-primary option-info" data-toggle="collapse" href="javascript:void(0)" onclick="showInfo('info{{ $option['id'] }}')" role="button" aria-expanded="false">{{ __('frontend.product_info') }}--}}
+{{--                                                                                </a>--}}
+{{--                                                                            @endif--}}
                                                                             @if($option['product_info'])
-                                                                                <a class="ml-4 text-primary option-info" data-toggle="collapse" href="javascript:void(0)" onclick="showInfo('info{{ $option['id'] }}')" role="button" aria-expanded="false">{{ __('frontend.product_info') }}
-                                                                                </a>
+                                                                                <a onclick="showProductInfo('{{ $option['product_info'] }}')" productdetail=" {{ $option['product_info']}}"><i class="fa fa-info-circle menu-readmore-btn" aria-hidden="true" style="padding-left: 30px; position: relative;right: 14px;"></i></a>
                                                                             @endif
                                                                             <div class="collapse" id="info{{ $option['id'] }}">
                                                                                 <div class="card card-body">
@@ -155,7 +158,12 @@
                                                                         <span class="optional-price"> +
                                                         {{currencyName($option->relatedmenuitem['unit_price'])}}</span>
                                                                 </div>
-                                                                    @if($option->relatedmenuitem['product_info'])<a class="ml-4 text-primary option-info" href="javascript:void(0)" onclick="showInfo('info{{ $option['id'] }}')" class="product_info">{{ __('frontend.product_info') }}</a>@endif
+{{--                                                                    @if($option->relatedmenuitem['product_info'])--}}
+{{--                                                                        <a class="ml-4 text-primary option-info" href="javascript:void(0)" onclick="showInfo('info{{ $option['id'] }}')" class="product_info">{{ __('frontend.product_info') }}</a>--}}
+{{--                                                                    @endif--}}
+                                                                    @if($option->relatedmenuitem['product_info'])
+                                                                        <a onclick="showProductInfo('{{ $option->relatedmenuitem['product_info'] }}')" productdetail=" {{ $option->relatedmenuitem['product_info']}}"><i class="fa fa-info-circle menu-readmore-btn" aria-hidden="true" style="padding-left: 30px; position: relative;right: 14px;"></i></a>
+                                                                    @endif
                                                                 </label>
 
                                                                 <div class="collapse" id="info{{ $option['id'] }}">
@@ -169,7 +177,12 @@
                                                                         <label class="optional-checkbox fs-6 fw-normal" for="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}">{{$option->relatedmenuitem['name']}}
                                                                             <span class="optional-price"> +
                                                         {{currencyName($option->relatedmenuitem['unit_price'])}}</span>
-                                                                            @if($option->relatedmenuitem['product_info'])<a class="ml-4 text-primary option-info" href="javascript:void(0)" onclick="showInfo('info{{ $option['id'] }}')" class="product_info">{{ __('frontend.product_info') }}</a>@endif
+{{--                                                                            @if($option->relatedmenuitem['product_info'])--}}
+{{--                                                                                <a class="ml-4 text-primary option-info" href="javascript:void(0)" onclick="showInfo('info{{ $option['id'] }}')" class="product_info">{{ __('frontend.product_info') }}</a>--}}
+{{--                                                                            @endif--}}
+                                                                            @if($option->relatedmenuitem['product_info'])
+                                                                                <a onclick="showProductInfo('{{ $option->relatedmenuitem['product_info'] }}')" productdetail=" {{ $option->relatedmenuitem['product_info'] }}"><i class="fa fa-info-circle menu-readmore-btn" aria-hidden="true" style="padding-left: 30px; position: relative;right: 14px;"></i></a>
+                                                                            @endif
                                                                         </label>
 
                                                                         <div class="collapse" id="info{{ $option['id'] }}">

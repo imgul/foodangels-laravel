@@ -46,7 +46,9 @@ if(jQuery().timepicker && $(".timepicker").length) {
 		icons: {
 			up: 'fas fa-chevron-up',
 			down: 'fas fa-chevron-down'
-		}
+		},
+        showMeridian: false,
+        maxHours: 24,
 	});
 }
 function initMap() {

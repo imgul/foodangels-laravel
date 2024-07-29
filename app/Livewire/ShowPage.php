@@ -11,6 +11,7 @@ class ShowPage extends Component
     public $categories = [];
     public $other_products;
     public $restaurant;
+    public $ordered_categories;
     public $menu_item;
     public $menu_id = 0;
     public $variations;
@@ -27,9 +28,9 @@ class ShowPage extends Component
 
     public function mount()
     {
-        $products = MenuItem::with('categories')->with('media')->with('variations')->with('options')->where(['restaurant_id' => $this->restaurant->id])->get();
+        $products = MenuItem::with('categories_orderBy')->with('categories')->with('media')->with('variations')->with('options')->where(['restaurant_id' => $this->restaurant->id])->get();
         foreach($products as $key => $product) {
-            $product_categories = $product->categories;
+            $product_categories = $product->categories_orderBy;
             if(!blank($product_categories)) {
                 foreach($product_categories as $product_category) {
                     $this->categories[$product_category->id]            = $product_category;
@@ -41,6 +42,15 @@ class ShowPage extends Component
                 $this->other_products[$key]['image'] = $product->image;
             }
         }
+//        usort($this->categories, function($a, $b) {
+//            return $a->orders - $b->orders;
+//        });
+
+//        usort($this->categories_products, function($a, $b) {
+//            return $a->order - $b->order;
+//        });
+
+//        dd($this->categories, $this->categories_products);
         return view('livewire.show-page');
     }
 }

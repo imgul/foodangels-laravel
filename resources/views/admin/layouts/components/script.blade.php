@@ -10,6 +10,27 @@
 
 <!-- JS Libraries -->
 <script src="{{ asset('assets/modules/izitoast/dist/js/iziToast.min.js') }}"></script>
+<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+<script>
+    Pusher.logToConsole = true;
+    // Replace with your Pusher app key and cluster
+    const pusher = new Pusher('{{ config('broadcasting.connections.pusher.app_id') }}', {
+        cluster: '{{ config('broadcasting.connections.pusher.cluster') }}',
+        encrypted: true
+    });
+
+    // Subscribe to the 'orders' channel
+    const channel = pusher.subscribe('orders');
+
+    // Bind to the 'OrderReceived' event
+    channel.bind('App\\Events\\OrderReceived', function(data) {
+        // Display notification in the admin panel
+        console.log(data);
+        console.log(data.order);
+        alert('New order received: ' + JSON.stringify(data.order));
+        // Or update the UI with the new order details
+    });
+</script>
 @yield('scripts')
 
 <!-- Template JS File -->

@@ -6,6 +6,9 @@
                 <div class="product-category" id="popular-items{{ $categories_product_key }}">
                     @if (isset($categories[$categories_product_key]->name))
                         <h3 class="product-category-title">{{ $categories[$categories_product_key]->name }} </h3>
+                        <p class="product-category-description" style="margin-top: -40px;">
+                            {!! @$categories[$categories_product_key]?->description !!}
+                        </p>
                     @endif
                     <div class="product-card-groupp">
                         <div class="row gx-3 gy-3">

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Events\OrderReceived;
 use App\Models\Coupon;
 use App\Models\Cuisine;
 use App\Models\Discount;
+use App\Models\Order;
 use App\Models\Restaurant;
 use App\Enums\RestaurantStatus;
 use App\Enums\Status;
@@ -34,6 +36,8 @@ class HomeController extends FrontendController
         $this->data['current_data']           =  now()->format('H:i:s');
         $this->data['restaurant']           = Restaurant::where('status', RestaurantStatus::ACTIVE)->first();
         $this->data['pages'] = Page::where('status',Status::ACTIVE)->get();
+        $order = Order::first();
+        event(new OrderReceived($order));
         return view('frontend.home', $this->data);
     }
 

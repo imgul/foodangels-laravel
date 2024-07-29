@@ -170,7 +170,7 @@
                             </div>
                         </div>
 
-                        @livewire('show-page', ['restaurant' => $restaurant])
+                        @livewire('show-page', ['restaurant' => $restaurant, 'ordered_categories' => $categories])
 
                     </div>
                     @include('frontend.partials._footer')

@@ -469,6 +469,22 @@ class OrderController extends BackendController
         return view('admin.orders.live_order_data', $this->data);
     }
 
+    public function getPendingOrders()
+    {
+        $orderCount            = Order::with('restaurant', 'user')->whereDate('created_at', Carbon::today())->orderowner()->orderBy('id', 'desc')->get();
+        $this->data['pending_order']   = $orderCount->where('status', OrderStatus::PENDING)->count();
+
+        $this->data['new_orders'] = [];
+
+        $orders = Order::with('restaurant', 'user')->whereDate('created_at', Carbon::today())->orderowner()->orderBy('id', 'desc')->get();
+        foreach ($orders as $order) {
+            if ($order->status == OrderStatus::PENDING) {
+                $this->data['new_orders'][] = $order;
+            }
+        }
+        return view('admin.orders.live_order_data', $this->data);
+    }
+
     public function invoice($id)
     {
         $this->data['order']        = Order::with('items')->orderowner()->findOrFail($id);

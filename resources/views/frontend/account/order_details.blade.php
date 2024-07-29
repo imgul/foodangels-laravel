@@ -143,6 +143,11 @@
                                             {{ $item->menuItem->name }}
                                             {{ $item->variation ? ' (' . ($item->variation->relatedMenuItem?->name ?: $item->variation->name ) . ')' : '' }}
                                         </dt>
+                                        @if ($item->instructions)
+                                        <dd>
+                                            <span><strong>Instructions: </strong> {{ $item->instructions }}</span>
+                                        </dd>
+                                        @endif
                                         @if ($item->options)
                                         <dd>
                                             @foreach (json_decode($item->options, true) as $option)
@@ -181,7 +186,7 @@
                         <li><span>{{ __('frontend.delivery_charge') }}</span>
                             <span class="pe-xxl-5 pe-xl-4 pe-lg-1 pe-md-2">{{ currencyFormat($order->delivery_charge) }}</span>
                         </li>
-                        
+
                         <li><span>{{ __('frontend.tax') }}</span>
                             <span class="pe-xxl-5 pe-xl-4 pe-lg-1 pe-md-2">{{ currencyFormat($total_tax) }}</span>
                         </li>

@@ -72,11 +72,13 @@
                             <hr>
                             @if($new_orders)
                             <script>
-                                    {{--var beep = new Audio('{{ asset("beep.mp3") }}');--}}
-                                    {{--beep.play();--}}
+                                var beep = new Audio('{{ asset("assets/audio/zomato_sms.mp3") }}');
+                                beep.play();
 
-                                    {{--var audio = new Audio('{{ asset("voice.mp3") }}');--}}
-                                    {{--audio.play();--}}
+                                var audio = new Audio('{{ asset("assets/audio/order_in_list_german.mp3") }}');
+                                setTimeout(function() {
+                                    audio.play();
+                                }, 3000);
                             </script>
                             @foreach($new_orders as $order)
                             <div class="row p-3 ticket">

@@ -333,7 +333,8 @@ class RestaurantService
         $time_slots = [];
 
         while ($current_time->lessThanOrEqualTo($closing_time)) {
-            $time_slots[] = $current_time->format('g:i A');
+//            $time_slots[] = $current_time->format('g:i A');
+            $time_slots[] = $current_time->format('H:i');
             $current_time->addMinutes(30);
         }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Enums\DiscountStatus;
+use App\Events\OrderReceived;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Balance;
@@ -24,6 +25,7 @@ use App\Models\LoyaltyScore;
 use App\Models\LoyaltyUser;
 use App\Models\RedeemSetting;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 
 class OrderService
 {
@@ -448,6 +450,7 @@ class OrderService
                 ]);
             }
         }
+        $time_slot_from_session = Session::get('time_slot');
         $order = [
             'user_id'         => $data['user_id'],
             'restaurant_id'   => $data['restaurant_id'],
@@ -458,7 +461,7 @@ class OrderService
             'order_type'      => $data['order_type'],
             'address'         => $address,
             'mobile'          => $data['mobile'],
-            'time_slot'       => $data['time_slot_tomorrow'] ?? $data['time_slot'],
+            'time_slot'       => $time_slot_from_session ?? $data['time_slot'],
             'lat'             => $latitude,
             'long'            => $longitude,
             'misc'            => json_encode(["remarks" => '']),
@@ -548,6 +551,8 @@ class OrderService
                 app(TransactionService::class)->payment($order->user->balance_id, $this->adminBalanceId, $order->total, $orderId);
             }
         }
+
+        event(new OrderReceived($order));
 
         return ResponseService::response();
     }
