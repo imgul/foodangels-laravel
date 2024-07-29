@@ -17,7 +17,7 @@
                     <div class="product-modal-group">
                         <dl class="product-modal-subset mb-0">
                             <dt>{{ __('frontend.price') }} </dt>
-                            <span class="fw-bold"> 
+                            <span class="fw-bold">
 {{--                                @if($price)--}}
 {{--                                    Price is: {{ $price }}--}}
 {{--                                @endif--}}
@@ -61,7 +61,7 @@
                                                         <!-- </option>-->
                                                         <!-- @endif -->
 
-                                                        <option value="" selected disabled>--Select--</option>
+{{--                                                        <option value="" selected disabled>--Select--</option>--}}
                                                         @foreach($menuItemVariations[$type->id] as $key => $variation)
 
                                                             @if($variation['type'] == 0)
@@ -102,17 +102,18 @@
                                                             @endphp
                                                             @if($option['type'] == 0)
                                                                 @if($i <= 2)
-                                                               
+
                                                                 <div class="mb-1">
-        
-                                                                    <input wire:change="changeOption($option['id'])" wire:model="options" id="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}" type="checkbox" value="{{ $option['id'] }}" name="options[]">
+
+                                                                    <input wire:change="changeOption($option['id'])" wire:model="options" class="form-checkbox" id="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}" type="checkbox" value="{{ $option['id'] }}" name="options[]">
                                                                     <label class="optional-checkbox fs-6 fw-normal" for="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}">{{$option['name']}}
                                                                     <span class="optional-price"> @if($option['unit_price'])+
                                                                             {{currencyName($option['unit_price'])}}@endif</span>
-                                                                            
+                                                                    </label>
+
                                                                  </div>
                                                                     @if($option['product_info'])
-                                                                     
+
 
                                                                     @endif
                                                                     <div class="collapse" id="info{{ $option['id'] }}">
@@ -147,7 +148,7 @@
                                                                     </div>
                                                                 @endif
                                                             @else
-                                                                @if($i <= 2) 
+                                                                @if($i <= 2)
                                                                 <div class="mb-1">
                                                                     <input wire:model="options" class="form-checkbox" id="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}" type="checkbox" value="{{ $option['id'] }}" name="options[]">
                                                                     <label class="optional-checkbox fs-6 fw-normal" for="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}">{{$option->relatedmenuitem['name']}}
@@ -165,7 +166,7 @@
                                                                 @else
                                                                     <div wire:ignore.self class="textarea" style="display: none">
                                                                         <input wire:model="options" class="form-checkbox" id="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}" type="checkbox" value="{{ $option['id'] }}" name="options[]">
-                                                                        <label class="optional-checkbox" for="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}">{{$option->relatedmenuitem['name']}}
+                                                                        <label class="optional-checkbox fs-6 fw-normal" for="check-option-{{ __('other') }}-{{ $option['id'] }}-{{ $option['id'] }}">{{$option->relatedmenuitem['name']}}
                                                                             <span class="optional-price"> +
                                                         {{currencyName($option->relatedmenuitem['unit_price'])}}</span>
                                                                             @if($option->relatedmenuitem['product_info'])<a class="ml-4 text-primary option-info" href="javascript:void(0)" onclick="showInfo('info{{ $option['id'] }}')" class="product_info">{{ __('frontend.product_info') }}</a>@endif

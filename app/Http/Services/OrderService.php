@@ -621,6 +621,10 @@ class OrderService
 
             $menu_item = MenuItem::find($reward_menu_item_id);
 
+            if  (blank($menu_item)) {
+                return;
+            }
+
             $total += $menu_item->unit_price;
 
             $order = Order::create([
