@@ -72,11 +72,11 @@
                             <hr>
                             @if($new_orders)
                             <script>
-                                    var beep = new Audio('{{ asset("beep.mp3") }}');
-                                    beep.play();
+                                    {{--var beep = new Audio('{{ asset("beep.mp3") }}');--}}
+                                    {{--beep.play();--}}
 
-                                    var audio = new Audio('{{ asset("voice.mp3") }}');
-                                    audio.play();
+                                    {{--var audio = new Audio('{{ asset("voice.mp3") }}');--}}
+                                    {{--audio.play();--}}
                             </script>
                             @foreach($new_orders as $order)
                             <div class="row p-3 ticket">
