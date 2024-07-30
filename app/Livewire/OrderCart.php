@@ -42,6 +42,11 @@ class OrderCart extends Component
 
     protected $listeners = ['addCart'];
 
+    public function __construct()
+    {
+        $this->isActive = session()->get('is_pickup') ?? false;
+    }
+
     public function mount()
     {
 //        dd(session('session_cart_restaurant_id'));
@@ -87,7 +92,6 @@ class OrderCart extends Component
 
     public function render()
     {
-       
         return view('livewire.order-cart');
     }
 

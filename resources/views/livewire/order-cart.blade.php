@@ -1,5 +1,75 @@
 <div>
 
+    <style>
+        .deliver_type {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            align-items: stretch;
+            justify-content: center;
+        }
+
+        .fixed-cart .row.switch6 {
+            width: 100%;
+        }
+        .fixed-cart .row {
+            /*margin-right: 0;*/
+        }
+        .row.switch6 {
+            justify-content: center;
+        }
+
+        label.switch6-light {
+            display: flex !important;
+            background: #efedea;
+            border-radius: 50px;
+            border: 5px solid #efedea;
+            justify-content: space-between;
+            width: 100%;
+        }
+        label, legend {
+            display: block;
+            font-size: 15px;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+        label {
+            display: inline-block;
+            margin-bottom: .5rem;
+        }
+
+        .deliver_type .leftDelivery.active, .rightPickup.active {
+            cursor: pointer;
+            background: #fff;
+            color: #000;
+            padding: 15px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .deliver_type .leftDelivery, .rightPickup {
+            cursor: pointer;
+            color: #000;
+            padding: 15px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            width: 50%;
+        }
+
+        .leftDelivery.d_delivery {
+            margin-left: -11px;
+        }
+
+        .rightPickup.d_pickup {
+            margin-right: -11px;
+        }
+    </style>
+
     @if (!blank($carts))
     <!--~~~~~~ WHEN CART IS ORDER CODE START ~~~~~~~~-->
     <h2 class="cart-title">{{ __('frontend.mycart') }}
@@ -12,25 +82,65 @@
         </span>)
     </h2>
 
-    <div class="cart-scroll-group">
+    <div class="cart-scroll-group fixed-cart">
         <div class="d-flex justify-content-center aligjn-items-center mt-3 mb-3">
             @if (
             $this->restaurant->pickup_status == \App\Enums\Status::ACTIVE &&
             $this->restaurant->delivery_status == \App\Enums\Status::ACTIVE)
-            <div class="deliver_type my_toggle">
-                <div class="d_delivery{{ $isActive ? '' : ' active' }}">
-                    {{ __('frontend.delivery') }}
+                <div class="deliver_type">
+                    <div class="row switch6">
+                        <label class="switch6-light">
+                            <input type="checkbox" style="display: none;" wire:model="isActive" wire:click="isUpdating" {{ !blank($delivery_type) && $delivery_type == \App\Enums\DeliveryType::PICKUP ? 'checked':'' }}>
+                            <div class="leftDelivery d_delivery{{ $isActive ? '' : ' active' }}">
+                                <i class="fa fa-bicycle" aria-hidden="true"></i>
+                                {{ __('frontend.delivery') }}
+                            </div>
+                            <div id="rightPickup" class="rightPickup d_pickup{{ $isActive ? ' active' : '' }}">
+                                <i class="fa fa-shopping-bag cardBagActive" aria-hidden="true"></i>
+                                {{ __('frontend.pickup') }}
+                            </div>
+                        </label>
+                    </div>
                 </div>
-                <div class="delivery_toglle">
-                    <label class="switch" style="color: #f91942 !important">
-                        <input type="checkbox" wire:model="isActive" wire:click="isUpdating" {{ !blank($delivery_type) && $delivery_type == \App\Enums\DeliveryType::PICKUP ? 'checked' : '' }}>
-                        <span class="slider slider-color btn-top round"></span>
-                    </label>
-                </div>
-                <div class="d_pickup{{ $isActive ? ' active' : '' }}">
-                    {{ __('frontend.pickup') }}
-                </div>
-            </div>
+
+                <script>
+                    // $(document).ready(function() {
+                    //     let is_pickup = localStorage.getItem('is-pickup');
+                    //     if (is_pickup == '1') {
+                    //         $('#rightPickup').click();
+                    //     }
+                    // });
+
+                    // document.addEventListener('DOMContentLoaded', function (){
+                    //     var is_pickup = localStorage.getItem('is-pickup');
+                    //     is_pickup = parseInt(is_pickup);
+                    //     console.log(is_pickup)
+                    //     if (is_pickup === 1) {
+                    //         var rightPickup = document.querySelector('#rightPickup');
+                    //         rightPickup.click();
+                    //     }
+                    // })
+
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var is_pickup = localStorage.getItem('is-pickup');
+                        if (is_pickup !== null) {
+                            is_pickup = parseInt(is_pickup);
+                            console.log(is_pickup);
+                            if (is_pickup === 1) {
+                                var rightPickup = document.querySelector('#rightPickup');
+                                if (rightPickup) {
+                                    setTimeout(()=> {
+                                        rightPickup.click();
+                                    }, 500);
+                                } else {
+                                    console.error('Button #rightPickup not found');
+                                }
+                            }
+                        } else {
+                            console.log('localStorage item "is-pickup" not set');
+                        }
+                    });
+                </script>
 
             @elseif(
             $this->restaurant->delivery_status == \App\Enums\Status::INACTIVE &&

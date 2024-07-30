@@ -209,6 +209,7 @@ class RestaurantController extends FrontendController
 //        $timeSlots = $this->generateTimeSlots($opening_time, $closing_time);
         $timeSlots = RestaurantService::timeSlots($restaurant, true);
         $this->data['timeSlots'] = $timeSlots;
+//        dd($this->data['timeSlots']);
 
 
         $this->restaurant = Cache::remember("restaurant_{$restaurant->id}", 60, function() use ($restaurant) {

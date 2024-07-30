@@ -306,7 +306,7 @@ class RestaurantService
             $currentDay = Carbon::now()->addDay()->dayOfWeek;
         }
 
-        if ($currentDay >= \Illuminate\Support\Carbon::MONDAY && $currentDay <= Carbon::FRIDAY) {
+        if ($currentDay >= Carbon::MONDAY && $currentDay <= Carbon::FRIDAY) {
             $opening_time = Carbon::parse($restaurant->week_days_opening);
             $closing_time = Carbon::parse($restaurant->week_days_closing);
         } elseif ($currentDay == Carbon::SATURDAY || $currentDay == Carbon::SUNDAY) {
@@ -314,7 +314,7 @@ class RestaurantService
             $closing_time = Carbon::parse($restaurant->weekend_closing);
         }
 
-        $current_time = \Illuminate\Support\Carbon::now();
+        $current_time = Carbon::now();
         if ($current_time->lessThan($opening_time)) {
             $current_time = $opening_time;
         }
@@ -360,7 +360,7 @@ class RestaurantService
 
         $currentDay = Carbon::now()->dayOfWeek;
 
-        if ($currentDay >= \Illuminate\Support\Carbon::MONDAY && $currentDay <= Carbon::FRIDAY) {
+        if ($currentDay >= Carbon::MONDAY && $currentDay <= Carbon::FRIDAY) {
             $opening_time = $restaurant->week_days_opening;
             $closing_time = $restaurant->week_days_closing;
         } elseif ($currentDay == Carbon::SATURDAY || $currentDay == Carbon::SUNDAY) {

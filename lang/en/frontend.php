@@ -214,4 +214,22 @@ return array (
     'closed' => 'Closed',
     'closed_restaurant_message' => 'Restaurant is closed right now. Please order for later tomorrow.',
     'select_time_slots_for_tomorrow' => 'Please select a time for tomorrow\'s order',
+
+    'login' => 'Login',
+    'register' => 'Register',
+    'welcome_back' => 'Welcome Back!',
+    'please_enter_login_details' => 'Please enter your login details below',
+    'email_privacy' => "We'll never share your email with anyone else.",
+    'remember_me' => 'Remember me',
+    'forgot_password' => 'Forgot Password?',
+    'reset_password' => 'Reset Password',
+    'send_password_reset_link' => 'Send Password Reset Link',
+    'dont_have_account' => "Don't have an account?",
+    'sign_up' => 'Sign up',
+    'customer' => 'Customer',
+    'restaurant_owner' => 'Restaurant Owner',
+    'delivery_man' => 'Delivery Man',
+    'create_password' => 'Create password',
+    'repeat_password' => 'Repeat password',
+    'register_button' => 'Register'
 );

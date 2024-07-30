@@ -216,4 +216,21 @@ return array (
     'closed_restaurant_message' => 'Das Restaurant ist derzeit geschlossen. Bitte für morgen später bestellen.',
     'select_time_slots_for_tomorrow' => 'Bitte wählen Sie einen Zeitpunkt für die morgige Bestellung aus',
 
+    'login' => 'Anmelden',
+    'register' => 'Registrieren',
+    'welcome_back' => 'Willkommen zurück!',
+    'please_enter_login_details' => 'Bitte geben Sie unten Ihre Anmeldedaten ein',
+    'email_privacy' => 'Wir werden Ihre E-Mail-Adresse niemals mit Dritten teilen.',
+    'remember_me' => 'Angemeldet bleiben',
+    'forgot_password' => 'Passwort vergessen?',
+    'reset_password' => 'Passwort zurücksetzen',
+    'send_password_reset_link' => 'Link zum Zurücksetzen des Passworts senden',
+    'dont_have_account' => 'Sie haben kein Konto?',
+    'sign_up' => 'Registrieren',
+    'customer' => 'Kunde',
+    'restaurant_owner' => 'Restaurantbesitzer',
+    'delivery_man' => 'Lieferant',
+    'create_password' => 'Passwort erstellen',
+    'repeat_password' => 'Passwort wiederholen',
+    'register_button' => 'Registrieren'
   );

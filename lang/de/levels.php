@@ -150,7 +150,7 @@ return array(
   'add_role'                          => 'Rolle hinzufügen',
   'roles'                             => 'Rollen',
   'amount'                            => 'Betrag',
-  'user_limit'                        => 'Límite de usuarios',
+  'user_limit'                        => 'Benutzerlimit',
   'total_requested_amount'            => 'Gesamtbetrag angefordert',
   'total_withdraw_amount'             => 'Gesamtbetrag abheben',
   'youtube'                           => 'YouTube',

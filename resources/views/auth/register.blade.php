@@ -11,8 +11,8 @@
                 <div class="col-12 col-md-8 col-lg-7">
                     <div class="auth-content">
                         <nav class="auth-navs">
-                            <a class="nav-link" href="{{ route('login') }}"> {{ __('login') }} </a>
-                            <a class="nav-link active" href="{{ route('register') }}"> {{ __('register') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}"> {{ __('frontend.login') }} </a>
+                            <a class="nav-link active" href="{{ route('register') }}"> {{ __('frontend.register') }}</a>
                         </nav>
                         <div class="auth-tabs">
                             <form method="POST" class="register" action="{{ route('register') }}">
@@ -21,17 +21,17 @@
                                     <li>
                                         <input type="radio" id="CustomerRegister" name="roles" value="2"
                                         {{ old('roles', 2)== 2 ? 'checked' : 'checked'}}>
-                                        <label for="CustomerRegister">{{ __('Customer') }}</label>
+                                        <label for="CustomerRegister">{{ __('frontend.customer') }}</label>
                                     </li>
                                     <li>
                                         <input type="radio" id="RestaurantOwnerRegister" name="roles" value="3"
                                         {{ old('roles')== 3 ? 'checked' : ''}}>
-                                        <label for="RestaurantOwnerRegister">{{ __('Restaurant Owner') }}</label>
+                                        <label for="RestaurantOwnerRegister">{{ __('frontend.restaurant_owner') }}</label>
                                     </li>
                                     <li>
                                         <input type="radio" id="DeliveryRegister" name="roles" value="4"
                                         {{ old('roles')== 4 ? 'checked' : ''}}>
-                                        <label for="DeliveryRegister">{{ __('Delivery Man') }}</label>
+                                        <label for="DeliveryRegister">{{ __('frontend.delivery_man') }}</label>
                                     </li>
                                 </ul>
 
@@ -39,7 +39,7 @@
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label for="first_name"
-                                                class="form-label required">{{ __('First name') }}</label>
+                                                class="form-label required">{{ __('frontend.first_name') }}</label>
                                             <input name="first_name" value="{{ old('first_name') }}" type="text"
                                                 class="form-control @if ($errors->has('first_name')) is-invalid @endif"
                                                 placeholder="John">
@@ -53,7 +53,7 @@
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label for="last_name"
-                                                class="form-label required">{{ __('Last Name') }}</label>
+                                                class="form-label required">{{ __('frontend.last_name') }}</label>
                                             <input name="last_name" value="{{ old('last_name') }}" type="text"
                                                 class="form-control @if ($errors->has('last_name')) is-invalid @endif"
                                                 placeholder="Doe">
@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
-                                            <label for="username" class="form-label required">{{ __('Username') }}</label>
+                                            <label for="username" class="form-label required">{{ __('frontend.username') }}</label>
                                             <input id="username" name="username" value="{{ old('username') }}"
                                                 type="text"
                                                 class="form-control @if ($errors->has('username')) is-invalid @endif"
@@ -81,7 +81,7 @@
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label for="register_email"
-                                                class="form-label required">{{ __('Email Address') }} </label>
+                                                class="form-label required">{{ __('frontend.email_address') }} </label>
                                             <input name="register_email" value="{{ old('register_email') }}" type="email"
                                                 class="form-control @if ($errors->has('register_email')) is-invalid @endif"
                                                 placeholder="johndoe@example.com">
@@ -112,29 +112,29 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="address" class="form-label required">{{ __('Address') }}</label>
+                                            <label for="address" class="form-label required">{{ __('frontend.phone') }}</label>
                                             <input id="address" name="address" value="{{ old('address') }}"
                                                 type="text"
                                                 class="form-control @if ($errors->has('address')) is-invalid @endif"
-                                                placeholder="House#10, Section#1, Dhaka 1216, Bangladesh">
+                                                placeholder="{{ __('frontend.phone') }}">
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label for="password"
-                                                class="form-label required">{{ __('Password') }}</label>
+                                                class="form-label required">{{ __('frontend.password') }}</label>
                                             <input name="password" id="password"
                                                 class="form-control @if ($errors->has('password')) is-invalid @endif"
-                                                type="password" placeholder="Create password">
+                                                type="password" placeholder="{{ __('frontend.create_password') }}">
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label for="password2"
-                                                class="form-label required">{{ __('Repeat Password') }}</label>
+                                                class="form-label required">{{ __('frontend.repeat_password') }}</label>
                                             <input name="password_confirmation"
                                                 class="form-control @if ($errors->has('password_confirmation')) is-invalid @endif"
-                                                type="password" placeholder="Repeat password">
+                                                type="password" placeholder="{{ __('frontend.repeat_password') }}">
                                             @if ($errors->has('password_confirmation'))
                                                 <span class="is-invalid" role="alert">
                                                     <strong
@@ -144,7 +144,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <input type="submit" class="form-btn mt-2" name="register" value="Register" />
+                                        <input type="submit" class="form-btn mt-2" name="register" value="{{ __('frontend.register') }}" />
                                     </div>
                                 </div>
                             </form>

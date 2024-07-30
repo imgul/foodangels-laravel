@@ -63,7 +63,7 @@
                                                     <option value="{{ $slot }}">{{ $slot }}</option>
                                                 @endforeach
                                             </select>
-                                            <button id="orderLaterBtn" class="button primary-button">Wähle Zeit+Go</button>
+                                            <button id="orderLaterBtn" class="button primary-button" style="background-color: #ba5dba;">Wähle Zeit+Go</button>
                                         </div>
                                         <div class="bold-separator"><div class="dotts">.</div></div>
                                         <div class="contact_details">

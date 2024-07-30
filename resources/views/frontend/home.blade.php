@@ -66,8 +66,8 @@
                                             </span>
                                         </a>
                                         <div class="d-flex gap-1">
-                                            <!-- <button id="searchBtn" type="submit">{{ __('frontend.search') }}</button> -->
-                                            <button id="pickupBtn" class="button">{{ __('frontend.pickup') }}</button>
+                                            <button id="searchBtn" type="submit" style="background-color: #80B42B;">{{ __('validation.attributes.order') }}</button>
+                                            <button id="pickupBtn" class="button" style="background-color: #DA8131;">{{ __('frontend.pickup') }}</button>
                                         </div>
                                     </div>
                                     @error('s')
@@ -297,6 +297,9 @@
     let pickupBtn = document.querySelector("#pickupBtn");
     pickupBtn.addEventListener('click', (e) => {
         e.preventDefault();
+        @php
+        session()->put('is_pickup', true);
+        @endphp
         localStorage.setItem('is-pickup', '1');
         searchForm.submit();
     });
@@ -304,6 +307,9 @@
     let searchBtn = document.querySelector("#searchBtn");
     searchBtn.addEventListener('click', (e) => {
         e.preventDefault();
+        @php
+            session()->put('is_pickup', false);
+        @endphp
         localStorage.setItem('is-pickup', '0');
         searchForm.submit();
     });
