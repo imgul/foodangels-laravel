@@ -76,7 +76,7 @@
             var beep1 = new Audio('{{ asset("assets/audio/zomato_sms.mp3") }}');
             beep1.play();
 
-            var audio1 = new Audio('{{ asset("assets/audio/new_order.mp3") }}');
+            var audio1 = new Audio('{{ asset("assets/audio/new_order_german.mp3") }}');
             setTimeout(function() {
                 audio1.play();
             }, 3000);
