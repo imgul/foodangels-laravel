@@ -2,13 +2,10 @@
 
 namespace App\Events;
 
-use Illuminate\Broadcasting\Channel;
-use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class OrderReceived implements ShouldBroadcast
 {
@@ -23,7 +20,12 @@ class OrderReceived implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new Channel('orders');
+        return ['orders'];
+    }
+
+    public function broadcastAs()
+    {
+        return 'App\\Events\\OrderReceived';
     }
 
     public function broadcastWith()

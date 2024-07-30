@@ -26,6 +26,7 @@ use App\Models\LoyaltyUser;
 use App\Models\RedeemSetting;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
+use Pusher\Pusher;
 
 class OrderService
 {
@@ -552,7 +553,21 @@ class OrderService
             }
         }
 
-        event(new OrderReceived($order));
+//        $order = Order::first();
+
+        $pusher = new Pusher(
+            config('broadcasting.connections.pusher.key'),
+            config('broadcasting.connections.pusher.secret'),
+            config('broadcasting.connections.pusher.app_id'),
+            array('cluster' => config('broadcasting.connections.pusher.options.cluster'))
+        );
+
+        $channels = 'orders';
+        $event = 'App\\Events\\OrderReceived';
+        $data = json_encode(['order' => $order]);
+
+        $response = $pusher->trigger($channels, $event, $data);
+//        event(new OrderReceived('Hello'));
 
         return ResponseService::response();
     }

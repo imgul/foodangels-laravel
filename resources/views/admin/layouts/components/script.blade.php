@@ -14,7 +14,7 @@
 <script>
     Pusher.logToConsole = true;
     // Replace with your Pusher app key and cluster
-    const pusher = new Pusher('{{ config('broadcasting.connections.pusher.app_id') }}', {
+    const pusher = new Pusher('{{ config('broadcasting.connections.pusher.key') }}', {
         cluster: '{{ config('broadcasting.connections.pusher.cluster') }}',
         encrypted: true
     });
@@ -23,13 +23,106 @@
     const channel = pusher.subscribe('orders');
 
     // Bind to the 'OrderReceived' event
+    {{--channel.bind('App\\Events\\OrderReceived', function(data) {--}}
+    {{--    // Parse the stringified JSON data--}}
+    {{--    const parsedData = JSON.parse(data);--}}
+    {{--    const order = parsedData.order;--}}
+
+    {{--    // Display notification in the admin panel--}}
+    {{--    console.log(parsedData);--}}
+    {{--    console.log(order);--}}
+    {{--    console.log(order.id);--}}
+    {{--    // open this in an iframe--}}
+    {{--    var link = `{{ route('admin.orders.invoice', ${order.id}) }}`;--}}
+    {{--    var iframe = document.createElement('iframe');--}}
+    {{--    // add id to iframe--}}
+    {{--    iframe.class = 'iframe-orders';--}}
+    {{--    iframe.src = link;--}}
+    {{--    document.body.appendChild(iframe);--}}
+    {{--    // Play a sound--}}
+    {{--    var beep1 = new Audio('{{ asset("assets/audio/zomato_sms.mp3") }}');--}}
+    {{--    beep1.play();--}}
+
+    {{--    var audio1 = new Audio('{{ asset("assets/audio/new_order.mp3") }}');--}}
+    {{--    setTimeout(function() {--}}
+    {{--        audio1.play();--}}
+    {{--    }, 3000);--}}
+    {{--    // Show a toast notification--}}
+    {{--    iziToast.show({--}}
+    {{--        title: 'New Order',--}}
+    {{--        message: 'You have a new order',--}}
+    {{--        position: 'topRight'--}}
+    {{--    });--}}
+    {{--});--}}
+
     channel.bind('App\\Events\\OrderReceived', function(data) {
+        // Parse the stringified JSON data
+        const parsedData = JSON.parse(data);
+        const order = parsedData.order;
+
         // Display notification in the admin panel
-        console.log(data);
-        console.log(data.order);
-        alert('New order received: ' + JSON.stringify(data.order));
-        // Or update the UI with the new order details
+        console.log(parsedData);
+        console.log(order);
+        console.log(order.id);
+
+        // Create a button to play the audio
+        var playButton = document.createElement('button');
+        playButton.textContent = 'Play Audio';
+        document.body.appendChild(playButton);
+
+// Add a click event listener to the button
+        playButton.addEventListener('click', function() {
+            // Play the audio when the button is clicked
+            var beep1 = new Audio('{{ asset("assets/audio/zomato_sms.mp3") }}');
+            beep1.play();
+
+            var audio1 = new Audio('{{ asset("assets/audio/new_order.mp3") }}');
+            setTimeout(function() {
+                audio1.play();
+            }, 3000);
+        });
+
+        // click on playButton to play audios automatically
+        playButton.click();
+
+        // Open in a new window (not iframe)
+        var link = `{{ route('admin.orders.invoice', ['order' => '__ID__']) }}`;
+        link = link.replace('__ID__', order.id);
+        // window.open(link, '_blank');
+        // open link in a detached separated window. no in ifram or new blank window
+        var windowFeatures = 'width=400,height=600,location=no,toolbar=no,menubar=no';
+        window.open(link, 'InvoiceWindow', windowFeatures);
+
+
+        {{--// Play a sound--}}
+        {{--var beep1 = new Audio('{{ asset("assets/audio/zomato_sms.mp3") }}');--}}
+        {{--beep1.play();--}}
+
+        {{--var audio1 = new Audio('{{ asset("assets/audio/new_order.mp3") }}');--}}
+        {{--setTimeout(function() {--}}
+        {{--    audio1.play();--}}
+        {{--}, 3000);--}}
+
+        // Show a toast notification
+        iziToast.show({
+            title: 'New Order',
+            message: 'You have a new order',
+            position: 'topRight'
+        });
     });
+
+    // // Enable pusher logging - don't include this in production
+    // Pusher.logToConsole = true;
+    //
+    // var pusher = new Pusher('759edb87b640b9700d98', {
+    //     cluster: 'ap2'
+    // });
+    //
+    // var channel = pusher.subscribe('orders');
+    // channel.bind('App\\Events\\OrderReceived', function(data) {
+    //     console.log(data);
+    //     alert(JSON.stringify(data));
+    // });
 </script>
 @yield('scripts')
 

@@ -13,6 +13,7 @@ use App\Enums\Status;
 use App\Http\Controllers\FrontendController;
 use App\Models\Page;
 use Carbon\Carbon;
+use Pusher\Pusher;
 
 class HomeController extends FrontendController
 {
@@ -36,8 +37,6 @@ class HomeController extends FrontendController
         $this->data['current_data']           =  now()->format('H:i:s');
         $this->data['restaurant']           = Restaurant::where('status', RestaurantStatus::ACTIVE)->first();
         $this->data['pages'] = Page::where('status',Status::ACTIVE)->get();
-        $order = Order::first();
-        event(new OrderReceived($order));
         return view('frontend.home', $this->data);
     }
 
