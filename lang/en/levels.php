@@ -285,5 +285,7 @@ return array(
   'other'                             => "Others",
   'redeemed' => 'Redeemed',
   'Barzahlung bei Lieferung' => 'Cash upon delivery',
+  'extras' => 'Extras',
+  'variations' => 'Variations',
 
 );

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class OrderLineItem extends Model
 {
     protected $table    = 'order_line_items';
-    protected $fillable = ['restaurant_id', 'order_id', 'product_id', 'quantity', 'unit_price', 'discounted_price', 'item_total', 'menu_item_variation_id', 'options','instructions', 'options_total'];
+    protected $fillable = ['restaurant_id', 'order_id', 'product_id', 'quantity', 'unit_price', 'discounted_price', 'item_total', 'menu_item_variation_id', 'options', 'variations', 'instructions', 'options_total'];
     protected $casts = [
         'restaurant_id' => 'int',
         'product_id' => 'int',

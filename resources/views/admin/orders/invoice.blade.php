@@ -81,16 +81,24 @@
                 $option = explode(',', $item->Options);
                 ?>
 
-                <p class="mb-0" style="margin-left: 2.7rem;">
-                    {{ $item->variation ? ' (' . ($item->variation->relatedMenuItem?->name ?: $item->variation->name) . ')' : '' }}
+{{--                <p class="mb-0" style="margin-left: 2.7rem;">--}}
+{{--                    {{ $item->variation ? ' (' . ($item->variation->relatedMenuItem?->name ?: $item->variation->name) . ')' : '' }}--}}
+{{--                </p>--}}
 
-                </p>
-                @if ($item->options)
-                @foreach (json_decode($item->options, true) as $option)
-                <p class="mb-0" style="margin-left: 2.7rem;">{{ $option['name'] }}</p>
-
-                @endforeach
+                @if ($item->variations && count(json_decode($item->variations, true)))
+                    <p class="mb-0" style="margin-left: 2.7rem;"><strong>{{ count(json_decode($item->variations, true)) }} {{ __('levels.variations') }}:</strong></p>
+                    @foreach (json_decode($item->variations, true) as $variation)
+                        <p class="mb-0" style="margin-left: 2.7rem;">{{ $variation['name'] }}</p>
+                    @endforeach
                 @endif
+
+                @if ($item->options && count(json_decode($item->options, true)))
+                    <p class="mb-0 mt-2" style="margin-left: 2.7rem;"><strong>{{ count(json_decode($item->options, true)) }} {{ __('levels.extras') }}:</strong></p>
+                    @foreach (json_decode($item->options, true) as $option)
+                        <p class="mb-0" style="margin-left: 2.7rem;">{{ $option['name'] }}</p>
+                    @endforeach
+                @endif
+
                 <h2 style="font-size:14px; font-weight:600; padding-top:13px; ">{{ __('levels.instructions') }}<span style="font-weight:600; padding-left:15px;">{{ $item->instructions }}</span></h2>
                 <hr class="m-0" style="opacity: 0.9 !important; border-top:2px solid">
                 @endforeach

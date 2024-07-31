@@ -72,15 +72,24 @@
                                 <tr>
                                     <td>{{ $itemKey+1 }}</td>
                                     <td>{{ $item->menuItem->name }}
-                                        @if(!blank($item->variation))
-                                        <small class="basic-color">({{  $item->variation->relatedMenuItem?->name ?: $item->variation->name }})</small>
+{{--                                        @if(!blank($item->variation))--}}
+{{--                                        <small class="basic-color">({{  $item->variation->relatedMenuItem?->name ?: $item->variation->name }})</small>--}}
+{{--                                        @endif--}}
+
+                                        @if($item->variations && count(json_decode($item->variations, true)))
+                                            <br><small><strong>{{ count(json_decode($item->variations, true)) }} {{ __('levels.variations') }}:</strong></small>
+                                            @foreach (json_decode($item->variations,true) as $variation)
+                                                <br>
+                                                <small><span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{{ $variation['name'] }}</span></small>
+                                            @endforeach
                                         @endif
 
-                                        @if(!blank($item->options))
-                                        @foreach (json_decode($item->options,true) as $option)
-                                        <br>
-                                        <small><span>-- &nbsp; &nbsp;{{ $option['name'] }}</span></small>
-                                        @endforeach
+                                        @if($item->options && count(json_decode($item->options, true)))
+                                            <br><small><strong>{{ count(json_decode($item->options, true)) }} {{ __('levels.extras') }}:</strong></small>
+                                            @foreach (json_decode($item->options,true) as $option)
+                                                <br>
+                                                <small><span>+ &nbsp; &nbsp; &nbsp;{{ $option['name'] }}</span></small>
+                                            @endforeach
                                         @endif
                                     </td>
                                     <td class="text-center">{{ currencyFormat($item->unit_price) }}</td>
@@ -92,7 +101,7 @@
 
                                     @else
 
-                                    <td class="text-right" colspan="5"><strong> N/A </td>
+                                    <td class="text-right" colspan="5"> N/A </td>
 
                                     @endif
                                 </tr>

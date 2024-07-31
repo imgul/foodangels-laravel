@@ -141,18 +141,27 @@
                                     <dl class="order-table-item">
                                         <dt>
                                             {{ $item->menuItem->name }}
-                                            {{ $item->variation ? ' (' . ($item->variation->relatedMenuItem?->name ?: $item->variation->name ) . ')' : '' }}
+{{--                                            {{ $item->variation ? ' (' . ($item->variation->relatedMenuItem?->name ?: $item->variation->name ) . ')' : '' }}--}}
                                         </dt>
-                                        @if ($item->instructions)
-                                        <dd>
-                                            <span><strong>Instructions: </strong> {{ $item->instructions }}</span>
+                                        @if ($item->variations && count(json_decode($item->variations, true)))
+                                        <dd class="mt-3">
+                                            <strong>{{ count(json_decode($item->variations, true)) }} {{ __('levels.variations') }}: </strong>
+                                            @foreach (json_decode($item->variations, true) as $variation)
+                                            <span>{{ $variation['name'] }}</span>
+                                            @endforeach
                                         </dd>
                                         @endif
-                                        @if ($item->options)
-                                        <dd>
+                                        @if ($item->options && count(json_decode($item->options, true)))
+                                        <dd class="mt-3">
+                                            <strong>{{ count(json_decode($item->options, true)) }} {{ __('levels.extras') }}: </strong>
                                             @foreach (json_decode($item->options, true) as $option)
                                             <span>{{ $option['name'] }}</span>
                                             @endforeach
+                                        </dd>
+                                        @endif
+                                        @if ($item->instructions)
+                                        <dd class="mt-3">
+                                            <span><strong>Instructions: </strong> {{ $item->instructions }}</span>
                                         </dd>
                                         @endif
                                     </dl>

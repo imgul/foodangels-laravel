@@ -413,6 +413,7 @@ class OrderService
 
     public function order($data): object
     {
+//        dd($data);
         $address = "";
         $latitude = "";
         $longitude = "";
@@ -507,7 +508,8 @@ class OrderService
                         $optionTotal += $option['price'];
                     }
                 }
-                // dd($item['options']);
+//                 dd($item['options']);
+//                 dd($item['variation']);
                 // INSERT INTO `order_line_items` (`id`, `order_id`, `restaurant_id`, `menu_item_id`, `quantity`, `unit_price`, `discounted_price`, `item_total`, `menu_item_variation_id`, `options`, `instructions`, `options_total`, `created_at`, `updated_at`) VALUES (NULL, '1', '1', '19', '1', '30.00', '0.00', '30.00', '4', '[]', NULL, '0', '2024-07-11 00:08:40', '2024-07-11 00:08:40');
                 $orderLineItems[$i] = [
                     'order_id'                  => $orderId,
@@ -519,6 +521,7 @@ class OrderService
                     'item_total'                => ($item['unit_price'] * $item['quantity']),
                     'menu_item_variation_id' => $item['menu_item_variation_id'],
                     'options'                   => json_encode($item['options']),
+                    'variations'                => json_encode($item['variation']),
                     'instructions'              => $item['instructions'],
                     'options_total'             => $optionTotal,
                     'created_at'                => date('Y-m-d H:i:s'),
